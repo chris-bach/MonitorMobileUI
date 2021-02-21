@@ -8,7 +8,7 @@ import {
 } from "react-native";
 import { Block, Text, theme } from "galio-framework";
 
-import { argonTheme } from "../../../Desktop/argon-pro-react-native-v1.5.0/constants";
+import { argonTheme } from "../constants";
 
 class Card extends React.Component {
   render() {

@@ -3,7 +3,7 @@ import { StyleSheet, TouchableWithoutFeedback } from "react-native";
 import PropTypes from "prop-types";
 import { Block, Text } from "galio-framework";
 import Icon from "./Icon";
-import { argonTheme } from "../../../Desktop/argon-pro-react-native-v1.5.0/constants";
+import { argonTheme } from "../constants";
 
 export default class Notification extends React.Component {
   render() {

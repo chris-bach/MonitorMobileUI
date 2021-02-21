@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { Input } from "galio-framework";
 
 import Icon from './Icon';
-import { argonTheme } from "../../../Desktop/argon-pro-react-native-v1.5.0/constants";
+import { argonTheme } from "../constants";
 
 class ArInput extends React.Component {
   render() {

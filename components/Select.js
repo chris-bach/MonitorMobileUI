@@ -5,7 +5,7 @@ import ModalDropdown from 'react-native-modal-dropdown';
 import { Block, Text } from 'galio-framework';
 
 import Icon from './Icon';
-import { argonTheme } from '../../../Desktop/argon-pro-react-native-v1.5.0/constants';
+import { argonTheme } from '../constants';
 
 class DropDown extends React.Component {
   state = {

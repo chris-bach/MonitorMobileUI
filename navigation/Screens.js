@@ -6,37 +6,37 @@ import { createDrawerNavigator } from "@react-navigation/drawer";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 // screens
-import Home from "../../../Desktop/argon-pro-react-native-v1.5.0/screens/Home";
+import Home from "../screens/Home";
 // import Onboarding from "../screens/Onboarding";
-import Pro from "../../../Desktop/argon-pro-react-native-v1.5.0/screens/Pro";
-import Profile from "../../../Desktop/argon-pro-react-native-v1.5.0/screens/Profile";
-import Register from "../../../Desktop/argon-pro-react-native-v1.5.0/screens/Register";
-import Elements from "../../../Desktop/argon-pro-react-native-v1.5.0/screens/Elements";
-import Articles from "../../../Desktop/argon-pro-react-native-v1.5.0/screens/Articles";
-import Beauty from "../../../Desktop/argon-pro-react-native-v1.5.0/screens/Beauty";
-import Category from "../../../Desktop/argon-pro-react-native-v1.5.0/screens/Category";
-import Fashion from "../../../Desktop/argon-pro-react-native-v1.5.0/screens/Fashion";
-import Product from "../../../Desktop/argon-pro-react-native-v1.5.0/screens/Product";
-import Gallery from "../../../Desktop/argon-pro-react-native-v1.5.0/screens/Gallery";
-import Chat from "../../../Desktop/argon-pro-react-native-v1.5.0/screens/Chat";
-import Search from "../../../Desktop/argon-pro-react-native-v1.5.0/screens/Search";
-import Cart from "../../../Desktop/argon-pro-react-native-v1.5.0/screens/Cart";
+import Pro from "../screens/Pro";
+import Profile from "../screens/Profile";
+import Register from "../screens/Register";
+import Elements from "../screens/Elements";
+import Articles from "../screens/Articles";
+import Beauty from "../screens/Beauty";
+import Category from "../screens/Category";
+import Fashion from "../screens/Fashion";
+import Product from "../screens/Product";
+import Gallery from "../screens/Gallery";
+import Chat from "../screens/Chat";
+import Search from "../screens/Search";
+import Cart from "../screens/Cart";
 // settings
-import SettingsScreen from "../../../Desktop/argon-pro-react-native-v1.5.0/screens/Settings";
-import AgreementScreen from "../../../Desktop/argon-pro-react-native-v1.5.0/screens/Agreement";
-import PrivacyScreen from "../../../Desktop/argon-pro-react-native-v1.5.0/screens/Privacy";
-import AboutScreen from "../../../Desktop/argon-pro-react-native-v1.5.0/screens/About";
-import NotificationsScreen from "../../../Desktop/argon-pro-react-native-v1.5.0/screens/Notifications";
+import SettingsScreen from "../screens/Settings";
+import AgreementScreen from "../screens/Agreement";
+import PrivacyScreen from "../screens/Privacy";
+import AboutScreen from "../screens/About";
+import NotificationsScreen from "../screens/Notifications";
 // Notifications
-import PersonalNotifications from "../../../Desktop/argon-pro-react-native-v1.5.0/screens/PersonalNotifications";
-import SystemNotifications from "../../../Desktop/argon-pro-react-native-v1.5.0/screens/SystemNotifications";
+import PersonalNotifications from "../screens/PersonalNotifications";
+import SystemNotifications from "../screens/SystemNotifications";
 
 // drawer
 import CustomDrawerContent from "./Menu";
 
 // header for screens
 import { Icon, Header } from "../components";
-import { argonTheme, tabs } from "../../../Desktop/argon-pro-react-native-v1.5.0/constants";
+import { argonTheme, tabs } from "../constants";
 
 const { width } = Dimensions.get("screen");
 

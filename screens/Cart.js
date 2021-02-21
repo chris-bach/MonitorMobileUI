@@ -8,8 +8,8 @@ import {
 } from "react-native";
 import { Block, Text, theme } from "galio-framework";
 // butoane text mai gros ca la register screen
-import { Card, Select, Button } from "./Cart";
-import { argonTheme } from "./Cart";
+import { Card, Select, Button } from "../components";
+import { argonTheme } from "../constants";
 import { cart } from "../constants";
 
 const { width } = Dimensions.get("screen");

@@ -3,7 +3,7 @@ import { StyleSheet } from "react-native";
 import PropTypes from 'prop-types';
 import { Button } from "galio-framework";
 
-import argonTheme from "../../../Desktop/argon-pro-react-native-v1.5.0/constants/Theme";
+import argonTheme from "../constants/Theme";
 
 class ArButton extends React.Component {
   render() {

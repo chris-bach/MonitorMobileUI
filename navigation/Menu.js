@@ -2,7 +2,7 @@ import React from "react";
 import { ScrollView, StyleSheet, Dimensions, Image, TouchableOpacity, Linking } from "react-native";
 import { Block, Text, theme } from "galio-framework";
 import { useSafeArea } from "react-native-safe-area-context";
-import Images from "../../../Desktop/argon-pro-react-native-v1.5.0/constants/Images";
+import Images from "../constants/Images";
 import { DrawerItem as DrawerCustomItem } from '../components/index'
 
 const { width } = Dimensions.get("screen");

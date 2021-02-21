@@ -8,8 +8,8 @@ import {
 // Galio components
 import { Block, Text, Button as GaButton, theme } from "galio-framework";
 // Argon themed components
-import { argonTheme, tabs } from "./Elements";
-import { Button, Select, Icon, Input, Header, Switch } from "./Elements";
+import { argonTheme, tabs } from "../constants";
+import { Button, Select, Icon, Input, Header, Switch } from "../components";
 
 const { width } = Dimensions.get("screen");
 
@@ -460,9 +460,6 @@ const styles = StyleSheet.create({
   },
   inputDefault: {
     borderBottomColor: argonTheme.COLORS.PLACEHOLDER
-  },
-  inputTheme: {
-    borderBottomColor: argonTheme.COLORS.PRIMARY
   },
   inputTheme: {
     borderBottomColor: argonTheme.COLORS.PRIMARY

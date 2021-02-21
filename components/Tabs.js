@@ -3,7 +3,7 @@ import { StyleSheet, Dimensions, FlatList, Animated } from 'react-native';
 import { Block, theme } from 'galio-framework';
 
 const { width } = Dimensions.get('screen');
-import argonTheme from '../../../Desktop/argon-pro-react-native-v1.5.0/constants/Theme';
+import argonTheme from '../constants/Theme';
 
 const defaultMenu = [
   { id: 'music', title: 'Music', },

@@ -7,7 +7,7 @@ import { CommonActions } from '@react-navigation/native';
 import Icon from './Icon';
 import Input from './Input';
 import Tabs from './Tabs';
-import argonTheme from '../../../Desktop/argon-pro-react-native-v1.5.0/constants/Theme';
+import argonTheme from '../constants/Theme';
 
 const { height, width } = Dimensions.get('window');
 const iPhoneX = () => Platform.OS === 'ios' && (height === 812 || width === 812 || height === 896 || width === 896);

@@ -8,7 +8,7 @@ import {
 } from "react-native";
 
 import { Input, Block, Text, theme } from "galio-framework";
-import { Icon } from "./Chat";
+import { Icon } from "../components";
 
 import Images from "../constants/Images";
 import argonTheme from "../constants/Theme";

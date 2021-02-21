@@ -8,7 +8,7 @@ import {
 } from "react-native";
 import { Block, Text, theme } from "galio-framework";
 
-import { Card } from "./Category";
+import { Card } from "../components";
 import categories from "../constants/categories";
 import { argonTheme } from "../constants";
 
