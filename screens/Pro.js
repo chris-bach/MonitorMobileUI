@@ -22,35 +22,38 @@ export default class Pro extends React.Component {
         <StatusBar barStyle="light-content" />
         <Block flex>
           <ImageBackground
-            source={Images.Pro}
+            source={Images.LoginBG}
             style={{ flex: 1, height: height, width, zIndex: 1 }}
           />
           <Block space="between" style={styles.padded}>
             <Block>
               <Block>
                 <Image
-                  source={Images.ArgonLogo}
-                  style={{ marginBottom: theme.SIZES.BASE * 1.5 }}
+                  source={Images.LogoB}
+                  style={{ marginBottom: theme.SIZES.BASE * 1.5,
+                    resizeMode: "contain",
+                    height: 150,
+                    width: 350 }}
                 />
               </Block>
               <Block>
                 <Block>
-                  <Text style={{ fontFamily: 'open-sans-regular' }} color="white" size={60}>
-                    Argon
+                  <Text style={{ fontFamily: 'open-sans-regular' }} color={argonTheme.COLORS.DEFAULT} size={60}>
+                    Insert
                   </Text>
                 </Block>
                 <Block>
-                  <Text style={{ fontFamily: 'open-sans-regular' }} color="white" size={60}>
-                    Design
+                  <Text style={{ fontFamily: 'open-sans-regular' }} color={argonTheme.COLORS.DEFAULT} size={60}>
+                    Login
                   </Text>
                 </Block>
                 <Block row>
-                  <Text style={{ fontFamily: 'open-sans-regular' }} color="white" size={60}>
-                    System
+                  <Text style={{ fontFamily: 'open-sans-regular' }} color={argonTheme.COLORS.DEFAULT}size={60}>
+                    Here
                   </Text>
                   <Block middle style={styles.pro}>
                     <Text style={{ fontFamily: 'open-sans-bold' }} size={16} color="white">
-                      PRO
+                      By The Monitor Team
                     </Text>
                   </Block>
                 </Block>
@@ -86,11 +89,11 @@ export default class Pro extends React.Component {
               <Button
                 shadowless
                 style={styles.button}
-                color={argonTheme.COLORS.ACCENT}
+                color={argonTheme.COLORS.DEFAULT}
                 onPress={() => navigation.navigate("App")}
               >
                 <Text style={{ fontFamily: 'open-sans-bold', fontSize: 14 }} color={theme.COLORS.WHITE}>
-                  GET STARTED
+                  LOGIN AND BEGIN YOUR QUEST
                 </Text>
               </Button>
             </Block>

@@ -149,7 +149,7 @@ const styles = StyleSheet.create({
     marginBottom: 2
   },
   activeStyle: {
-    backgroundColor: argonTheme.COLORS.ACTIVE,
+    backgroundColor: argonTheme.COLORS.ACCENT,
     borderRadius: 4
   },
   shadow: {

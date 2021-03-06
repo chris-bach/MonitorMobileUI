@@ -9,6 +9,9 @@ const ArgonLogo = require("../assets/imgs/argonlogo.png");
 const iOSLogo = require("../assets/imgs/ios.png");
 const androidLogo = require("../assets/imgs/android.png");
 const ProfilePicture = require("../assets/imgs/jigglypuff.jpg")
+const LoginBG = require("../src/images/bg.png")
+const LogoB = require("../src/images/logoblue.png")
+const LogoBNN = require("../src/images/logobluenoname.png")
 // internet imgs
 const ProfileChat = 'https://images.unsplash.com/photo-1500522144261-ea64433bbe27?fit=crop&w=1051&q=80'
 
@@ -59,5 +62,8 @@ export default {
   androidLogo,
   Beauty,
   Music,
-  ProfileChat
+  ProfileChat,
+  LoginBG,
+  LogoB,
+  LogoBNN
 };
