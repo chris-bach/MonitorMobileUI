@@ -86,7 +86,7 @@ export default class Pro extends React.Component {
               <Button
                 shadowless
                 style={styles.button}
-                color={argonTheme.COLORS.INFO}
+                color={argonTheme.COLORS.ACCENT}
                 onPress={() => navigation.navigate("App")}
               >
                 <Text style={{ fontFamily: 'open-sans-bold', fontSize: 14 }} color={theme.COLORS.WHITE}>

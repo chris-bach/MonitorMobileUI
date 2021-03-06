@@ -8,7 +8,7 @@ const Pro = require("../assets/imgs/getPro-bg.png");
 const ArgonLogo = require("../assets/imgs/argonlogo.png");
 const iOSLogo = require("../assets/imgs/ios.png");
 const androidLogo = require("../assets/imgs/android.png");
-const ProfilePicture = require("../assets/imgs/profile-img.jpg")
+const ProfilePicture = require("../assets/imgs/jigglypuff.jpg")
 // internet imgs
 const ProfileChat = 'https://images.unsplash.com/photo-1500522144261-ea64433bbe27?fit=crop&w=1051&q=80'
 

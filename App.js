@@ -11,6 +11,7 @@ import { enableScreens } from 'react-native-screens';
 enableScreens();
 
 import Screens from './navigation/Screens';
+import MonitorScreens from "./navigation/MonitorScreens";
 import { Images, articles, argonTheme } from './constants';
 
 // cache app images
@@ -67,7 +68,8 @@ export default class App extends React.Component {
         <NavigationContainer>
           <GalioProvider theme={argonTheme}>
             <Block flex>
-              <Screens />
+              <MonitorScreens />
+              {/*<Screens />*/}
             </Block>
           </GalioProvider>
         </NavigationContainer>

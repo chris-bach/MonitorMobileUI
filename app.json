@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "Argon PRO React Native",
-    "slug": "argon-pro-react-native",
+    "name": "Monitor Mobile",
+    "slug": "monitor-mobile",
     "privacy": "public",
     "sdkVersion": "39.0.0",
     "platforms": [
@@ -10,9 +10,9 @@
     ],
     "version": "1.5.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./src/images/icon.png",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./src/images/splash.png",
       "resizeMode": "cover",
       "backgroundColor": "#ffffff"
     },
@@ -25,6 +25,6 @@
     "ios": {
       "supportsTablet": true
     },
-    "description": "Argon Pro React Native, based on Argon Design System. Coded by Creative Tim"
+    "description": "Monitor Mobile, coded by Team Monitor based on Argon Design System by Creative Tim."
   }
 }

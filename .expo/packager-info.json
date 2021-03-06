@@ -1,6 +1,6 @@
 {
   "devToolsPort": 19002,
-  "expoServerPort": 19000,
-  "packagerPort": 19001,
-  "packagerPid": 8300
+  "expoServerPort": null,
+  "packagerPort": null,
+  "packagerPid": null
 }
