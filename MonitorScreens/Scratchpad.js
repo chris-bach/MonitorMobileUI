@@ -9,7 +9,8 @@ import {
 import { Block, Text, Button as GaButton, theme } from "galio-framework";
 // Argon themed components
 import { argonTheme, tabs } from "../constants";
-import { Button, Select, Icon, Input, Header, Switch } from "../components";
+import Document from "../models/Document";
+import ViewDocumentsTile from "../components/ViewDocumentsTile";
 
 import axios from "axios";
 

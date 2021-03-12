@@ -1,9 +1,13 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import {
     ScrollView,
+    View,
+    FlatList,
     StyleSheet,
     Dimensions,
-    TouchableOpacity
+    TouchableOpacity,
+    TouchableNativeFeedback,
+    Alert, Platform
 } from "react-native";
 // Galio components
 import { Block, Text, Button as GaButton, theme } from "galio-framework";
@@ -12,27 +16,134 @@ import { argonTheme, tabs } from "../constants";
 import { Button, Select, Icon, Input, Header, Switch } from "../components";
 
 import axios from "axios";
+import {getDocumentsByOrganisationId} from "../Services/DocumentService";
+import Document from "../models/Document";
+import {getJobListByDepartment} from "../Services/DepartmentService";
+import ViewJobsTile from "../components/ViewJobsTile";
 
 const { width } = Dimensions.get("screen");
 
-class MyJobsView extends React.Component {
-    render() {
-        return (
-            <Block flex center>
-                <ScrollView
-                    showsVerticalScrollIndicator={false}
-                    contentContainerStyle={{ paddingBottom: 30, width }}
-                >
-                    <Text size={16} style={styles.title}>
-                        View My Documents
-                    </Text>
-                </ScrollView>
-            </Block>
-        );
+const MyJobsView = () => {
+
+    const [jobList, setJobList] = useState([]);
+
+    const [data, setData] = useState([]);
+
+    const departmentId = 2;
+
+
+    let TouchableCmp = TouchableOpacity;
+
+    if (Platform.OS === 'android' && Platform.Version >= 21) {
+        TouchableCmp = TouchableNativeFeedback; //ripple effect
     }
+
+    function alertIndex(index) {
+        Alert.alert(`This is row ${index + 1}`);
+    }
+
+    const element = (data, index) => (
+        <TouchableOpacity onPress={() => alertIndex(index)}>
+            <View style={styles.btn}>
+                <Text style={styles.btnText}>button</Text>
+            </View>
+        </TouchableOpacity>
+    );
+
+    useEffect(() => {
+            getJobListByDepartment(departmentId)
+                .then((response) => {
+                    const jobList = []
+                    response.data.forEach(object => {
+                        jobList.push(object)
+                        // setIsLoading(true)
+                    })
+                    setJobList(jobList);
+                    alert('Jobs got!');
+                }).catch(error => {
+                console.log(error)
+                alert('Jobs NOT got!');
+            })
+        },
+        []);
+
+    useEffect(() => {
+        const tableData = [];
+        jobList.forEach((job, key) => {
+            let jobInfo = {
+                id: key,
+                address: job.address,
+                startDate: job.contractStartDate,
+                endDate: job.contractEndDate,
+                jobNumber: job.jobIdentifier,
+            };
+            tableData.push(jobInfo);
+        })
+        setData(tableData);
+        alert('Jobs pushed!');
+    }, [jobList]);
+
+    const renderGridItem = itemData => {
+        return (
+            <ViewJobsTile
+                address={itemData.item.address}
+                startDate={itemData.item.startDate}
+                endDate={itemData.item.endDate}
+                onSelect={() => {
+                    // props.navigation.navigate({
+                    //     routeName: 'CategoryMeals',
+                    //     params: {
+                    //         docId: itemData.item.id
+                    //     }
+                    // });
+                    alert("You clicked the job at " + itemData.item.address + "!" )
+                }}
+            />
+        );
+    };
+
+    // const renderGridItem = itemData => {
+    //     return (
+    //         <TouchableCmp style={{ flex: 1 }}
+    //               onPress={() => {
+    //                   alert("You clicked " + itemData.item.description + " document!" )
+    //               }}
+    //         >
+    //             <View
+    //                 style={styles.group}
+    //             >
+    //                 <Text style={styles.title} numberOfLines={2}>
+    //                     {itemData.item.documentName}
+    //                 </Text>
+    //                 <Text style={styles.title} numberOfLines={2}>
+    //                     {itemData.item.description}
+    //                 </Text>
+    //             </View>
+    //         </TouchableCmp>
+    //     );
+    // };
+
+    return (
+        <Block flex style={styles.group}>
+            <Block flex>
+                <FlatList
+                    keyExtractor={(item, index) => item.id}
+                    data={data}
+                    renderItem={renderGridItem}
+                    numColumns={1}
+                />
+            </Block>
+        </Block>
+    );
 }
 
 const styles = StyleSheet.create({
+    container: { flex: 1, padding: 16, paddingTop: 30, backgroundColor: '#fff' },
+    head: { height: 40, backgroundColor: '#808B97' },
+    text: { margin: 6 },
+    row: { flexDirection: 'row', backgroundColor: '#FFF1C1' },
+    btn: { width: 58, height: 18, backgroundColor: '#78B7BB',  borderRadius: 2 },
+    btnText: { textAlign: 'center', color: '#fff' },
     title: {
         fontFamily: 'open-sans-bold',
         paddingBottom: theme.SIZES.BASE,

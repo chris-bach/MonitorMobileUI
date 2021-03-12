@@ -5,7 +5,7 @@ export const getStaffListByDepartment = async (managerId) => {
 }
 
 export const getJobListByDepartment = async (serviceTypeId) => {
-    return await axios.get(`http://localhost:8080/api/service/type/getDepartmentJobList/value=${serviceTypeId}`)
+    return await axios.get(`http://192.168.56.1:8080/api/service/type/getDepartmentJobList/value=${serviceTypeId}`)
 }
 
 export const createDepartment =  (department) => {
