@@ -14,12 +14,12 @@ function CustomDrawerContent({ drawerPosition, navigation, profile, focused, sta
     "Dashboard",
     "My Jobs",
     "My Documents",
+    "Scratchpad",
     "Profile",
     "Account",
     "Elements",
     "Articles",
     "Settings",
-    "Scratchpad"
   ];
   return (
     <Block

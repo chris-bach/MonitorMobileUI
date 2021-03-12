@@ -306,7 +306,7 @@ const styles = StyleSheet.create({
     bottom: theme.SIZES.BASE,
     left: 0,
     right: 0,
-    bottom: height / 10
+    // bottom: height / 10
   },
   addToCart: {
     width: width - theme.SIZES.BASE * 4,

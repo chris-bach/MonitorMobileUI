@@ -1,4 +1,4 @@
-import React, {useState, useEffect}from "react";
+import React from "react";
 import {
     ScrollView,
     StyleSheet,
@@ -11,100 +11,25 @@ import { Block, Text, Button as GaButton, theme } from "galio-framework";
 import { argonTheme, tabs } from "../constants";
 import { Button, Select, Icon, Input, Header, Switch } from "../components";
 
-import axios from 'axios';
+import axios from "axios";
 
 const { width } = Dimensions.get("screen");
 
-const MyJobsView = () => {
-    const [docName, setDocName] = useState('TestDoc2')
-    const [organisationID, setOrganisationID] = useState({entry: '1'})
-    const [userID, setUserID] = useState({entry: '2'})
-    const [password, setPassword] = useState({entry: 'password'})
-
-    function download(){
-        alert("Docname: " + docName + ", OrganisationID: " + organisationID.entry + ", UserID: " + userID.entry + ", Password: " + password.entry);
-        axios({
-            url: `http://localhost:8080/api/document/getByName/value=${docName}/value=${organisationID.entry}/value=${userID.entry}/value=${password.entry}`, //your url
-            method: 'GET',
-            responseType: 'blob', // important
-        }).then((response) => {
-            const url = window.URL.createObjectURL(new Blob([response.data]));
-            const link = document.createElement('a');
-            link.href = url;
-            link.setAttribute('download', 'file.pdf'); //or any other extension
-            document.body.appendChild(link);
-            link.click();
-        });
-    }
-
-    return (
-        <Block flex style={styles.group}>
-            <Text size={16} style={styles.title}>
-                Test File Download
-            </Text>
-            <Block style={{ paddingHorizontal: theme.SIZES.BASE }}>
-                <Input
-                    right
-                    placeholder="Enter Document Name"
-                    // onChange={(event) =>
-                    //     setDocName({entry:event.target.value})}
-                    onChangeText={text =>
-                        setDocName(text)}
-                    value = {docName.entry}
-                    style={{
-                        borderColor: argonTheme.COLORS.INFO,
-                        borderRadius: 4,
-                        backgroundColor: "#fff"
-                    }}
-                    iconContent={<Block />}
-                />
-                <Input
-                    right
-                    placeholder="Enter OrganisationID"
-                    onChange={(event) =>
-                        setOrganisationID({entry:event.target.value})}
-                    value = {organisationID.entry}
-                    style={{
-                        borderColor: argonTheme.COLORS.INFO,
-                        borderRadius: 4,
-                        backgroundColor: "#fff"
-                    }}
-                    iconContent={<Block />}
-                />
-                <Input
-                    right
-                    placeholder="Enter UserID"
-                    onChange={(event) =>
-                        setUserID({entry:event.target.value})}
-                    value = {userID.entry}
-                    style={{
-                        borderColor: argonTheme.COLORS.INFO,
-                        borderRadius: 4,
-                        backgroundColor: "#fff"
-                    }}
-                    iconContent={<Block />}
-                />
-                <Input
-                    right
-                    placeholder="{Password}"
-                    onChange={(event) =>
-                        setPassword({entry:event.target.value})}
-                    value = {password.entry}
-                    style={{
-                        borderColor: argonTheme.COLORS.INFO,
-                        borderRadius: 4,
-                        backgroundColor: "#fff"
-                    }}
-                    iconContent={<Block />}
-                />
-                <TouchableOpacity>
-                    <Button color="info" onPress={download}>Download!!!</Button>
-                </TouchableOpacity>
+class MyJobsView extends React.Component {
+    render() {
+        return (
+            <Block flex center>
+                <ScrollView
+                    showsVerticalScrollIndicator={false}
+                    contentContainerStyle={{ paddingBottom: 30, width }}
+                >
+                    <Text size={16} style={styles.title}>
+                        View My Documents
+                    </Text>
+                </ScrollView>
             </Block>
-
-        </Block>
-    );
-
+        );
+    }
 }
 
 const styles = StyleSheet.create({
