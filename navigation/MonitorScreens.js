@@ -7,8 +7,10 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 // screens
 import Home from "../screens/Home";
-import Dashboard from "../screens/Dashboard";
-import Scratchpad from "../screens/Scratchpad";
+import Dashboard from "../MonitorScreens/Dashboard";
+import Scratchpad from "../MonitorScreens/Scratchpad";
+import MyJobsView from "../MonitorScreens/MyJobsView";
+import MyDocsView from "../MonitorScreens/MyDocsView";
 // import Onboarding from "../screens/Onboarding";
 import Pro from "../screens/Pro";
 import Profile from "../screens/Profile";
@@ -218,23 +220,6 @@ function ArticlesStack(props) {
       />
     </Stack.Navigator>
   );
-}
-
-function ScratchpadStack(props) {
-    return (
-        <Stack.Navigator mode="card" headerMode="screen">
-            <Stack.Screen
-                name="Scratchpad"
-                component={Scratchpad}
-                options={{
-                    header: ({ navigation, scene }) => (
-                        <Header title="Scratchpad" navigation={navigation} scene={scene} />
-                    ),
-                    cardStyle: { backgroundColor: "#F8F9FE" }
-                }}
-            />
-        </Stack.Navigator>
-    );
 }
 
 function ProfileStack(props) {
@@ -447,6 +432,56 @@ function DashboardStack(props) {
   );
 }
 
+function ScratchpadStack(props) {
+    return (
+        <Stack.Navigator mode="card" headerMode="screen">
+            <Stack.Screen
+                name="Scratchpad"
+                component={Scratchpad}
+                options={{
+                    header: ({ navigation, scene }) => (
+                        <Header title="Scratchpad" navigation={navigation} scene={scene} />
+                    ),
+                    cardStyle: { backgroundColor: "#F8F9FE" }
+                }}
+            />
+        </Stack.Navigator>
+    );
+}
+function MyJobsStack(props) {
+    return (
+        <Stack.Navigator mode="card" headerMode="screen">
+            <Stack.Screen
+                name="My Jobs"
+                component={MyJobsView}
+                options={{
+                    header: ({ navigation, scene }) => (
+                        <Header title="View My Jobs" navigation={navigation} scene={scene} />
+                    ),
+                    cardStyle: { backgroundColor: "#F8F9FE" }
+                }}
+            />
+        </Stack.Navigator>
+    );
+}
+
+function MyDocsStack(props) {
+    return (
+        <Stack.Navigator mode="card" headerMode="screen">
+            <Stack.Screen
+                name="My Documents"
+                component={MyDocsView}
+                options={{
+                    header: ({ navigation, scene }) => (
+                        <Header title="View My Documents" navigation={navigation} scene={scene} />
+                    ),
+                    cardStyle: { backgroundColor: "#F8F9FE" }
+                }}
+            />
+        </Stack.Navigator>
+    );
+}
+
 function AppStack(props) {
   return (
     <Drawer.Navigator
@@ -479,6 +514,8 @@ function AppStack(props) {
       initialRouteName="Dashboard"
     >
       <Drawer.Screen name="Dashboard" component={DashboardStack} />
+      <Drawer.Screen name="My Jobs" component={MyJobsStack} />
+      <Drawer.Screen name="My Documents" component={MyDocsStack} />
       <Drawer.Screen name="Profile" component={ProfileStack} />
       <Drawer.Screen name="Account" component={Register} />
       <Drawer.Screen name="Elements" component={ElementsStack} />

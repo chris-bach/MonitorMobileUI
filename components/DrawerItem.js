@@ -10,19 +10,37 @@ class DrawerItem extends React.Component {
     const { title, focused } = this.props;
 
     switch (title) {
-      case "Home":
-        return (
-          <Icon
-            name="shop"
-            family="ArgonExtra"
-            size={14}
-            color={focused ? "white" : argonTheme.COLORS.PRIMARY}
-          />
-        );
+      // case "Home":
+      //   return (
+      //     <Icon
+      //       name="shop"
+      //       family="ArgonExtra"
+      //       size={14}
+      //       color={focused ? "white" : argonTheme.COLORS.PRIMARY}
+      //     />
+      //   );
       case "Dashboard":
         return (
             <Icon
                 name="shop"
+                family="ArgonExtra"
+                size={14}
+                color={focused ? "white" : argonTheme.COLORS.DEFAULT}
+            />
+        );
+      case "My Jobs":
+        return (
+            <Icon
+                name="calendar-date"
+                family="ArgonExtra"
+                size={14}
+                color={focused ? "white" : argonTheme.COLORS.DEFAULT}
+            />
+        );
+      case "My Documents":
+        return (
+            <Icon
+                name="map-big"
                 family="ArgonExtra"
                 size={14}
                 color={focused ? "white" : argonTheme.COLORS.DEFAULT}

@@ -12,6 +12,8 @@ function CustomDrawerContent({ drawerPosition, navigation, profile, focused, sta
   const insets = useSafeArea();
   const screens = [
     "Dashboard",
+    "My Jobs",
+    "My Documents",
     "Profile",
     "Account",
     "Elements",
