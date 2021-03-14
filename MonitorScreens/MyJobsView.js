@@ -58,7 +58,7 @@ const MyJobsView = props => {
                         // setIsLoading(true)
                     })
                     setJobList(jobList);
-                    alert('Jobs got!');
+                    // alert('Jobs got!');
                 }).catch(error => {
                 console.log(error)
                 alert('Jobs NOT got!');
@@ -79,7 +79,7 @@ const MyJobsView = props => {
             tableData.push(jobInfo);
         })
         setData(tableData);
-        alert('Jobs pushed!');
+        // alert('Jobs pushed!');
     }, [jobList]);
 
     const renderItem = itemData => {

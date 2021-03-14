@@ -58,7 +58,7 @@ const MyDocsView = props => {
                         console.log(object)
                     })
                     setDocList(docs)
-                    alert("Data was gotten!");
+                    // alert("Data was gotten!");
                 }).catch(error => {
                 console.log(error);
                 alert("Data error!");
@@ -82,7 +82,7 @@ const MyDocsView = props => {
                 }
                 tableData.push(users);
                 console.log(tableData);
-                alert("Data was pushed!");
+                // alert("Data was pushed!");
             })
             setData(tableData);
         }, [docList]);
