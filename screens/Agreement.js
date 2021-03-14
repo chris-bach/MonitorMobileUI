@@ -5,7 +5,9 @@ import { Block, Text, theme } from "galio-framework";
 import argonTheme from "../constants/Theme";
 
 export default class Agreement extends React.Component {
+
   render() {
+    console.log(this.props);
     return (
       <Block flex style={{ position: "relative" }}>
         <ScrollView

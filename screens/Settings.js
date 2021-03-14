@@ -33,7 +33,11 @@ export default class Settings extends React.Component {
       case "button":
         return (
           <Block style={styles.rows}>
-            <TouchableOpacity onPress={() => (item.id !== 'Payment' && item.id !== 'gift') && navigate(item.id)}>
+            <TouchableOpacity onPress={() => (item.id !== 'Payment' && item.id !== 'gift') && navigate(item.id,
+                {
+                  params: {name: "Name"}
+                }
+            )}>
               <Block row middle space="between" style={{ paddingTop: 7 }}>
                 <Text style={{ fontFamily: 'open-sans-regular' }} size={14} color="#525F7F">{item.title}</Text>
                 <Icon
@@ -51,6 +55,7 @@ export default class Settings extends React.Component {
   };
 
   render() {
+    console.log(this.props);
     const recommended = [
       { title: "Use FaceID to sign in", id: "face", type: "switch" },
       { title: "Auto-Lock security", id: "autolock", type: "switch" },

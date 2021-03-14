@@ -18,16 +18,18 @@ import { Button, Select, Icon, Input, Header, Switch } from "../components";
 import axios from "axios";
 import {getDocumentsByOrganisationId} from "../Services/DocumentService";
 import Document from "../models/Document";
-import ViewDocumentsTile from "../components/ViewDocumentsTile";
+import {getJobListByDepartment} from "../Services/DepartmentService";
+import ViewJobsTile from "../components/ViewJobsTile";
 
 const { width } = Dimensions.get("screen");
 
-const MyDocsView = props => {
+const MyJobsView = props => {
 
-    const [docList, setDocList] = useState([]);
-    const [docsData, setData] = useState([]);
+    const [jobList, setJobList] = useState([]);
+    const [data, setData] = useState([]);
 
-    const organisationId = 1;
+    const departmentId = 2;
+
 
     let TouchableCmp = TouchableOpacity;
 
@@ -47,64 +49,58 @@ const MyDocsView = props => {
         </TouchableOpacity>
     );
 
-
     useEffect(() => {
-            getDocumentsByOrganisationId(organisationId)
+            getJobListByDepartment(departmentId)
                 .then((response) => {
-                    const docs = []
+                    const jobList = []
                     response.data.forEach(object => {
-                        docs.push(object)
+                        jobList.push(object)
                         // setIsLoading(true)
-                        console.log(object)
                     })
-                    setDocList(docs)
-                    alert("Data was gotten!");
+                    setJobList(jobList);
+                    alert('Jobs got!');
                 }).catch(error => {
-                console.log(error);
-                alert("Data error!");
+                console.log(error)
+                alert('Jobs NOT got!');
             })
         },
         []);
 
+    useEffect(() => {
+        const tableData = [];
+        jobList.forEach((job, key) => {
+            let jobInfo = {
+                id: key,
+                address: job.address,
+                startDate: job.contractStartDate,
+                endDate: job.contractEndDate,
+                jobNumber: job.jobIdentifier,
+            };
+            tableData.push(jobInfo);
+        })
+        setData(tableData);
+        alert('Jobs pushed!');
+    }, [jobList]);
 
-        useEffect(() => {
-            const tableData = [];
-            docList.forEach((docs, index) => {
-                let users = {
-                    id: index,
-                    documentName: docs.name,
-                    description: docs.description,
-                    actions: (
-                        <div className="actions-right">
-                            <Input type="checkbox" id={index} value={index}/>
-                        </div>
-                    ),
-                }
-                tableData.push(users);
-                console.log(tableData);
-                alert("Data was pushed!");
-            })
-            setData(tableData);
-        }, [docList]);
-
-        const renderItem = itemData => {
-            return (
-                <ViewDocumentsTile
-                    name={itemData.item.documentName}
-                    desc={itemData.item.description}
-                    onSelect={() => {
-                        // props.navigation.navigate({
-                        //     routeName: 'CategoryMeals',
-                        //     params: {
-                        //         docId: itemData.item.id
-                        //     }
-                        // });
-                        alert("You clicked " + itemData.item.description + " document!" )
-                        alert("You clicked " + itemData.item.id + " document!" )
-                    }}
-                />
-            );
-        };
+    const renderGridItem = itemData => {
+        return (
+            <ViewJobsTile
+                address={itemData.item.address}
+                startDate={itemData.item.startDate}
+                endDate={itemData.item.endDate}
+                onSelect={() => {
+                    // props.navigation.navigate({
+                    //     routeName: 'CategoryMeals',
+                    //     params: {
+                    //         docId: itemData.item.id
+                    //     }
+                    // });
+                    alert("You clicked the job at " + itemData.item.address + "!" )
+                    alert("You clicked the job at " + itemData.item.address + "!" )
+                }}
+            />
+        );
+    };
 
     // const renderGridItem = itemData => {
     //     return (
@@ -132,8 +128,8 @@ const MyDocsView = props => {
             <Block flex>
                 <FlatList
                     keyExtractor={(item, index) => item.id}
-                    data={docsData}
-                    renderItem={renderItem}
+                    data={data}
+                    renderItem={renderGridItem}
                     numColumns={1}
                 />
             </Block>
@@ -204,4 +200,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default MyDocsView;
+export default MyJobsView;

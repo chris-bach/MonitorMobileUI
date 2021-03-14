@@ -18,16 +18,23 @@ import { Button, Select, Icon, Input, Header, Switch } from "../components";
 import axios from "axios";
 import {getDocumentsByOrganisationId} from "../Services/DocumentService";
 import Document from "../models/Document";
-import ViewDocumentsTile from "../components/ViewDocumentsTile";
+import {getJobListByDepartment} from "../Services/DepartmentService";
+import {getJobsByUserId} from "../Services/JobService";
+import ViewJobsTile from "../components/ViewJobsTile";
+import {getJobsDetailsByJobId} from "../Services/JobService";
+import ViewJobDetailsTile from "../components/ViewJobDetailsTile";
 
 const { width } = Dimensions.get("screen");
 
-const MyDocsView = props => {
+const MyJobDetailsView = props => {
 
-    const [docList, setDocList] = useState([]);
-    const [docsData, setData] = useState([]);
+    const [jobList, setJobList] = useState([]);
+    const [data, setData] = useState([]);
 
-    const organisationId = 1;
+    const jobIdentifier = props.route.params.params.jobIdentifier;
+    const userId = 1;
+
+    console.log(props);
 
     let TouchableCmp = TouchableOpacity;
 
@@ -35,78 +42,71 @@ const MyDocsView = props => {
         TouchableCmp = TouchableNativeFeedback; //ripple effect
     }
 
-    function alertIndex(index) {
-        Alert.alert(`This is row ${index + 1}`);
-    }
+    // function alertIndex(index) {
+    //     Alert.alert(`This is row ${index + 1}`);
+    // }
+    //
+    // const element = (data, index) => (
+    //     <TouchableOpacity onPress={() => alertIndex(index)}>
+    //         <View style={styles.btn}>
+    //             <Text style={styles.btnText}>button</Text>
+    //         </View>
+    //     </TouchableOpacity>
+    // );
 
-    const element = (data, index) => (
-        <TouchableOpacity onPress={() => alertIndex(index)}>
-            <View style={styles.btn}>
-                <Text style={styles.btnText}>button</Text>
-            </View>
-        </TouchableOpacity>
-    );
+    // useEffect(() => {
+    //         getJobsByUserId(userId)
+    //             .then((response) => {
+    //                 const jobList = []
+    //                 response.data.forEach(object => {
+    //                     jobList.push(object)
+    //                     // setIsLoading(true)
+    //                 })
+    //                 setJobList(jobList);
+    //                 alert('Job details got!');
+    //             }).catch(error => {
+    //             console.log(error)
+    //             alert('Job details NOT got!');
+    //         })
+    //     },
+    //     []);
+    //
+    // useEffect(() => {
+    //     const tableData = [];
+    //     jobList.forEach((job, key) => {
+    //         let jobInfo = {
+    //             id: key,
+    //             address: job.address,
+    //             start: job.start,
+    //             end: job.end,
+    //             jobIdentifier: job.jobIdentifier,
+    //         };
+    //         tableData.push(jobInfo);
+    //     })
+    //     setData(tableData);
+    //     alert('Jobs details pushed!');
+    // }, [jobList]);
 
+    const renderItem = itemData => {
+        return (
+            <ViewJobsTile
+                address={itemData.item.address}
+                startDate={itemData.item.start}
+                endDate={itemData.item.end}
+                onSelect={() => {
+                    // props.navigation.navigate({
+                    //     routeName: 'CategoryMeals',
+                    //     params: {
+                    //         docId: itemData.item.id
+                    //     }
+                    // });
+                    alert("You clicked the job at " + itemData.item.jobIdentifier + "!" )
+                }}
+            />
+        );
+    };
 
-    useEffect(() => {
-            getDocumentsByOrganisationId(organisationId)
-                .then((response) => {
-                    const docs = []
-                    response.data.forEach(object => {
-                        docs.push(object)
-                        // setIsLoading(true)
-                        console.log(object)
-                    })
-                    setDocList(docs)
-                    alert("Data was gotten!");
-                }).catch(error => {
-                console.log(error);
-                alert("Data error!");
-            })
-        },
-        []);
-
-
-        useEffect(() => {
-            const tableData = [];
-            docList.forEach((docs, index) => {
-                let users = {
-                    id: index,
-                    documentName: docs.name,
-                    description: docs.description,
-                    actions: (
-                        <div className="actions-right">
-                            <Input type="checkbox" id={index} value={index}/>
-                        </div>
-                    ),
-                }
-                tableData.push(users);
-                console.log(tableData);
-                alert("Data was pushed!");
-            })
-            setData(tableData);
-        }, [docList]);
-
-        const renderItem = itemData => {
-            return (
-                <ViewDocumentsTile
-                    name={itemData.item.documentName}
-                    desc={itemData.item.description}
-                    onSelect={() => {
-                        // props.navigation.navigate({
-                        //     routeName: 'CategoryMeals',
-                        //     params: {
-                        //         docId: itemData.item.id
-                        //     }
-                        // });
-                        alert("You clicked " + itemData.item.description + " document!" )
-                        alert("You clicked " + itemData.item.id + " document!" )
-                    }}
-                />
-            );
-        };
-
-    // const renderGridItem = itemData => {
+    // const renderItem = itemData => {
     //     return (
     //         <TouchableCmp style={{ flex: 1 }}
     //               onPress={() => {
@@ -130,12 +130,13 @@ const MyDocsView = props => {
     return (
         <Block flex style={styles.group}>
             <Block flex>
-                <FlatList
-                    keyExtractor={(item, index) => item.id}
-                    data={docsData}
-                    renderItem={renderItem}
-                    numColumns={1}
-                />
+                {/*<FlatList*/}
+                {/*    keyExtractor={(item, index) => item.id}*/}
+                {/*    data={data}*/}
+                {/*    renderItem={renderItem}*/}
+                {/*    numColumns={1}*/}
+                {/*/>*/}
+                <Text>{jobIdentifier}</Text>
             </Block>
         </Block>
     );
@@ -204,4 +205,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default MyDocsView;
+export default MyJobDetailsView;

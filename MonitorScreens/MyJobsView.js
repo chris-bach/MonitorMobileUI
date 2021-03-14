@@ -19,18 +19,17 @@ import axios from "axios";
 import {getDocumentsByOrganisationId} from "../Services/DocumentService";
 import Document from "../models/Document";
 import {getJobListByDepartment} from "../Services/DepartmentService";
+import {getJobsByUserId} from "../Services/JobService";
 import ViewJobsTile from "../components/ViewJobsTile";
 
 const { width } = Dimensions.get("screen");
 
-const MyJobsView = () => {
+const MyJobsView = props => {
 
     const [jobList, setJobList] = useState([]);
-
     const [data, setData] = useState([]);
 
-    const departmentId = 2;
-
+    const userId = 1;
 
     let TouchableCmp = TouchableOpacity;
 
@@ -51,7 +50,7 @@ const MyJobsView = () => {
     );
 
     useEffect(() => {
-            getJobListByDepartment(departmentId)
+            getJobsByUserId(userId)
                 .then((response) => {
                     const jobList = []
                     response.data.forEach(object => {
@@ -73,9 +72,9 @@ const MyJobsView = () => {
             let jobInfo = {
                 id: key,
                 address: job.address,
-                startDate: job.contractStartDate,
-                endDate: job.contractEndDate,
-                jobNumber: job.jobIdentifier,
+                start: job.start,
+                end: job.end,
+                jobIdentifier: job.jobIdentifier,
             };
             tableData.push(jobInfo);
         })
@@ -83,26 +82,28 @@ const MyJobsView = () => {
         alert('Jobs pushed!');
     }, [jobList]);
 
-    const renderGridItem = itemData => {
+    const renderItem = itemData => {
         return (
             <ViewJobsTile
                 address={itemData.item.address}
-                startDate={itemData.item.startDate}
-                endDate={itemData.item.endDate}
+                startDate={itemData.item.start}
+                endDate={itemData.item.end}
+                jobIdentifier={itemData.item.jobIdentifier}
                 onSelect={() => {
-                    // props.navigation.navigate({
-                    //     routeName: 'CategoryMeals',
-                    //     params: {
-                    //         docId: itemData.item.id
-                    //     }
-                    // });
-                    alert("You clicked the job at " + itemData.item.address + "!" )
+                    alert("You clicked the job at " + itemData.item.jobIdentifier + "!" )
+                    props.navigation.navigate('Job Details',
+                        {
+                            params: {
+                                jobIdentifier: itemData.item.jobIdentifier
+                            }
+                        });
+
                 }}
             />
         );
     };
 
-    // const renderGridItem = itemData => {
+    // const renderItem = itemData => {
     //     return (
     //         <TouchableCmp style={{ flex: 1 }}
     //               onPress={() => {
@@ -129,7 +130,7 @@ const MyJobsView = () => {
                 <FlatList
                     keyExtractor={(item, index) => item.id}
                     data={data}
-                    renderItem={renderGridItem}
+                    renderItem={renderItem}
                     numColumns={1}
                 />
             </Block>
