@@ -23,11 +23,17 @@ const ViewJobsTile = props => {
           <Text style={styles.title} numberOfLines={2}>
             Address: {props.address}
           </Text>
-          <Text style={styles.title} numberOfLines={2}>
+          <Text style={styles.normal} numberOfLines={2}>
             Start Date: {props.startDate}
           </Text>
-          <Text style={styles.title} numberOfLines={2}>
+          <Text style={styles.normal} numberOfLines={2}>
             End Date: {props.endDate}
+          </Text>
+          <Text style={styles.normal} numberOfLines={2}>
+            Latitude: {props.latitude}
+          </Text>
+          <Text style={styles.normal} numberOfLines={2}>
+            Longitude: {props.longitude}
           </Text>
         </View>
       </TouchableCmp>
@@ -60,7 +66,12 @@ const styles = StyleSheet.create({
   },
   title: {
     fontFamily: 'open-sans-bold',
-    fontSize: 22,
+    fontSize: 20,
+    textAlign: 'right'
+  },
+  normal: {
+    fontFamily: 'open-sans-regular',
+    fontSize: 14,
     textAlign: 'right'
   }
 });

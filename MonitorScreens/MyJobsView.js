@@ -75,6 +75,8 @@ const MyJobsView = props => {
                 start: job.start,
                 end: job.end,
                 jobIdentifier: job.jobIdentifier,
+                latitude: job.latitude,
+                longitude: job.longitude,
             };
             tableData.push(jobInfo);
         })
@@ -88,13 +90,17 @@ const MyJobsView = props => {
                 address={itemData.item.address}
                 startDate={itemData.item.start}
                 endDate={itemData.item.end}
+                latitude={itemData.item.latitude}
+                longitude={itemData.item.longitude}
                 jobIdentifier={itemData.item.jobIdentifier}
                 onSelect={() => {
                     alert("You clicked the job at " + itemData.item.jobIdentifier + "!" )
                     props.navigation.navigate('Job Details',
                         {
                             params: {
-                                jobIdentifier: itemData.item.jobIdentifier
+                                jobIdentifier: itemData.item.jobIdentifier,
+                                address: itemData.item.address,
+                                id: itemData.item.id
                             }
                         });
 

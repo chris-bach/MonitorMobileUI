@@ -32,6 +32,9 @@ const MyJobDetailsView = props => {
     const [data, setData] = useState([]);
 
     const jobIdentifier = props.route.params.params.jobIdentifier;
+    const id = props.route.params.params.id;
+    const address = props.route.params.params.address;
+
     const userId = 1;
 
     console.log(props);
@@ -54,23 +57,23 @@ const MyJobDetailsView = props => {
     //     </TouchableOpacity>
     // );
 
-    // useEffect(() => {
-    //         getJobsByUserId(userId)
-    //             .then((response) => {
-    //                 const jobList = []
-    //                 response.data.forEach(object => {
-    //                     jobList.push(object)
-    //                     // setIsLoading(true)
-    //                 })
-    //                 setJobList(jobList);
-    //                 alert('Job details got!');
-    //             }).catch(error => {
-    //             console.log(error)
-    //             alert('Job details NOT got!');
-    //         })
-    //     },
-    //     []);
-    //
+    useEffect(() => {
+            getJobsDetailsByJobId(id,userId)
+                .then((response) => {
+                    const jobList = []
+                    response.data.forEach(object => {
+                        jobList.push(object)
+                        // setIsLoading(true)
+                    })
+                    setJobList(jobList);
+                    alert('Job details got!');
+                }).catch(error => {
+                console.log(error)
+                alert('Job details NOT got!');
+            })
+        },
+        []);
+
     // useEffect(() => {
     //     const tableData = [];
     //     jobList.forEach((job, key) => {
@@ -136,6 +139,8 @@ const MyJobDetailsView = props => {
                 {/*    renderItem={renderItem}*/}
                 {/*    numColumns={1}*/}
                 {/*/>*/}
+                <Text>{address}</Text>
+                <Text>{id}</Text>
                 <Text>{jobIdentifier}</Text>
             </Block>
         </Block>

@@ -23,7 +23,7 @@ const ViewDocumentsTile = props => {
           <Text style={styles.title} numberOfLines={2}>
             {props.name}
           </Text>
-          <Text style={styles.title} numberOfLines={2}>
+          <Text style={styles.normal} numberOfLines={2}>
             {props.desc}
           </Text>
         </View>
@@ -57,7 +57,12 @@ const styles = StyleSheet.create({
   },
   title: {
     fontFamily: 'open-sans-bold',
-    fontSize: 22,
+    fontSize: 20,
+    textAlign: 'right'
+  },
+  normal: {
+    fontFamily: 'open-sans-regular',
+    fontSize: 14,
     textAlign: 'right'
   }
 });
