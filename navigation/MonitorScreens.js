@@ -13,6 +13,8 @@ import MyJobsView from "../MonitorScreens/MyJobsView";
 import MyDocsView from "../MonitorScreens/MyDocsView";
 import MyJobDetailsView  from "../MonitorScreens/JobDetails";
 import ViewJobEquipment from "../MonitorScreens/ViewJobEquipment";
+import PDFView from "../MonitorScreens/PDFView";
+
 // import Onboarding from "../screens/Onboarding";
 import Pro from "../screens/Pro";
 import Profile from "../screens/Profile";
@@ -506,6 +508,21 @@ function MyDocsStack(props) {
                 options={{
                     header: ({ navigation, scene }) => (
                         <Header title="View My Documents" navigation={navigation} scene={scene} />
+                    ),
+                    cardStyle: { backgroundColor: "#F8F9FE" }
+                }}
+            />
+            <Stack.Screen
+                name="View PDF"
+                component={PDFView}
+                options={{
+                    header: ({ navigation, scene }) => (
+                        <Header
+                            back
+                            title= "View PDF"
+                            scene={scene}
+                            navigation={navigation}
+                        />
                     ),
                     cardStyle: { backgroundColor: "#F8F9FE" }
                 }}

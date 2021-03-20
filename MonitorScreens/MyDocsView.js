@@ -93,12 +93,14 @@ const MyDocsView = props => {
                     name={itemData.item.documentName}
                     desc={itemData.item.description}
                     onSelect={() => {
-                        // props.navigation.navigate({
-                        //     routeName: 'CategoryMeals',
-                        //     params: {
-                        //         docId: itemData.item.id
-                        //     }
-                        // });
+                        props.navigation.navigate('View PDF',
+                            {
+                                params: {
+                                    // jobIdentifier: itemData.item.jobIdentifier,
+                                    // address: itemData.item.address,
+                                    // job_id: itemData.item.id
+                                }
+                            });
                         alert("You clicked " + itemData.item.description + " document!" )
                         alert("You clicked " + itemData.item.id + " document!" )
                     }}
