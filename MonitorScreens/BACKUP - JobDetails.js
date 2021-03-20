@@ -26,7 +26,7 @@ import ViewEquipmentDetailsTile from "../components/ViewEquipmentDetailsTile";
 
 const { width } = Dimensions.get("screen");
 
-const ViewJobEquipment = props => {
+const MyJobDetailsView = props => {
 
     const [jobDetails, setJobDetails] = useState([]);
     const [equipmentDetails, setEquipmentDetails] = useState([]);
@@ -230,4 +230,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default ViewJobEquipment;
+export default MyJobDetailsView;

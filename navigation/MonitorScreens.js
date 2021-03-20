@@ -12,6 +12,7 @@ import Scratchpad from "../MonitorScreens/Scratchpad";
 import MyJobsView from "../MonitorScreens/MyJobsView";
 import MyDocsView from "../MonitorScreens/MyDocsView";
 import MyJobDetailsView  from "../MonitorScreens/JobDetails";
+import ViewJobEquipment from "../MonitorScreens/ViewJobEquipment";
 // import Onboarding from "../screens/Onboarding";
 import Pro from "../screens/Pro";
 import Profile from "../screens/Profile";
@@ -470,6 +471,21 @@ function MyJobsStack(props) {
                         <Header
                             back
                             title= "Job Details"
+                            scene={scene}
+                            navigation={navigation}
+                        />
+                    ),
+                    cardStyle: { backgroundColor: "#F8F9FE" }
+                }}
+            />
+            <Stack.Screen
+                name="View Job Equipment"
+                component={ViewJobEquipment}
+                options={{
+                    header: ({ navigation, scene }) => (
+                        <Header
+                            back
+                            title= "View Job Equipment"
                             scene={scene}
                             navigation={navigation}
                         />

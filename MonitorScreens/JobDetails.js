@@ -28,10 +28,6 @@ const { width } = Dimensions.get("screen");
 
 const MyJobDetailsView = props => {
 
-    const [jobDetails, setJobDetails] = useState([]);
-    const [equipmentDetails, setEquipmentDetails] = useState([]);
-    const [dataEquipment, setDataEquipment] = useState([]);
-
     const jobIdentifier = props.route.params.params.jobIdentifier;
     const job_id = props.route.params.params.job_id;
     const address = props.route.params.params.address;
@@ -58,112 +54,30 @@ const MyJobDetailsView = props => {
     //     </TouchableOpacity>
     // );
 
-    useEffect(() => {
-            getJobsDetailsByJobId(job_id,userId)
-                .then((response) => {
-                    const equipmentList = []
-                    response.data.equipmentDetails.forEach(object => {
-                        equipmentList.push(object)
-                        // setIsLoading(true)
-                        // console.log(object)
-                    })
-                    setEquipmentDetails(equipmentList);
-                    alert('Equipment details got!');
-                    console.log(response.data);
-                }).catch(error => {
-                console.log(error)
-                alert('Equipment details NOT got!');
-            })
-        },
-        []);
-
-    useEffect(() => {
-        const tableData = [];
-        equipmentDetails.forEach((eq, key) => {
-            let equipmentInfo = {
-                id: key,
-                description: eq.equipment.description,
-                equipmentId: eq.equipment.equipmentId,
-                equipmentName: eq.equipment.equipmentName,
-                manufacturer: eq.equipment.manufacturer,
-                model: eq.equipment.model,
-                currentState: eq.equipmentMonitor.currentState,
-                equipmentMonitorId: eq.equipmentMonitor.equipmentMonitorId,
-                flags: eq.equipmentMonitor.flags,
-                ipAddress: eq.equipmentMonitor.ipAddress,
-                status: eq.equipmentMonitor.status,
-                breakdowns: eq.equipmentMonitor.breakdowns
-                // end: job.end,
-                // jobIdentifier: job.jobIdentifier,
-            };
-            tableData.push(equipmentInfo);
-        })
-        setDataEquipment(tableData);
-        alert('Equipment details pushed!');
-    }, [equipmentDetails]);
-
-    const renderEquipment = equipmentData => {
-        return (
-            <ViewEquipmentDetailsTile
-                description={equipmentData.item.description}
-                equipmentId={equipmentData.item.equipmentId}
-                equipmentName={equipmentData.item.equipmentName}
-                manufacturer={equipmentData.item.manufacturer}
-                model={equipmentData.item.model}
-                currentState={equipmentData.item.currency}
-                flags={equipmentData.item.flags}
-                ipAddress={equipmentData.item.ipAddress}
-                status={equipmentData.item.status}
-                breakdowns={equipmentData.item.breakdowns}
-                onSelect={() => {
-                    // props.navigation.navigate({
-                    //     routeName: 'CategoryMeals',
-                    //     params: {
-                    //         docId: itemData.item.id
-                    //     }
-                    // });
-                    console.log(equipmentData.item.breakdowns)
-                }}
-            />
-        );
-    };
-
-    // const renderItem = itemData => {
-    //     return (
-    //         <TouchableCmp style={{ flex: 1 }}
-    //               onPress={() => {
-    //                   alert("You clicked " + itemData.item.description + " document!" )
-    //               }}
-    //         >
-    //             <View
-    //                 style={styles.group}
-    //             >
-    //                 <Text style={styles.title} numberOfLines={2}>
-    //                     {itemData.item.documentName}
-    //                 </Text>
-    //                 <Text style={styles.title} numberOfLines={2}>
-    //                     {itemData.item.description}
-    //                 </Text>
-    //             </View>
-    //         </TouchableCmp>
-    //     );
-    // };
-
     return (
-        <Block flex style={styles.group}>
-            <Block flex>
-                <Text>{address}</Text>
-                <Text>{job_id}</Text>
-                <Text>{jobIdentifier}</Text>
-                <FlatList
-                    keyExtractor={(item, index) => item.id} //Need to check which key!!!
-                    data={dataEquipment}
-                    renderItem={renderEquipment}
-                    numColumns={1}
-                />
+        <Block>
+                <Text style={styles.title}>{address}</Text>
+                <Text style={styles.title}>{job_id}</Text>
+                <Text style={styles.title}>{jobIdentifier}</Text>
+                <Button
+                    onPress={() => {
+                        alert("You clicked this button!" )
+                        props.navigation.navigate('View Job Equipment',
+                            {
+                                params: {
+                                    jobIdentifier: jobIdentifier,
+                                    address: address,
+                                    job_id: job_id
+                                }
+                            });
 
-            </Block>
+                    }}
+                >View Equipment</Button>
+
+                <Button>View Job Documents</Button>
         </Block>
+
+
     );
 }
 
