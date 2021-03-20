@@ -5,15 +5,39 @@ import {
   Text,
   StyleSheet,
   Platform,
-  TouchableNativeFeedback
+  TouchableNativeFeedback, FlatList
 } from 'react-native';
 
-const ViewEquipmentDetails = props => {
+import ViewBreakdownsTile from "./ViewBreakdownsTile";
+import {Block} from "galio-framework";
+const ViewEquipmentDetailsTile = props => {
   let TouchableCmp = TouchableOpacity;
 
   if (Platform.OS === 'android' && Platform.Version >= 21) {
     TouchableCmp = TouchableNativeFeedback; //ripple effect
   }
+
+  const renderBreakdowns = breakdownData => {
+    return (
+        <ViewBreakdownsTile
+            breakdownId={breakdownData.item.breakdownId}
+            breakdownTime={breakdownData.item.breakdownTime}
+            faultCause={breakdownData.item.faultCause}
+            faultCode={breakdownData.item.faultCode}
+            recentState={breakdownData.item.recentState}
+            onSelect={() => {
+              // props.navigation.navigate({
+              //     routeName: 'CategoryMeals',
+              //     params: {
+              //         docId: itemData.item.id
+              //     }
+              // });
+              alert("You clicked a breakdown id: " + breakdownData.item.breakdownId)
+            }}
+        />
+    );
+  };
+
   return (
       <View style={styles.gridItem}>
         <TouchableCmp style={{ flex: 1 }} onPress={props.onSelect}>
@@ -21,14 +45,41 @@ const ViewEquipmentDetails = props => {
               style={{ ...styles.container}}
           >
             <Text style={styles.title} numberOfLines={2}>
-              Address: {props.address}
+              Equipment Name: {props.equipmentName}
             </Text>
-            <Text style={styles.title} numberOfLines={2}>
-              Start Date: {props.startDate}
+            <Text style={styles.normal} numberOfLines={2}>
+              Description: {props.description}
             </Text>
-            <Text style={styles.title} numberOfLines={2}>
-              End Date: {props.endDate}
+            <Text style={styles.normal} numberOfLines={2}>
+              Equipment Id: {props.equipmentId}
             </Text>
+            <Text style={styles.normal} numberOfLines={2}>
+              Manufacturer: {props.manufacturer}
+            </Text>
+            <Text style={styles.normal} numberOfLines={2}>
+              Model: {props.model}
+            </Text>
+            <Text style={styles.normal} numberOfLines={2}>
+              Current State: {props.currentState}
+            </Text>
+            <Text style={styles.normal} numberOfLines={2}>
+              Equipment Monitor Id: {props.equipmentMonitorId}
+            </Text>
+            <Text style={styles.normal} numberOfLines={2}>
+              Flags: {props.flags}
+            </Text>
+            <Text style={styles.normal} numberOfLines={2}>
+              IP Address: {props.ipAddress}
+            </Text>
+            <Text style={styles.normal} numberOfLines={2}>
+              Status: {props.status}
+            </Text>
+            <FlatList
+                keyExtractor={(item, index) => item.id} //Need to check which key!!!
+                data={props.breakdowns}
+                renderItem={renderBreakdowns}
+                numColumns={1}
+            />
           </View>
         </TouchableCmp>
       </View>
@@ -39,7 +90,7 @@ const styles = StyleSheet.create({
   gridItem: {
     flex: 1,
     margin: 15,
-    height: 150,
+    // height: 150,
     borderRadius: 10,
     //overflow: 'hidden',
     overflow: Platform.OS === 'android' && Platform.Version >= 21 ? 'hidden' : 'visible',
@@ -70,4 +121,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default ViewEquipmentDetails;
+export default ViewEquipmentDetailsTile;
