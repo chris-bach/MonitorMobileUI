@@ -22,22 +22,23 @@ import {getJobListByDepartment} from "../Services/DepartmentService";
 import {getJobsByUserId} from "../Services/JobService";
 import ViewJobsTile from "../components/ViewJobsTile";
 import {getJobsDetailsByJobId} from "../Services/JobService";
-import ViewJobDetailsTile from "../components/ViewJobDetailsTile";
+import ViewEquipmentDetailsTile from "../components/ViewEquipmentDetailsTile";
 
 const { width } = Dimensions.get("screen");
 
 const MyJobDetailsView = props => {
 
-    const [jobList, setJobList] = useState([]);
-    const [data, setData] = useState([]);
+    const [jobDetails, setJobDetails] = useState([]);
+    const [equipmentDetails, setEquipmentDetails] = useState([]);
+    const [dataEquipment, setDataEquipment] = useState([]);
 
     const jobIdentifier = props.route.params.params.jobIdentifier;
-    const id = props.route.params.params.id;
+    const job_id = props.route.params.params.job_id;
     const address = props.route.params.params.address;
 
     const userId = 1;
 
-    console.log(props);
+    // console.log(props);
 
     let TouchableCmp = TouchableOpacity;
 
@@ -58,44 +59,62 @@ const MyJobDetailsView = props => {
     // );
 
     useEffect(() => {
-            getJobsDetailsByJobId(id,userId)
+            getJobsDetailsByJobId(job_id,userId)
                 .then((response) => {
-                    const jobList = []
-                    response.data.forEach(object => {
-                        jobList.push(object)
+                    const equipmentList = []
+                    response.data.equipmentDetails.forEach(object => {
+                        equipmentList.push(object)
                         // setIsLoading(true)
+                        // console.log(object)
                     })
-                    setJobList(jobList);
-                    alert('Job details got!');
+                    setEquipmentDetails(equipmentList);
+                    alert('Equipment details got!');
+                    console.log(response.data);
                 }).catch(error => {
                 console.log(error)
-                alert('Job details NOT got!');
+                alert('Equipment details NOT got!');
             })
         },
         []);
 
-    // useEffect(() => {
-    //     const tableData = [];
-    //     jobList.forEach((job, key) => {
-    //         let jobInfo = {
-    //             id: key,
-    //             address: job.address,
-    //             start: job.start,
-    //             end: job.end,
-    //             jobIdentifier: job.jobIdentifier,
-    //         };
-    //         tableData.push(jobInfo);
-    //     })
-    //     setData(tableData);
-    //     alert('Jobs details pushed!');
-    // }, [jobList]);
+    useEffect(() => {
+        const tableData = [];
+        equipmentDetails.forEach((eq, key) => {
+            let equipmentInfo = {
+                id: key,
+                description: eq.equipment.description,
+                equipmentId: eq.equipment.equipmentId,
+                equipmentName: eq.equipment.equipmentName,
+                manufacturer: eq.equipment.manufacturer,
+                model: eq.equipment.model,
+                currentState: eq.equipmentMonitor.currentState,
+                equipmentMonitorId: eq.equipmentMonitor.equipmentMonitorId,
+                flags: eq.equipmentMonitor.flags,
+                ipAddress: eq.equipmentMonitor.ipAddress,
+                status: eq.equipmentMonitor.status,
+                breakdowns: eq.equipmentMonitor.breakdowns
+                // end: job.end,
+                // jobIdentifier: job.jobIdentifier,
+            };
+            tableData.push(equipmentInfo);
+        })
+        setDataEquipment(tableData);
+        alert('Equipment details pushed!');
+    }, [equipmentDetails]);
 
-    const renderItem = itemData => {
+    const renderEquipment = equipmentData => {
         return (
-            <ViewJobsTile
-                address={itemData.item.address}
-                startDate={itemData.item.start}
-                endDate={itemData.item.end}
+            <ViewEquipmentDetailsTile
+                description={equipmentData.item.description}
+                equipmentId={equipmentData.item.equipmentId}
+                equipmentName={equipmentData.item.equipmentName}
+                manufacturer={equipmentData.item.manufacturer}
+                model={equipmentData.item.model}
+                currentState={equipmentData.item.currency}
+                flags={equipmentData.item.flags}
+                ipAddress={equipmentData.item.ipAddress}
+                status={equipmentData.item.status}
+                breakdowns={equipmentData.item.breakdowns}
                 onSelect={() => {
                     // props.navigation.navigate({
                     //     routeName: 'CategoryMeals',
@@ -103,7 +122,7 @@ const MyJobDetailsView = props => {
                     //         docId: itemData.item.id
                     //     }
                     // });
-                    alert("You clicked the job at " + itemData.item.jobIdentifier + "!" )
+                    console.log(equipmentData.item.breakdowns)
                 }}
             />
         );
@@ -133,15 +152,16 @@ const MyJobDetailsView = props => {
     return (
         <Block flex style={styles.group}>
             <Block flex>
-                {/*<FlatList*/}
-                {/*    keyExtractor={(item, index) => item.id}*/}
-                {/*    data={data}*/}
-                {/*    renderItem={renderItem}*/}
-                {/*    numColumns={1}*/}
-                {/*/>*/}
                 <Text>{address}</Text>
-                <Text>{id}</Text>
+                <Text>{job_id}</Text>
                 <Text>{jobIdentifier}</Text>
+                <FlatList
+                    keyExtractor={(item, index) => item.id} //Need to check which key!!!
+                    data={dataEquipment}
+                    renderItem={renderEquipment}
+                    numColumns={1}
+                />
+
             </Block>
         </Block>
     );

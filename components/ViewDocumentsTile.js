@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
   gridItem: {
     flex: 1,
     margin: 15,
-    height: 150,
+    // height: 150,
     borderRadius: 10,
     //overflow: 'hidden',
     overflow: Platform.OS === 'android' && Platform.Version >= 21 ? 'hidden' : 'visible',

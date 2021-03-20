@@ -131,7 +131,7 @@ const MyDocsView = props => {
         <Block flex style={styles.group}>
             <Block flex>
                 <FlatList
-                    keyExtractor={(item, index) => item.id}
+                    keyExtractor={(item, index) => item.id}  //Need to check which key!!!
                     data={docsData}
                     renderItem={renderItem}
                     numColumns={1}

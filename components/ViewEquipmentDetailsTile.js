@@ -8,7 +8,7 @@ import {
   TouchableNativeFeedback
 } from 'react-native';
 
-const ViewJobDetailsTile = props => {
+const ViewEquipmentDetails = props => {
   let TouchableCmp = TouchableOpacity;
 
   if (Platform.OS === 'android' && Platform.Version >= 21) {
@@ -70,4 +70,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default ViewJobDetailsTile;
+export default ViewEquipmentDetails;

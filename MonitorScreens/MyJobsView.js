@@ -58,7 +58,8 @@ const MyJobsView = props => {
                         // setIsLoading(true)
                     })
                     setJobList(jobList);
-                    // alert('Jobs got!');
+                    alert('My Jobs View Got!');
+                    console.log(response)
                 }).catch(error => {
                 console.log(error)
                 alert('Jobs NOT got!');
@@ -71,6 +72,7 @@ const MyJobsView = props => {
         jobList.forEach((job, key) => {
             let jobInfo = {
                 id: key,
+                // job_id:job.job_id,
                 address: job.address,
                 start: job.start,
                 end: job.end,
@@ -100,7 +102,7 @@ const MyJobsView = props => {
                             params: {
                                 jobIdentifier: itemData.item.jobIdentifier,
                                 address: itemData.item.address,
-                                id: itemData.item.id
+                                job_id: itemData.item.id
                             }
                         });
 
@@ -134,7 +136,7 @@ const MyJobsView = props => {
         <Block flex style={styles.group}>
             <Block flex>
                 <FlatList
-                    keyExtractor={(item, index) => item.id}
+                    keyExtractor={(item, index) => item.id}  //Need to check which key!!!
                     data={data}
                     renderItem={renderItem}
                     numColumns={1}
