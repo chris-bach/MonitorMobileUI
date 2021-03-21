@@ -5,6 +5,7 @@ import * as Font from 'expo-font';
 import { Asset } from 'expo-asset';
 import { Block, GalioProvider } from 'galio-framework';
 import { NavigationContainer } from '@react-navigation/native';
+import {LoginProvider} from "./context/LogInContext";
 
 // Before rendering any navigation stack
 import { enableScreens } from 'react-native-screens';
@@ -65,14 +66,16 @@ export default class App extends React.Component {
       );
     } else {
       return (
-        <NavigationContainer>
-          <GalioProvider theme={argonTheme}>
-            <Block flex>
-              <MonitorScreens />
-              {/*<Screens />*/}
-            </Block>
-          </GalioProvider>
-        </NavigationContainer>
+        <LoginProvider>
+          <NavigationContainer>
+            <GalioProvider theme={argonTheme}>
+              <Block flex>
+                <MonitorScreens />
+                {/*<Screens />*/}
+              </Block>
+            </GalioProvider>
+          </NavigationContainer>
+        </LoginProvider>
       );
     }
   }

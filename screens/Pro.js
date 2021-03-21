@@ -1,17 +1,20 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import {
-  ImageBackground,
   Image,
   StyleSheet,
   StatusBar,
   Dimensions,
-  Platform
+  Platform,
 } from "react-native";
-import { Block, Button, Text, theme } from "galio-framework";
+import { Block, Button ,Text, Input, theme } from "galio-framework";
+import AuthInput from "../components/AuthInput";
 
 const { height, width } = Dimensions.get("screen");
 import { Images, argonTheme } from "../constants";
 import { HeaderHeight } from "../constants/utils";
+
+
+
 
 export default class Pro extends React.Component {
   render() {
@@ -19,86 +22,34 @@ export default class Pro extends React.Component {
 
     return (
       <Block flex style={styles.container}>
-        <StatusBar barStyle="light-content" />
-        <Block flex>
-          <ImageBackground
-            source={Images.LoginBG}
-            style={{ flex: 1, height: height, width, zIndex: 1 }}
-          />
-          <Block space="between" style={styles.padded}>
-            <Block>
+        <StatusBar barStyle="dark-content" />
+          <Block flex style={styles.padded}>
               <Block>
                 <Image
                   source={Images.LogoB}
-                  style={{ marginBottom: theme.SIZES.BASE * 1.5,
+                  style={{ align: "center",
                     resizeMode: "contain",
                     height: 150,
                     width: 350 }}
                 />
               </Block>
-              <Block>
-                <Block>
-                  <Text style={{ fontFamily: 'open-sans-regular' }} color={argonTheme.COLORS.DEFAULT} size={60}>
-                    Insert
-                  </Text>
-                </Block>
-                <Block>
-                  <Text style={{ fontFamily: 'open-sans-regular' }} color={argonTheme.COLORS.DEFAULT} size={60}>
-                    Login
-                  </Text>
-                </Block>
-                <Block row>
-                  <Text style={{ fontFamily: 'open-sans-regular' }} color={argonTheme.COLORS.DEFAULT}size={60}>
-                    Here
-                  </Text>
-                  <Block middle style={styles.pro}>
-                    <Text style={{ fontFamily: 'open-sans-bold' }} size={16} color="white">
-                      By The Monitor Team
-                    </Text>
-                  </Block>
-                </Block>
-              </Block>
+                  <AuthInput nav={navigation}/>
+
               <Text
                 size={16}
-                color="rgba(255,255,255,0.6)"
+                color="black"
                 style={{ marginTop: 35, fontFamily: 'open-sans-regular' }}
               >
                 Take advantage of all the features and screens made upon Galio
                 Design System, coded on React Native for both.
               </Text>
-              <Block
-                row
-                style={{
-                  marginTop: theme.SIZES.BASE * 1.5,
-                  marginBottom: theme.SIZES.BASE * 4
-                }}
-              >
-                <Image
-                  source={Images.iOSLogo}
-                  style={{
-                    height: 38,
-                    width: 82,
-                    marginRight: theme.SIZES.BASE * 1.5
-                  }}
-                />
-                <Image
-                  source={Images.androidLogo}
-                  style={{ height: 38, width: 140 }}
-                />
-              </Block>
-              <Button
-                shadowless
-                style={styles.button}
-                color={argonTheme.COLORS.DEFAULT}
-                onPress={() => navigation.navigate("App")}
-              >
-                <Text style={{ fontFamily: 'open-sans-bold', fontSize: 14 }} color={theme.COLORS.WHITE}>
-                  LOGIN AND BEGIN YOUR QUEST
+              <Block flex middle style={styles.pro}>
+                <Text style={{ fontFamily: 'open-sans-bold' }} size={16} color="white">
+                  By The Monitor Teams
                 </Text>
-              </Button>
-            </Block>
+              </Block>
+
           </Block>
-        </Block>
       </Block>
     );
   }
@@ -106,21 +57,22 @@ export default class Pro extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: theme.COLORS.BLACK,
+    backgroundColor: theme.COLORS.white,
     marginTop: Platform.OS === "android" ? -HeaderHeight : 0
   },
   padded: {
-    paddingHorizontal: theme.SIZES.BASE * 2,
+    paddingHorizontal: theme.SIZES.BASE,
     zIndex: 3,
     position: "absolute",
-    bottom:
-      Platform.OS === "android" ? theme.SIZES.BASE * 2 : theme.SIZES.BASE * 3
+    top: theme.SIZES.BASE * 15
   },
   button: {
     width: width - theme.SIZES.BASE * 4,
     height: theme.SIZES.BASE * 3,
     shadowRadius: 0,
-    shadowOpacity: 0
+    shadowOpacity: 0,
+    color:"white",
+
   },
   pro: {
     backgroundColor: argonTheme.COLORS.INFO,
