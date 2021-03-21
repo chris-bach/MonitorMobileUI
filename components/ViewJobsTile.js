@@ -22,6 +22,9 @@ const ViewJobsTile = props => {
           style={{ ...styles.container}}
         >
           <Text style={styles.title} numberOfLines={2}>
+            Job Name: {props.jobName}
+          </Text>
+          <Text style={styles.title} numberOfLines={2}>
             Address: {props.address}
           </Text>
           <Text style={styles.normal} numberOfLines={2}>

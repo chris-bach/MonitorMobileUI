@@ -15,10 +15,6 @@ import { Block, Text, Button as GaButton, theme } from "galio-framework";
 import { argonTheme, tabs } from "../constants";
 import { Button, Select, Icon, Input, Header, Switch } from "../components";
 
-import axios from "axios";
-import {getDocumentsByOrganisationId} from "../Services/DocumentService";
-import Document from "../models/Document";
-import {getJobListByDepartment} from "../Services/DepartmentService";
 import {getJobsByUserId} from "../Services/JobService";
 import ViewJobsTile from "../components/ViewJobsTile";
 
@@ -58,7 +54,6 @@ const MyJobsView = props => {
                         // setIsLoading(true)
                     })
                     setJobList(jobList);
-                    alert('My Jobs View Got!');
                     console.log(response)
                 }).catch(error => {
                 console.log(error)
@@ -72,7 +67,8 @@ const MyJobsView = props => {
         jobList.forEach((job, key) => {
             let jobInfo = {
                 id: key,
-                // job_id:job.job_id,
+                jobId:job.jobId,
+                jobName:job.jobName,
                 address: job.address,
                 start: job.start,
                 end: job.end,
@@ -89,20 +85,22 @@ const MyJobsView = props => {
     const renderItem = itemData => {
         return (
             <ViewJobsTile
+                jobName={itemData.item.jobName}
                 address={itemData.item.address}
                 startDate={itemData.item.start}
                 endDate={itemData.item.end}
                 latitude={itemData.item.latitude}
                 longitude={itemData.item.longitude}
+                jobId={itemData.item.jobId}
                 jobIdentifier={itemData.item.jobIdentifier}
                 onSelect={() => {
-                    alert("You clicked the job at " + itemData.item.jobIdentifier + "!" )
                     props.navigation.navigate('Job Details',
                         {
                             params: {
                                 jobIdentifier: itemData.item.jobIdentifier,
                                 address: itemData.item.address,
-                                job_id: itemData.item.id
+                                jobId: itemData.item.jobId,
+                                jobName: itemData.item.jobName
                             }
                         });
 
@@ -110,27 +108,6 @@ const MyJobsView = props => {
             />
         );
     };
-
-    // const renderItem = itemData => {
-    //     return (
-    //         <TouchableCmp style={{ flex: 1 }}
-    //               onPress={() => {
-    //                   alert("You clicked " + itemData.item.description + " document!" )
-    //               }}
-    //         >
-    //             <View
-    //                 style={styles.group}
-    //             >
-    //                 <Text style={styles.title} numberOfLines={2}>
-    //                     {itemData.item.documentName}
-    //                 </Text>
-    //                 <Text style={styles.title} numberOfLines={2}>
-    //                     {itemData.item.description}
-    //                 </Text>
-    //             </View>
-    //         </TouchableCmp>
-    //     );
-    // };
 
     return (
         <Block flex style={styles.group}>

@@ -33,7 +33,8 @@ const ViewJobEquipment = props => {
     const [dataEquipment, setDataEquipment] = useState([]);
 
     const jobIdentifier = props.route.params.params.jobIdentifier;
-    const job_id = props.route.params.params.job_id;
+    const jobId = props.route.params.params.jobId;
+    const jobName = props.route.params.params.jobName;
     const address = props.route.params.params.address;
 
     const userId = 1;
@@ -59,7 +60,7 @@ const ViewJobEquipment = props => {
     // );
 
     useEffect(() => {
-            getJobsDetailsByJobId(job_id,userId)
+            getJobsDetailsByJobId(jobId,userId)
                 .then((response) => {
                     const equipmentList = []
                     response.data.equipmentDetails.forEach(object => {
@@ -123,38 +124,19 @@ const ViewJobEquipment = props => {
                     //         docId: itemData.item.id
                     //     }
                     // });
+
                     console.log(equipmentData.item.breakdowns)
                 }}
             />
         );
     };
 
-    // const renderItem = itemData => {
-    //     return (
-    //         <TouchableCmp style={{ flex: 1 }}
-    //               onPress={() => {
-    //                   alert("You clicked " + itemData.item.description + " document!" )
-    //               }}
-    //         >
-    //             <View
-    //                 style={styles.group}
-    //             >
-    //                 <Text style={styles.title} numberOfLines={2}>
-    //                     {itemData.item.documentName}
-    //                 </Text>
-    //                 <Text style={styles.title} numberOfLines={2}>
-    //                     {itemData.item.description}
-    //                 </Text>
-    //             </View>
-    //         </TouchableCmp>
-    //     );
-    // };
-
     return (
         <Block flex style={styles.group}>
             <Block flex>
+                <Text>{jobName}</Text>
                 <Text>{address}</Text>
-                <Text>{job_id}</Text>
+                <Text>{jobId}</Text>
                 <Text>{jobIdentifier}</Text>
                 <FlatList
                     keyExtractor={(item, index) => item.id} //Need to check which key!!!
@@ -162,7 +144,6 @@ const ViewJobEquipment = props => {
                     renderItem={renderEquipment}
                     numColumns={1}
                 />
-
             </Block>
         </Block>
     );

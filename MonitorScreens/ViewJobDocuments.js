@@ -34,7 +34,7 @@ const ViewJobDocuments = props => {
     const [dataDocuments, setDataDocuments] = useState([]);
 
     const jobIdentifier = props.route.params.params.jobIdentifier;
-    const job_id = props.route.params.params.job_id;
+    const jobId = props.route.params.params.jobId;
     const address = props.route.params.params.address;
 
     const userId = 1;
@@ -60,7 +60,7 @@ const ViewJobDocuments = props => {
     // );
 
     useEffect(() => {
-            getJobsDetailsByJobId(job_id,userId)
+            getJobsDetailsByJobId(jobId,userId)
                 .then((response) => {
                     const documentList = []
                     response.data.jobDocuments.forEach(object => {
@@ -141,7 +141,7 @@ const ViewJobDocuments = props => {
         <Block flex style={styles.group}>
             <Block flex>
                 <Text>{address}</Text>
-                <Text>{job_id}</Text>
+                <Text>{jobId}</Text>
                 <Text>{jobIdentifier}</Text>
                 <FlatList
                     keyExtractor={(item, index) => item.id} //Need to check which key!!!

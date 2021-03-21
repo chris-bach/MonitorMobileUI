@@ -15,9 +15,7 @@ import { Block, Text, Button as GaButton, theme } from "galio-framework";
 import { argonTheme, tabs } from "../constants";
 import { Button, Select, Icon, Input, Header, Switch } from "../components";
 
-import axios from "axios";
 import {getDocumentsByOrganisationId} from "../Services/DocumentService";
-import Document from "../models/Document";
 import ViewDocumentsTile from "../components/ViewDocumentsTile";
 
 const { width } = Dimensions.get("screen");
@@ -55,10 +53,9 @@ const MyDocsView = props => {
                     response.data.forEach(object => {
                         docs.push(object)
                         // setIsLoading(true)
-                        console.log(object)
                     })
-                    setDocList(docs)
-                    // alert("Data was gotten!");
+                    setDocList(docs);
+                    console.log(response);
                 }).catch(error => {
                 console.log(error);
                 alert("Data error!");
@@ -83,8 +80,6 @@ const MyDocsView = props => {
                     ),
                 }
                 tableData.push(users);
-                console.log(tableData);
-                // alert("Data was pushed!");
             })
             setData(tableData);
         }, [docList]);
@@ -105,33 +100,11 @@ const MyDocsView = props => {
                                     // job_id: itemData.item.id
                                 }
                             });
-                        alert("You clicked " + itemData.item.description + " document!" )
-                        alert("You clicked " + itemData.item.id + " document!" )
+                        // alert("You clicked " + itemData.item.description + " document!" )
                     }}
                 />
             );
         };
-
-    // const renderGridItem = itemData => {
-    //     return (
-    //         <TouchableCmp style={{ flex: 1 }}
-    //               onPress={() => {
-    //                   alert("You clicked " + itemData.item.description + " document!" )
-    //               }}
-    //         >
-    //             <View
-    //                 style={styles.group}
-    //             >
-    //                 <Text style={styles.title} numberOfLines={2}>
-    //                     {itemData.item.documentName}
-    //                 </Text>
-    //                 <Text style={styles.title} numberOfLines={2}>
-    //                     {itemData.item.description}
-    //                 </Text>
-    //             </View>
-    //         </TouchableCmp>
-    //     );
-    // };
 
     return (
         <Block flex style={styles.group}>

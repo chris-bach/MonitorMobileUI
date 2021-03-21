@@ -15,26 +15,18 @@ import { Block, Text, Button as GaButton, theme } from "galio-framework";
 import { argonTheme, tabs } from "../constants";
 import { Button, Select, Icon, Input, Header, Switch } from "../components";
 
-import axios from "axios";
-import {getDocumentsByOrganisationId} from "../Services/DocumentService";
-import Document from "../models/Document";
-import {getJobListByDepartment} from "../Services/DepartmentService";
-import {getJobsByUserId} from "../Services/JobService";
-import ViewJobsTile from "../components/ViewJobsTile";
-import {getJobsDetailsByJobId} from "../Services/JobService";
-import ViewEquipmentDetailsTile from "../components/ViewEquipmentDetailsTile";
-
 const { width } = Dimensions.get("screen");
 
 const MyJobDetailsView = props => {
 
     const jobIdentifier = props.route.params.params.jobIdentifier;
-    const job_id = props.route.params.params.job_id;
+    const jobId = props.route.params.params.jobId;
+    const jobName = props.route.params.params.jobName;
     const address = props.route.params.params.address;
 
     const userId = 1;
 
-    // console.log(props);
+    console.log(props);
 
     let TouchableCmp = TouchableOpacity;
 
@@ -42,22 +34,11 @@ const MyJobDetailsView = props => {
         TouchableCmp = TouchableNativeFeedback; //ripple effect
     }
 
-    // function alertIndex(index) {
-    //     Alert.alert(`This is row ${index + 1}`);
-    // }
-    //
-    // const element = (data, index) => (
-    //     <TouchableOpacity onPress={() => alertIndex(index)}>
-    //         <View style={styles.btn}>
-    //             <Text style={styles.btnText}>button</Text>
-    //         </View>
-    //     </TouchableOpacity>
-    // );
-
     return (
         <Block>
+                <Text style={styles.title}>{jobName}</Text>
                 <Text style={styles.title}>{address}</Text>
-                <Text style={styles.title}>{job_id}</Text>
+                <Text style={styles.title}>{jobId}</Text>
                 <Text style={styles.title}>{jobIdentifier}</Text>
                 <Button
                     onPress={() => {
@@ -67,7 +48,8 @@ const MyJobDetailsView = props => {
                                 params: {
                                     jobIdentifier: jobIdentifier,
                                     address: address,
-                                    job_id: job_id
+                                    jobId: jobId,
+                                    jobName: jobName
                                 }
                             });
 
@@ -82,14 +64,12 @@ const MyJobDetailsView = props => {
                             params: {
                                 jobIdentifier: jobIdentifier,
                                 address: address,
-                                job_id: job_id
+                                jobId: jobId,
+                                jobName: jobName
                             }
                         });
-
                 }}>View Job Documents</Button>
         </Block>
-
-
     );
 }
 
