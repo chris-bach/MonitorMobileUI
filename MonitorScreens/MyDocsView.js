@@ -74,6 +74,8 @@ const MyDocsView = props => {
                     id: index,
                     documentName: docs.name,
                     description: docs.description,
+                    documentId: docs.documentId,
+                    parentInfo: docs.parentInfo,
                     actions: (
                         <div className="actions-right">
                             <Input type="checkbox" id={index} value={index}/>
@@ -91,7 +93,9 @@ const MyDocsView = props => {
             return (
                 <ViewDocumentsTile
                     name={itemData.item.documentName}
-                    desc={itemData.item.description}
+                    description={itemData.item.description}
+                    documentId={itemData.item.documentId}
+                    parentInfo={itemData.item.parentInfo}
                     onSelect={() => {
                         props.navigation.navigate('View PDF',
                             {

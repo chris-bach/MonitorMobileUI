@@ -74,7 +74,19 @@ const MyJobDetailsView = props => {
                     }}
                 >View Equipment</Button>
 
-                <Button>View Job Documents</Button>
+                <Button
+                    onPress={() => {
+                    alert("You clicked this view job documents button!" )
+                    props.navigation.navigate('View Job Documents',
+                        {
+                            params: {
+                                jobIdentifier: jobIdentifier,
+                                address: address,
+                                job_id: job_id
+                            }
+                        });
+
+                }}>View Job Documents</Button>
         </Block>
 
 

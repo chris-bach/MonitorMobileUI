@@ -87,6 +87,7 @@ const ViewJobEquipment = props => {
                 equipmentName: eq.equipment.equipmentName,
                 manufacturer: eq.equipment.manufacturer,
                 model: eq.equipment.model,
+                documents: eq.equipmentDocuments,
                 currentState: eq.equipmentMonitor.currentState,
                 equipmentMonitorId: eq.equipmentMonitor.equipmentMonitorId,
                 flags: eq.equipmentMonitor.flags,

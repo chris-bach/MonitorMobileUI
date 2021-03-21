@@ -21,10 +21,16 @@ const ViewDocumentsTile = props => {
           style={{ ...styles.container}}
         >
           <Text style={styles.title} numberOfLines={2}>
-            {props.name}
+            Name: {props.name}
           </Text>
           <Text style={styles.normal} numberOfLines={2}>
-            {props.desc}
+            Description: {props.description}
+          </Text>
+          <Text style={styles.normal} numberOfLines={2}>
+            Document Id: {props.documentId}
+          </Text>
+          <Text style={styles.normal} numberOfLines={2}>
+            Parent Info: {props.parentInfo}
           </Text>
         </View>
       </TouchableCmp>
