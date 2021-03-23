@@ -15,12 +15,6 @@ import { Block, Text, Button as GaButton, theme } from "galio-framework";
 import { argonTheme, tabs } from "../constants";
 import { Button, Select, Icon, Input, Header, Switch } from "../components";
 
-import axios from "axios";
-import {getDocumentsByOrganisationId} from "../Services/DocumentService";
-import Document from "../models/Document";
-import {getJobListByDepartment} from "../Services/DepartmentService";
-import {getJobsByUserId} from "../Services/JobService";
-import ViewJobsTile from "../components/ViewJobsTile";
 import {getJobsDetailsByJobId} from "../Services/JobService";
 import ViewEquipmentDetailsTile from "../components/ViewEquipmentDetailsTile";
 
@@ -69,7 +63,6 @@ const ViewJobEquipment = props => {
                         // console.log(object)
                     })
                     setEquipmentDetails(equipmentList);
-                    alert('Equipment details got!');
                     console.log(response.data);
                 }).catch(error => {
                 console.log(error)

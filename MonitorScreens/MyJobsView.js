@@ -79,7 +79,7 @@ const MyJobsView = props => {
             tableData.push(jobInfo);
         })
         setData(tableData);
-        // alert('Jobs pushed!');
+        alert('Jobs pushed!');
     }, [jobList]);
 
     const renderItem = itemData => {

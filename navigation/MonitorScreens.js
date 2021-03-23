@@ -609,13 +609,13 @@ function AppStack(props) {
 export default function OnboardingStack(props) {
   return (
     <Stack.Navigator mode="card" headerMode="none">
-      <Stack.Screen
-        name="Onboarding"
-        component={Pro}
-        option={{
-          headerTransparent: true
-        }}
-      />
+      {/*<Stack.Screen*/}
+      {/*  name="Onboarding"*/}
+      {/*  component={Pro}*/}
+      {/*  option={{*/}
+      {/*    headerTransparent: true*/}
+      {/*  }}*/}
+      {/*/>*/}
       <Stack.Screen name="App" component={AppStack} />
     </Stack.Navigator>
   );

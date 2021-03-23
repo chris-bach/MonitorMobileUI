@@ -15,21 +15,13 @@ import { Block, Text, Button as GaButton, theme } from "galio-framework";
 import { argonTheme, tabs } from "../constants";
 import { Button, Select, Icon, Input, Header, Switch } from "../components";
 
-import axios from "axios";
-import {getDocumentsByOrganisationId} from "../Services/DocumentService";
-import Document from "../models/Document";
-import {getJobListByDepartment} from "../Services/DepartmentService";
-import {getJobsByUserId} from "../Services/JobService";
-import ViewJobsTile from "../components/ViewJobsTile";
 import {getJobsDetailsByJobId} from "../Services/JobService";
-import ViewEquipmentDetailsTile from "../components/ViewEquipmentDetailsTile";
 import ViewDocumentsTile from "../components/ViewDocumentsTile";
 
 const { width } = Dimensions.get("screen");
 
 const ViewJobDocuments = props => {
 
-    const [jobDetails, setJobDetails] = useState([]);
     const [documentDetails, setDocumentDetails] = useState([]);
     const [dataDocuments, setDataDocuments] = useState([]);
 
@@ -47,18 +39,6 @@ const ViewJobDocuments = props => {
         TouchableCmp = TouchableNativeFeedback; //ripple effect
     }
 
-    // function alertIndex(index) {
-    //     Alert.alert(`This is row ${index + 1}`);
-    // }
-    //
-    // const element = (data, index) => (
-    //     <TouchableOpacity onPress={() => alertIndex(index)}>
-    //         <View style={styles.btn}>
-    //             <Text style={styles.btnText}>button</Text>
-    //         </View>
-    //     </TouchableOpacity>
-    // );
-
     useEffect(() => {
             getJobsDetailsByJobId(jobId,userId)
                 .then((response) => {
@@ -69,7 +49,6 @@ const ViewJobDocuments = props => {
                         // console.log(object)
                     })
                     setDocumentDetails(documentList);
-                    alert('Equipment details got!');
                     console.log(documentList);
                 }).catch(error => {
                 console.log(error)
@@ -115,27 +94,6 @@ const ViewJobDocuments = props => {
             />
         );
     };
-
-    // const renderItem = itemData => {
-    //     return (
-    //         <TouchableCmp style={{ flex: 1 }}
-    //               onPress={() => {
-    //                   alert("You clicked " + itemData.item.description + " document!" )
-    //               }}
-    //         >
-    //             <View
-    //                 style={styles.group}
-    //             >
-    //                 <Text style={styles.title} numberOfLines={2}>
-    //                     {itemData.item.documentName}
-    //                 </Text>
-    //                 <Text style={styles.title} numberOfLines={2}>
-    //                     {itemData.item.description}
-    //                 </Text>
-    //             </View>
-    //         </TouchableCmp>
-    //     );
-    // };
 
     return (
         <Block flex style={styles.group}>
