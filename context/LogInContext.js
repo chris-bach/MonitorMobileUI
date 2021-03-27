@@ -10,7 +10,13 @@ const initialState = {
         lastName: null
     },
     userRoles: [],
-    userOrganisation: {},
+    userOrganisation: {
+        address: null,
+        contactNumber: null,
+        email: null,
+        organisationId: null,
+        organisationName: null,
+    },
     director: {},
     userInactiveJobs: [],
     userActiveJobs: [],

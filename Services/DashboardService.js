@@ -19,3 +19,11 @@ export const createRole =  (role, organisationId) => {
         "manageOrganisation": role.manageOrganisation
     })
 }
+
+export const getMonthlyBreakdowns = async (userId) => {
+    return await axios.get(`http://192.168.56.1:8080/api/login/getMonthlyBreakdowns/value=${userId}`)
+}
+
+export const getBreakdownsPerBuilding = async (userId) => {
+    return await axios.get(`http://192.168.56.1:8080/api/login/getBreakdownsPerBuilding/value=${userId}`)
+}

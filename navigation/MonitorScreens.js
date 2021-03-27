@@ -15,6 +15,7 @@ import MyJobDetailsView  from "../MonitorScreens/JobDetails";
 import ViewJobEquipment from "../MonitorScreens/ViewJobEquipment";
 import ViewJobDocuments from "../MonitorScreens/ViewJobDocuments";
 import PDFView from "../MonitorScreens/PDFView";
+import MyProfile from "../MonitorScreens/MyProfile";
 
 // import Onboarding from "../screens/Onboarding";
 import Pro from "../screens/Pro";
@@ -238,7 +239,7 @@ function ProfileStack(props) {
             <Header
               transparent
               white
-              title="Profiley"
+              title="Profile"
               navigation={navigation}
               scene={scene}
             />
@@ -562,6 +563,23 @@ function MyDocsStack(props) {
     );
 }
 
+function MyProfileStack(props) {
+    return (
+        <Stack.Navigator mode="card" headerMode="screen">
+            <Stack.Screen
+                name="My Profile"
+                component={MyProfile}
+                options={{
+                    header: ({ navigation, scene }) => (
+                        <Header title="My Profile" navigation={navigation} scene={scene} />
+                    ),
+                    cardStyle: { backgroundColor: "#F8F9FE" }
+                }}
+            />
+        </Stack.Navigator>
+    );
+}
+
 function AppStack(props) {
   return (
     <Drawer.Navigator
@@ -596,10 +614,11 @@ function AppStack(props) {
       <Drawer.Screen name="Dashboard" component={DashboardStack} />
       <Drawer.Screen name="My Jobs" component={MyJobsStack} />
       <Drawer.Screen name="My Documents" component={MyDocsStack} />
-      <Drawer.Screen name="Profile" component={ProfileStack} />
+      <Drawer.Screen name="My Profile" component={MyProfileStack} />
       <Drawer.Screen name="Account" component={Register} />
       <Drawer.Screen name="Elements" component={ElementsStack} />
       <Drawer.Screen name="Articles" component={ArticlesStack} />
+      <Drawer.Screen name="Profile" component={ProfileStack} />
       <Drawer.Screen name="Settings" component={SettingsStack} />
       <Drawer.Screen name="Scratchpad" component={ScratchpadStack} />
     </Drawer.Navigator>

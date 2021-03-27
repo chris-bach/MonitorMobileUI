@@ -44,7 +44,7 @@ function AuthInput(props){
     async function logInHandler(){
         setLoading(true);
         try {
-            const resp = await axios.post("http://10.14.17.70:8080/api/login", {"email": email, "password": password})
+            const resp = await axios.post("http://192.168.56.1:8080/api/login", {"email": email, "password": password})
                 .then(setLoading(false))
                 .catch(setError(true))
             setLoading(false);
@@ -55,10 +55,11 @@ function AuthInput(props){
                 firstName: data.userFirstName,
                 lastName: data.userLastName
             }
-            console.log("organisation", data.organisations)
+            // console.log("data", data)
+            // console.log("organisation", data.organisations.[0])
             setUserInfo(user);
             setUserRoles(data.assignedRoles);
-            setUserOrganisation(data.organisations);
+            setUserOrganisation(data.organisations.[0]);
             setDirector(data.directorData);
             setInactiveJobs(data.inactiveJobs);
             setActiveJobs(data.activeJobs);
