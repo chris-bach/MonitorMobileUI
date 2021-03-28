@@ -8,6 +8,9 @@ import {
   TouchableNativeFeedback
 } from 'react-native';
 
+import { argonTheme} from "../constants";
+import styles from "../constants/TileTheme";
+
 const ViewJobsTile = props => {
   let TouchableCmp = TouchableOpacity;
 
@@ -22,9 +25,10 @@ const ViewJobsTile = props => {
           style={{ ...styles.container}}
         >
           <Text style={styles.title} numberOfLines={2}>
-            Job Name: {props.jobName}
+            {/*Job Name: */}
+            {props.jobName}
           </Text>
-          <Text style={styles.title} numberOfLines={2}>
+          <Text style={styles.heading} numberOfLines={2}>
             Address: {props.address}
           </Text>
           <Text style={styles.normal} numberOfLines={2}>
@@ -33,51 +37,16 @@ const ViewJobsTile = props => {
           <Text style={styles.normal} numberOfLines={2}>
             End Date: {props.endDate}
           </Text>
-          <Text style={styles.normal} numberOfLines={2}>
-            Latitude: {props.latitude}
-          </Text>
-          <Text style={styles.normal} numberOfLines={2}>
-            Longitude: {props.longitude}
-          </Text>
+          {/*<Text style={styles.normal} numberOfLines={2}>*/}
+          {/*  Latitude: {props.latitude}*/}
+          {/*</Text>*/}
+          {/*<Text style={styles.normal} numberOfLines={2}>*/}
+          {/*  Longitude: {props.latitude}*/}
+          {/*</Text>*/}
         </View>
       </TouchableCmp>
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  gridItem: {
-    flex: 1,
-    margin: 15,
-    // height: 150,
-    borderRadius: 10,
-    //overflow: 'hidden',
-    overflow: Platform.OS === 'android' && Platform.Version >= 21 ? 'hidden' : 'visible',
-    elevation: 5,
-
-  },
-  container: {
-    flex: 1,
-    borderRadius: 10,
-    shadowColor: 'black',
-    shadowOpacity: 0.26,
-    shadowOffset: { width: 0, height: 2 },
-    shadowRadius: 10,
-    elevation: 3,
-    padding: 15,
-    justifyContent: 'flex-end',
-    alignItems: 'flex-end'
-  },
-  title: {
-    fontFamily: 'open-sans-bold',
-    fontSize: 20,
-    textAlign: 'right'
-  },
-  normal: {
-    fontFamily: 'open-sans-regular',
-    fontSize: 14,
-    textAlign: 'right'
-  }
-});
 
 export default ViewJobsTile;
