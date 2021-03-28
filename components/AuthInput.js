@@ -13,7 +13,7 @@ const { height, width } = Dimensions.get("screen");
 function AuthInput(props){
     const [loading, setLoading] = useState(false);
     const [email, setEmail] = useState('');
-    const [emailValid, setEmailValid] = useState(false)
+    const [emailValid, setEmailValid] = useState(true)
     const [password, setPassword] = useState("");
     const [errorState, setError] = useState(true);
     const [errorText, setErrorText] = useState("");
@@ -44,7 +44,8 @@ function AuthInput(props){
     async function logInHandler(){
         setLoading(true);
         try {
-            const resp = await axios.post("http://192.168.56.1:8080/api/login", {"email": email, "password": password})
+            changeEmailHandler(email)
+            const resp = await axios.post("http://10.14.17.70:8080/api/login", {"email": email, "password": password})
                 .then(setLoading(false))
                 .catch(setError(true))
             setLoading(false);
@@ -78,8 +79,8 @@ function AuthInput(props){
     return(
         <Block safe>
             {emailValid ? null : <Text color="red"> Please Enter Valid Email </Text>}
-            {errorState ? <Block><Text color="red" >{errorText}</Text></Block> : null}
-            <Input style={styles.input} rounded onChangeText={changeEmailHandler} value={email} type="email-address" autoCapitalize="none" color={theme.COLORS.BLACK}/>
+            {errorState ? <Text color="red" >{errorText}</Text> : null}
+            <Input style={styles.input} rounded onChangeText={setEmail} value={email} type="email-address" autoCapitalize="none" color={theme.COLORS.BLACK}/>
             <Input style={styles.input} rounded password viewPass onChangeText={changePasswordHandler} value={password} autoCapitalize="none" color={theme.COLORS.BLACK}/>
             {loading ? <ActivityIndicator size="small" color="black"/> : null}
             <Button
