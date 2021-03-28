@@ -11,7 +11,6 @@ import {LoginProvider} from "./context/LogInContext";
 import { enableScreens } from 'react-native-screens';
 enableScreens();
 
-import Screens from './navigation/Screens';
 import MonitorScreens from "./navigation/MonitorScreens";
 import { Images, articles, argonTheme } from './constants';
 

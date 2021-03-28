@@ -58,13 +58,18 @@ class Header extends React.Component {
     if (title === 'Title') {
       return [
         <BellButton key='chat-title' navigation={navigation} isWhite={white} />,
-        <BasketButton key='basket-title' navigation={navigation} isWhite={white} />
+        // <BasketButton key='basket-title' navigation={navigation} isWhite={white} />
       ]
     }
 
     switch (title) {
-      case 'Home':
-      case 'Deals':
+
+      case 'Monitor Dashboard':
+        return ([
+          <BellButton key='chat-categories' navigation={navigation} isWhite={white}/>,
+          // <BasketButton key='basket-categories' navigation={navigation} isWhite={white}/>
+        ]);
+      case 'View My Jobs':
       case 'Categories':
       case 'Category':
       case 'Profile':
@@ -98,16 +103,16 @@ class Header extends React.Component {
 
     return (
       <Block row style={styles.options}>
-        <Button shadowless style={[styles.tab, styles.divider]} onPress={() => navigation.navigate('Beauty')}>
+        <Button shadowless style={[styles.tab, styles.divider]} onPress={() => navigation.navigate('My Jobs')}>
           <Block row middle>
-            <Icon name="diamond" family="ArgonExtra" style={{ paddingRight: 8 }} color={argonTheme.COLORS.ICON} />
-            <Text style={{ fontFamily: 'open-sans-regular' }} size={16}  style={styles.tabTitle}>{optionLeft || 'Beauty'}</Text>
+            <Icon name="calendar-date" family="ArgonExtra" style={{ paddingRight: 8 }} color={argonTheme.COLORS.ICON} />
+            <Text style={{ fontFamily: 'open-sans-regular' }} size={16}  style={styles.tabTitle}>{optionLeft || 'My Jobs'}</Text>
           </Block>
         </Button>
-        <Button shadowless style={styles.tab} onPress={() => navigation.navigate('Fashion')}>
+        <Button shadowless style={styles.tab} onPress={() => navigation.navigate('My Documents')}>
           <Block row middle>
-            <Icon size={16} name="bag-17" family="ArgonExtra" style={{ paddingRight: 8 }} color={argonTheme.COLORS.ICON}/>
-            <Text style={{ fontFamily: 'open-sans-regular' }} size={16} style={styles.tabTitle}>{optionRight || 'Fashion'}</Text>
+            <Icon size={16} name="map-big" family="ArgonExtra" style={{ paddingRight: 8 }} color={argonTheme.COLORS.ICON}/>
+            <Text style={{ fontFamily: 'open-sans-regular' }} size={16} style={styles.tabTitle}>{optionRight || 'My Documents'}</Text>
           </Block>
         </Button>
       </Block>

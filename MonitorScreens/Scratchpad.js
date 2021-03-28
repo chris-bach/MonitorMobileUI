@@ -1,10 +1,9 @@
-import React, {useEffect, useState,useContext} from "react";
+import React, {useEffect, useState} from "react";
 import {
     ScrollView,
-    View,
     StyleSheet,
     Dimensions,
-    TouchableOpacity, Platform, TouchableNativeFeedback, Linking, FlatList
+    TouchableOpacity, Platform, TouchableNativeFeedback, Linking
 } from "react-native";
 // Galio components
 import { Block, Text, Button as GaButton, theme } from "galio-framework";
@@ -15,19 +14,6 @@ import { Button, Select, Icon, Input, Header, Switch } from "../components";
 import axios from "axios";
 
 const { width } = Dimensions.get("screen");
-import {getMonthlyBreakdowns} from "../Services/DashboardService";
-import {getBreakdownsPerBuilding} from "../Services/DashboardService";
-import {
-    LineChart,
-    BarChart,
-    PieChart,
-    ProgressChart,
-    ContributionGraph,
-    StackedBarChart
-} from "react-native-chart-kit";
-
-
-const userId = 1;
 
 const Scratchpad = () => {
     let TouchableCmp = TouchableOpacity;
@@ -35,175 +21,66 @@ const Scratchpad = () => {
     if (Platform.OS === 'android' && Platform.Version >= 21) {
         TouchableCmp = TouchableNativeFeedback; //ripple effect
     }
+    const [latitude, setLatitude] = useState([]);
+    const [longitude, setLongitude] = useState([]);
+    const [address, setAddress] = useState({entry: '50 Park St, Sydney, NSW 2000'})
 
-    const [monthlyBreakdownsList, setMonthlyBreakdownsList] = useState([]);
-    const [mlabels, setmLabels] = useState([]);
-    const [mdata, setmData] = useState([]);
-
-    useEffect(() => {
-            getMonthlyBreakdowns(userId)
-                .then((response) => {
-                    const list = []
-                    response.data.forEach(object => {
-                        list.push(object)
-                        // setIsLoading(true)
-                        // console.log("Object", object)
-                    })
-                    setMonthlyBreakdownsList(list);
-                    // console.log("Response", response)
-                    // console.log("List", list)
-                    // console.log("monthly", monthlyBreakdownsList)
-                }).catch(error => {
-                console.log(error)
-                // alert('Monthly Breakdowns NOT got!');
-            })
+    var position = window.navigator.geolocation.getCurrentPosition(
+        (position) => {
+            setLatitude(position.coords.latitude);
+            //can only use "setState" to change state
+            setLongitude(position.coords.longitude)
+            // alert("Latitude is: " + latitude + " Longitude is: " + longitude)
         },
-        []);
+        (err) => {
+            alert(err.message);
+        }
+    )
 
-        useEffect(() => {
-            const listData = [];
-            const listLabels = [];
-            monthlyBreakdownsList.forEach((data, key) => {
-                // let dataObject = {
-                //     id: key,
-                //     breakdowns: data.breakdowns,
-                // };
-                let labelObject = {
-                    id: key,
-                    month: data.month,
-                };
+    const geo = () => {
+        alert (address);
+        Linking.openURL(`https://www.google.com/maps/dir/?api=1&origin=${latitude},${longitude}&destination=${address}`)
+    }
 
-                let int = parseInt(data.breakdowns)
-                listLabels.push(data.month);
-                // listLabels.push(labelObject);
-                listData.push(int);
-            })
-            setmData(listData);
-            setmLabels(listLabels);
-            // console.log("Breakdowns", mdata)
-            // console.log("Labels", mlabels)
-            // alert('Breakdowns data pushed!');
-        }, [monthlyBreakdownsList]);
-
-    const [breakdownsPerBuildingList, setBreakdownsPerBuildingList] = useState([]);
-    const [bblabels, setbbLabels] = useState([]);
-    const [bbdata, setbbData] = useState([]);
-
-    useEffect(() => {
-            getBreakdownsPerBuilding(userId)
-                .then((response) => {
-                    const list = []
-                    response.data.forEach(object => {
-                        list.push(object)
-                        // setIsLoading(true)
-                        console.log("Object", object)
-                    })
-                    setBreakdownsPerBuildingList(list);
-                    console.log("Response", response)
-                    // console.log("List", list)
-                    console.log("Buildings", breakdownsPerBuildingList)
-                }).catch(error => {
-                console.log(error)
-                alert('Building  Breakdowns NOT got!');
-            })
-        },
-        []);
-
-        useEffect(() => {
-            const listData = [];
-            const listLabels = [];
-            breakdownsPerBuildingList.forEach((data, key) => {
-                // let dataObject = {
-                //     id: key,
-                //     breakdowns: data.breakdowns,
-                // };
-                // let labelObject = {
-                //     id: key,
-                //     month: data.month,
-                // };
-
-                let int = parseInt(data.breakdowns)
-                listLabels.push(data.buildingAddress);
-                // listLabels.push(labelObject);
-                listData.push(int);
-            })
-            setbbData(listData);
-            setbbLabels(listLabels);
-            console.log("Breakdowns", bbdata)
-            console.log("Labels", bblabels)
-            alert('Breakdowns data pushed!');
-        }, [breakdownsPerBuildingList]);
-
-    const check = () => {
-        // console.log (monthlyBreakdownsList);
-        console.log ("Checking labels", mlabels);
-        console.log ("Checking data", mdata);
+    const pdf = () => {
+        axios({
+            url: `http://192.168.56.1:8080/api/document/test`, //your url
+            method: 'GET',
+            responseType: 'blob', // important
+        }).then((response) => {
+            const url = window.URL.createObjectURL(new Blob([response.data]));
+            const link = document.createElement('a');
+            link.href = url;
+            link.setAttribute('download', 'file.pdf'); //or any other extension
+            document.body.appendChild(link);
+            link.click();
+        });
     }
 
 
     return (
-        <Block flex style={styles.group}>
-            <Button onPress={check}>Check</Button>
-            <ScrollView>
-                <View>
-                    <Text>Bezier Line Chart</Text>
-                    <LineChart
-                        data={{
-                            labels: ["January", "February", "March", "April", "May", "June"],
-                            datasets: [
-                                {
-                                    data: [
-                                        Math.random() * 100,
-                                        Math.random() * 100,
-                                        Math.random() * 100,
-                                        Math.random() * 100,
-                                        Math.random() * 100,
-                                        Math.random() * 100
-                                    ]
-                                }
-                            ]
-                        }}
-                        width={Dimensions.get("window").width} // from react-native
-                        height={220}
-                        yAxisLabel="$"
-                        yAxisSuffix="k"
-                        yAxisInterval={1} // optional, defaults to 1
-                        chartConfig={{
-                            backgroundColor: "#e26a00",
-                            backgroundGradientFrom: "#fb8c00",
-                            backgroundGradientTo: "#ffa726",
-                            decimalPlaces: 2, // optional, defaults to 2dp
-                            color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-                            labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-                            style: {
-                                borderRadius: 16
-                            },
-                            propsForDots: {
-                                r: "6",
-                                strokeWidth: "2",
-                                stroke: "#ffa726"
-                            }
-                        }}
-                        bezier
-                        style={{
-                            marginVertical: 8,
-                            borderRadius: 16
-                        }}
-                    />
-                </View>
+        <Block flex center>
+            <ScrollView
+                showsVerticalScrollIndicator={false}
+                contentContainerStyle={{ paddingBottom: 30, width }}
+            >
+                <Text>Longitude: {longitude}</Text>
+                <Text>Latitude: {latitude}</Text>
+                <Text>{address.entry}</Text>
+                <Block style={{ paddingHorizontal: theme.SIZES.BASE }}>
+                    <Input right placeholder="Input Address Here"
+                           onChangeText={text =>
+                               setAddress(text)}
+                           iconContent={<Block />} />
+                </Block>
+                <Button color="info" onPress={geo}>Geo!!!</Button>
+                <Button color="info" onPress={pdf}>PDF!!!</Button>
             </ScrollView>
-
         </Block>
     );
 }
 
 const styles = StyleSheet.create({
-    container: { flex: 1, padding: 16, paddingTop: 30, backgroundColor: '#fff' },
-    head: { height: 40, backgroundColor: '#808B97' },
-    text: { margin: 6 },
-    row: { flexDirection: 'row', backgroundColor: '#FFF1C1' },
-    btn: { width: 58, height: 18, backgroundColor: '#78B7BB',  borderRadius: 2 },
-    btnText: { textAlign: 'center', color: '#fff' },
     title: {
         fontFamily: 'open-sans-bold',
         paddingBottom: theme.SIZES.BASE,

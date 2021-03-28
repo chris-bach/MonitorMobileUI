@@ -5,10 +5,9 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
-// screens
-import Home from "../screens/Home";
+// Monitor screens
+import Login from "../MonitorScreens/Login";
 import Dashboard from "../MonitorScreens/Dashboard";
-import Scratchpad from "../MonitorScreens/Scratchpad";
 import MyJobsView from "../MonitorScreens/MyJobsView";
 import MyDocsView from "../MonitorScreens/MyDocsView";
 import MyJobDetailsView  from "../MonitorScreens/JobDetails";
@@ -17,8 +16,9 @@ import ViewJobDocuments from "../MonitorScreens/ViewJobDocuments";
 import PDFView from "../MonitorScreens/PDFView";
 import MyProfile from "../MonitorScreens/MyProfile";
 
-// import Onboarding from "../screens/Onboarding";
-import Pro from "../screens/Pro";
+import Scratchpad from "../MonitorScreens/Scratchpad";
+
+import Home from "../screens/Home";
 import Profile from "../screens/Profile";
 import Register from "../screens/Register";
 import Elements from "../screens/Elements";
@@ -36,10 +36,10 @@ import SettingsScreen from "../screens/Settings";
 import AgreementScreen from "../screens/Agreement";
 import PrivacyScreen from "../screens/Privacy";
 import AboutScreen from "../screens/About";
-import NotificationsScreen from "../screens/Notifications";
+import NotificationsScreen from "../MonitorScreens/Notifications";
 // Notifications
-import PersonalNotifications from "../screens/PersonalNotifications";
-import SystemNotifications from "../screens/SystemNotifications";
+import PersonalNotifications from "../MonitorScreens/PersonalNotifications";
+import SystemNotifications from "../MonitorScreens/SystemNotifications";
 
 // drawer
 import CustomDrawerContent from "./MonitorMenu";
@@ -211,6 +211,162 @@ function SettingsStack(props) {
   );
 }
 
+function HomeStack(props) {
+    return (
+        <Stack.Navigator mode="card" headerMode="screen">
+            <Stack.Screen
+                name="Home"
+                component={Home}
+                options={{
+                    header: ({ navigation, scene }) => (
+                        <Header
+                            title="Home"
+                            search
+                            options
+                            navigation={navigation}
+                            scene={scene}
+                        />
+                    ),
+                    cardStyle: { backgroundColor: "#F8F9FE" }
+                }}
+            />
+            <Stack.Screen
+                name="Beauty"
+                component={Beauty}
+                options={{
+                    header: ({ navigation, scene }) => (
+                        <Header
+                            title="Beauty"
+                            back
+                            tabs={tabs.beauty}
+                            navigation={navigation}
+                            scene={scene}
+                        />
+                    ),
+                    cardStyle: { backgroundColor: "#F8F9FE" }
+                }}
+            />
+            <Stack.Screen
+                name="Category"
+                component={Category}
+                options={{
+                    header: ({ navigation, scene }) => {
+                        const { params } = scene.descriptor;
+                        const title = (params && params.headerTitle) || "Category";
+                        return (<Header title={title} back navigation={navigation} scene={scene} />);
+                    },
+                    cardStyle: { backgroundColor: "#F8F9FE" }
+                }}
+            />
+            <Stack.Screen
+                name="Fashion"
+                component={Fashion}
+                options={{
+                    header: ({ navigation, scene }) => (
+                        <Header
+                            title="Fashion"
+                            back
+                            tabs={tabs.fashion}
+                            navigation={navigation}
+                            scene={scene}
+                        />
+                    ),
+                    cardStyle: { backgroundColor: "#F8F9FE" }
+                }}
+            />
+            <Stack.Screen
+                name="Product"
+                component={Product}
+                options={{
+                    header: ({ navigation, scene }) => (
+                        <Header
+                            title=""
+                            back
+                            white
+                            transparent
+                            navigation={navigation}
+                            scene={scene}
+                        />
+                    ),
+                    headerTransparent: true
+                }}
+            />
+            <Stack.Screen
+                name="Gallery"
+                component={Gallery}
+                options={{
+                    header: ({ navigation, scene }) => (
+                        <Header
+                            back
+                            transparent
+                            white
+                            title=""
+                            navigation={navigation}
+                            scene={scene}
+                        />
+                    ),
+                    headerTransparent: true
+                }}
+            />
+            <Stack.Screen
+                name="Chat"
+                component={Chat}
+                options={{
+                    header: ({ navigation, scene }) => (
+                        <Header
+                            title="Rachel Brown"
+                            back
+                            navigation={navigation}
+                            scene={scene}
+                        />
+                    ),
+                    cardStyle: { backgroundColor: "#F8F9FE" }
+                }}
+            />
+            <Stack.Screen
+                name="Search"
+                component={Search}
+                options={{
+                    header: ({ navigation, scene }) => (
+                        <Header title="Search" back navigation={navigation} scene={scene} />
+                    ),
+                    cardStyle: { backgroundColor: "#F8F9FE" }
+                }}
+            />
+            <Stack.Screen
+                name="Cart"
+                component={Cart}
+                options={{
+                    header: ({ navigation, scene }) => (
+                        <Header
+                            title="Shopping Cart"
+                            back
+                            navigation={navigation}
+                            scene={scene}
+                        />
+                    ),
+                    cardStyle: { backgroundColor: "#F8F9FE" }
+                }}
+            />
+            <Stack.Screen
+                name="Notifications"
+                component={NotificationsStack}
+                options={{
+                    header: ({ navigation, scene }) => (
+                        <Header
+                            title="Notifications"
+                            back
+                            navigation={navigation}
+                            scene={scene}
+                        />
+                    ),
+                    cardStyle: { backgroundColor: "#F8F9FE" }
+                }}
+            />
+        </Stack.Navigator>
+    );
+}
+
 function ArticlesStack(props) {
   return (
     <Stack.Navigator mode="card" headerMode="screen">
@@ -302,119 +458,11 @@ function DashboardStack(props) {
         }}
       />
       <Stack.Screen
-        name="Beauty"
-        component={Beauty}
-        options={{
-          header: ({ navigation, scene }) => (
-            <Header
-              title="Beauty"
-              back
-              tabs={tabs.beauty}
-              navigation={navigation}
-              scene={scene}
-            />
-          ),
-          cardStyle: { backgroundColor: "#F8F9FE" }
-        }}
-      />
-      <Stack.Screen
-        name="Category"
-        component={Category}
-        options={{
-          header: ({ navigation, scene }) => {
-            const { params } = scene.descriptor;
-            const title = (params && params.headerTitle) || "Category";
-            return (<Header title={title} back navigation={navigation} scene={scene} />);
-          },
-          cardStyle: { backgroundColor: "#F8F9FE" }
-        }}
-      />
-      <Stack.Screen
-        name="Fashion"
-        component={Fashion}
-        options={{
-          header: ({ navigation, scene }) => (
-            <Header
-              title="Fashion"
-              back
-              tabs={tabs.fashion}
-              navigation={navigation}
-              scene={scene}
-            />
-          ),
-          cardStyle: { backgroundColor: "#F8F9FE" }
-        }}
-      />
-      <Stack.Screen
-        name="Product"
-        component={Product}
-        options={{
-          header: ({ navigation, scene }) => (
-            <Header
-              title=""
-              back
-              white
-              transparent
-              navigation={navigation}
-              scene={scene}
-            />
-          ),
-          headerTransparent: true
-        }}
-      />
-      <Stack.Screen
-        name="Gallery"
-        component={Gallery}
-        options={{
-          header: ({ navigation, scene }) => (
-            <Header
-              back
-              transparent
-              white
-              title=""
-              navigation={navigation}
-              scene={scene}
-            />
-          ),
-          headerTransparent: true
-        }}
-      />
-      <Stack.Screen
-        name="Chat"
-        component={Chat}
-        options={{
-          header: ({ navigation, scene }) => (
-            <Header
-              title="Rachel Brown"
-              back
-              navigation={navigation}
-              scene={scene}
-            />
-          ),
-          cardStyle: { backgroundColor: "#F8F9FE" }
-        }}
-      />
-      <Stack.Screen
         name="Search"
         component={Search}
         options={{
           header: ({ navigation, scene }) => (
             <Header title="Search" back navigation={navigation} scene={scene} />
-          ),
-          cardStyle: { backgroundColor: "#F8F9FE" }
-        }}
-      />
-      <Stack.Screen
-        name="Cart"
-        component={Cart}
-        options={{
-          header: ({ navigation, scene }) => (
-            <Header
-              title="Shopping Cart"
-              back
-              navigation={navigation}
-              scene={scene}
-            />
           ),
           cardStyle: { backgroundColor: "#F8F9FE" }
         }}
@@ -438,22 +486,6 @@ function DashboardStack(props) {
   );
 }
 
-function ScratchpadStack(props) {
-    return (
-        <Stack.Navigator mode="card" headerMode="screen">
-            <Stack.Screen
-                name="Scratchpad"
-                component={Scratchpad}
-                options={{
-                    header: ({ navigation, scene }) => (
-                        <Header title="Scratchpad" navigation={navigation} scene={scene} />
-                    ),
-                    cardStyle: { backgroundColor: "#F8F9FE" }
-                }}
-            />
-        </Stack.Navigator>
-    );
-}
 function MyJobsStack(props) {
     return (
         <Stack.Navigator mode="card" headerMode="screen">
@@ -462,7 +494,12 @@ function MyJobsStack(props) {
                 component={MyJobsView}
                 options={{
                     header: ({ navigation, scene }) => (
-                        <Header title="View My Jobs" navigation={navigation} scene={scene} />
+                        <Header
+                            back
+                            title="View My Jobs"
+                            scene={scene}
+                            navigation={navigation}
+                        />
                     ),
                     cardStyle: { backgroundColor: "#F8F9FE" }
                 }}
@@ -539,7 +576,12 @@ function MyDocsStack(props) {
                 component={MyDocsView}
                 options={{
                     header: ({ navigation, scene }) => (
-                        <Header title="View My Documents" navigation={navigation} scene={scene} />
+                        <Header
+                            back
+                            title="My Documents"
+                            scene={scene}
+                            navigation={navigation}
+                        />
                     ),
                     cardStyle: { backgroundColor: "#F8F9FE" }
                 }}
@@ -571,7 +613,33 @@ function MyProfileStack(props) {
                 component={MyProfile}
                 options={{
                     header: ({ navigation, scene }) => (
-                        <Header title="My Profile" navigation={navigation} scene={scene} />
+                        <Header
+                            back
+                            title="My Profile"
+                            scene={scene}
+                            navigation={navigation}
+                        />
+                    ),
+                    cardStyle: { backgroundColor: "#F8F9FE" }
+                }}
+            />
+        </Stack.Navigator>
+    );
+}
+
+function ScratchpadStack(props) {
+    return (
+        <Stack.Navigator mode="card" headerMode="screen">
+            <Stack.Screen
+                name="Scratchpad"
+                component={Scratchpad}
+                options={{
+                    header: ({ navigation, scene }) => (
+                        <Header
+                            title="Scratchpad"
+                            scene={scene}
+                            navigation={navigation}
+                        />
                     ),
                     cardStyle: { backgroundColor: "#F8F9FE" }
                 }}
@@ -615,6 +683,7 @@ function AppStack(props) {
       <Drawer.Screen name="My Jobs" component={MyJobsStack} />
       <Drawer.Screen name="My Documents" component={MyDocsStack} />
       <Drawer.Screen name="My Profile" component={MyProfileStack} />
+      <Drawer.Screen name="Home" component={HomeStack} />
       <Drawer.Screen name="Account" component={Register} />
       <Drawer.Screen name="Elements" component={ElementsStack} />
       <Drawer.Screen name="Articles" component={ArticlesStack} />
@@ -630,7 +699,7 @@ export default function OnboardingStack(props) {
     <Stack.Navigator mode="card" headerMode="none">
       {/*<Stack.Screen*/}
       {/*  name="Onboarding"*/}
-      {/*  component={Pro}*/}
+      {/*  component={Login}*/}
       {/*  option={{*/}
       {/*    headerTransparent: true*/}
       {/*  }}*/}

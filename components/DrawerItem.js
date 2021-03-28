@@ -8,17 +8,8 @@ import argonTheme from "../constants/Theme";
 class DrawerItem extends React.Component {
   renderIcon = () => {
     const { title, focused } = this.props;
-
     switch (title) {
-      // case "Home":
-      //   return (
-      //     <Icon
-      //       name="shop"
-      //       family="ArgonExtra"
-      //       size={14}
-      //       color={focused ? "white" : argonTheme.COLORS.PRIMARY}
-      //     />
-      //   );
+
       case "Dashboard":
         return (
             <Icon
@@ -55,6 +46,17 @@ class DrawerItem extends React.Component {
                 color={focused ? "white" : argonTheme.COLORS.DEFAULT}
             />
         );
+
+      case "Home":
+        return (
+            <Icon
+                name="shop"
+                family="ArgonExtra"
+                size={14}
+                color={focused ? "white" : argonTheme.COLORS.PRIMARY}
+            />
+        );
+
       case "Elements":
         return (
           <Icon
@@ -119,16 +121,7 @@ class DrawerItem extends React.Component {
                 color={focused ? "white" : argonTheme.COLORS.DRIBBBLE}
             />
         );
-      case "Click Me For A Good Time":
-        return (
-            <Icon
-                name="diamond"
-                family="ArgonExtra"
-                size={14}
-                color={focused ? "white" : "rgba(0,0,0,0.5)"}
-            />
-        );
-      case "Log out":
+      case "Log Out":
         return <Icon />;
       default:
         return null;
@@ -146,8 +139,7 @@ class DrawerItem extends React.Component {
     return (
       <TouchableOpacity
         style={{ height: 60 }}
-        // onPress={() => title == 'Getting Started' ? Linking.openURL('https://demos.creative-tim.com/argon-pro-react-native/docs/').catch((err) => console.error('An error occurred', err)) : navigation.navigate(title)}
-        onPress={() => title == 'Click Me For A Good Time' ? Linking.openURL('https://www.youtube.com/watch?v=dQw4w9WgXcQ').catch((err) => console.error('An error occurred', err)) : navigation.navigate(title)}
+        onPress={() => title == 'Getting Started' ? Linking.openURL('https://demos.creative-tim.com/argon-pro-react-native/docs/').catch((err) => console.error('An error occurred', err)) : navigation.navigate(title)}
       >
         <Block flex row style={containerStyles}>
           <Block middle flex={0.1} style={{ marginRight: 5 }}>
