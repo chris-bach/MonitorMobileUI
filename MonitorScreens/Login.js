@@ -24,31 +24,34 @@ export default class Login extends React.Component {
       <Block flex style={styles.container}>
         <StatusBar barStyle="dark-content" />
           <Block flex style={styles.padded}>
-              <Block>
+              <Block style={{alignItems: 'center'}}>
                 <Image
                   source={Images.LogoB}
-                  style={{ align: "center",
+                  style={{
                     resizeMode: "contain",
                     height: 150,
                     width: 350 }}
                 />
               </Block>
                   <AuthInput nav={navigation}/>
-
-              <Text
-                size={16}
-                color="black"
-                style={{ marginTop: 35, fontFamily: 'open-sans-regular' }}
-              >
-                Take advantage of all the features and screens made upon Galio
-                Design System, coded on React Native for both.
-              </Text>
               <Block flex middle style={styles.pro}>
                 <Text style={{ fontFamily: 'open-sans-bold' }} size={16} color="white">
-                  By The Monitor Teams
+                  Created by Team Monitor
                 </Text>
-              </Block>
 
+              </Block>
+              <Text
+                  size={16}
+                  color="black"
+                  textAlign="center"
+                  style={{ marginTop: 35, fontFamily: 'open-sans-regular' }}
+              >
+                  {/*Matthew Belgre: Team Leader*/}
+                  {/*Patrick Bornay: Full Stack Developer*/}
+                  {/*Manik Bagga: Full Stack Developer*/}
+                  {/*Molin Lai: Graphic/UI Designer/Documentation*/}
+                  {/*Christian Bautista: Front End/Documentation/Marketing*/}
+              </Text>
           </Block>
       </Block>
     );
@@ -64,7 +67,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: theme.SIZES.BASE,
     zIndex: 3,
     position: "absolute",
-    top: theme.SIZES.BASE * 15
+    top: theme.SIZES.BASE * 15,
+      alignItems: 'center'
   },
   button: {
     width: width - theme.SIZES.BASE * 4,

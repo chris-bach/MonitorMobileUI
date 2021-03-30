@@ -30,11 +30,11 @@ const MyProfile = props => {
     return (
         <Block flex style={styles.profile}>
             <Block flex>
-                <ImageBackground
-                    source={Images.LoginBG}
-                    style={styles.profileContainer}
-                    imageStyle={styles.profileBackground}
-                >
+                {/*<ImageBackground*/}
+                {/*    source={Images.LoginBG}*/}
+                {/*    style={styles.profileContainer}*/}
+                {/*    imageStyle={styles.profileBackground}*/}
+                {/*>*/}
                     <ScrollView
                         showsVerticalScrollIndicator={false}
                         style={{ width, marginTop: "15%" }}
@@ -96,7 +96,7 @@ const MyProfile = props => {
                             </Block>
                         </Block>
                     </ScrollView>
-                </ImageBackground>
+                {/*</ImageBackground>*/}
             </Block>
         </Block>
     );

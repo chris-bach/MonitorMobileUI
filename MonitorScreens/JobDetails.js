@@ -36,11 +36,11 @@ const MyJobDetailsView = props => {
     }
 
     return (
-        <Block>
+        <Block style={styles.group}>
                 <Text style={styles.title}>{jobName}</Text>
-                <Text style={styles.heading}>Address: {address}</Text>
-                <Text style={styles.normal}>Job Id: {jobId}</Text>
-                <Text style={styles.normal}>Job Identifier: {jobIdentifier}</Text>
+                <Text style={styles.heading}>{address}</Text>
+                {/*<Text style={styles.normal}>Job Id: {jobId}</Text>*/}
+                {/*<Text style={styles.normal}>Job Identifier: {jobIdentifier}</Text>*/}
                 <Button
                     onPress={() => {
                         alert("You clicked this button!" )
@@ -55,7 +55,7 @@ const MyJobDetailsView = props => {
                             });
 
                     }}
-                >View Equipment</Button>
+                >VIEW EQUIPMENT</Button>
 
                 <Button
                     onPress={() => {
@@ -69,7 +69,7 @@ const MyJobDetailsView = props => {
                                 jobName: jobName
                             }
                         });
-                }}>View Job Documents</Button>
+                }}>VIEW JOB DOCUMENTS</Button>
         </Block>
     );
 }

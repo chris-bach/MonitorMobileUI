@@ -15,12 +15,12 @@ function CustomDrawerContent({ drawerPosition, navigation, profile, focused, sta
     "My Jobs",
     "My Documents",
     "My Profile",
-    "Scratchpad",
-    "Home",
-    "Profile",
-    "Account",
-    "Elements",
-    "Articles",
+    // "Scratchpad",
+    // "Home",
+    // "Profile",
+    // "Account",
+    // "Elements",
+    // "Articles",
     "Settings",
   ];
   return (
@@ -29,7 +29,8 @@ function CustomDrawerContent({ drawerPosition, navigation, profile, focused, sta
       forceInset={{ top: 'always', horizontal: 'never' }}
     >
       <Block flex={0.06} style={styles.header}>
-      <Image styles={styles.logo} source={Images.LogoB}                   style={{ marginBottom: theme.SIZES.BASE * 1.5,
+      <Image styles={styles.logo} source={Images.LogoB}
+             style={{ marginBottom: theme.SIZES.BASE * 1.5,
           resizeMode: "contain",
           height: 150,
           width: 150 }}/>
@@ -62,7 +63,8 @@ const styles = StyleSheet.create({
     flex: 1
   },
   header: {
-    marginTop: 30,
+    marginTop: 40,
+    marginBottom: 20,
     paddingHorizontal: 28,
     paddingBottom: theme.SIZES.BASE,
     paddingTop: theme.SIZES.BASE * 3,

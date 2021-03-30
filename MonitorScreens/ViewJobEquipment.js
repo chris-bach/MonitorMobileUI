@@ -103,13 +103,13 @@ const ViewJobEquipment = props => {
         return (
             <ViewEquipmentDetailsTile
                 description={equipmentData.item.description}
-                equipmentId={equipmentData.item.equipmentId}
+                // equipmentId={equipmentData.item.equipmentId}
                 equipmentName={equipmentData.item.equipmentName}
                 manufacturer={equipmentData.item.manufacturer}
                 model={equipmentData.item.model}
                 currentState={equipmentData.item.currency}
-                flags={equipmentData.item.flags}
-                ipAddress={equipmentData.item.ipAddress}
+                // flags={equipmentData.item.flags}
+                // ipAddress={equipmentData.item.ipAddress}
                 status={equipmentData.item.status}
                 breakdowns={equipmentData.item.breakdowns}
                 onSelect={() => {
@@ -129,10 +129,10 @@ const ViewJobEquipment = props => {
     return (
         <Block flex style={styles.group}>
             <Block flex>
-                <Text>{jobName}</Text>
-                <Text>{address}</Text>
-                <Text>{jobId}</Text>
-                <Text>{jobIdentifier}</Text>
+                <Text style={styles.title}>{jobName}</Text>
+                <Text style={styles.heading}>{address}</Text>
+                {/*<Text>{jobId}</Text>*/}
+                {/*<Text>{jobIdentifier}</Text>*/}
                 <FlatList
                     keyExtractor={(item, index) => item.id} //Need to check which key!!!
                     data={dataEquipment}
