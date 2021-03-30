@@ -8,7 +8,6 @@ import {
   TouchableNativeFeedback
 } from 'react-native';
 
-import { argonTheme} from "../constants";
 import styles from "../constants/TileTheme";
 
 const ViewJobsTile = props => {
@@ -29,7 +28,8 @@ const ViewJobsTile = props => {
             {props.jobName}
           </Text>
           <Text style={styles.heading} numberOfLines={2}>
-            Address: {props.address}
+            {/*Address: */}
+            {props.address}
           </Text>
           <Text style={styles.normal} numberOfLines={2}>
             Start Date: {props.startDate}

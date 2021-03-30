@@ -30,6 +30,7 @@ const ViewJobDocuments = props => {
     const jobIdentifier = props.route.params.params.jobIdentifier;
     const jobId = props.route.params.params.jobId;
     const address = props.route.params.params.address;
+    const jobName = props.route.params.params.jobName;
 
     const userId = 1;
 
@@ -100,7 +101,8 @@ const ViewJobDocuments = props => {
     return (
         <Block flex style={styles.group}>
             <Block flex>
-                <Text>{address}</Text>
+                <Text style={styles.title}>{jobName}</Text>
+                <Text style={styles.heading}>{address}</Text>
                 <Text>{jobId}</Text>
                 <Text>{jobIdentifier}</Text>
                 <FlatList

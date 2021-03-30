@@ -1,5 +1,6 @@
 import {Platform, StyleSheet} from "react-native";
 import {argonTheme} from "./index";
+import {theme} from "galio-framework";
 
 const styles = StyleSheet.create({
     gridItem: {
@@ -12,6 +13,10 @@ const styles = StyleSheet.create({
         elevation: 5,
 
     },
+    group: {
+        paddingTop: theme.SIZES.BASE * 2,
+        alignItems: 'center'
+    },
     container: {
         flex: 1,
         borderRadius: 10,
@@ -23,19 +28,21 @@ const styles = StyleSheet.create({
         elevation: 3,
         padding: 15,
         // justifyContent: 'flex-start',
-        // alignItems: 'flex-start'
+        alignItems: 'center'
     },
     title: {
         fontFamily: 'open-sans-bold',
         color: argonTheme.COLORS.PRIMARY,
         fontSize: 20,
-        textAlign: 'center'
+        textAlign: 'center',
+        marginBottom: 10,
     },
     heading: {
         fontFamily: 'open-sans-bold',
         color: argonTheme.COLORS.HEADER,
         fontSize: 16,
-        textAlign: 'left'
+        textAlign: 'center',
+        marginBottom: 10,
     },
     normal: {
         fontFamily: 'open-sans-regular',

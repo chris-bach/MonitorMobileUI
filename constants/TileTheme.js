@@ -29,18 +29,20 @@ const styles = StyleSheet.create({
         fontFamily: 'open-sans-bold',
         color: argonTheme.COLORS.PRIMARY,
         fontSize: 20,
-        textAlign: 'center'
+        textAlign: 'center',
+        marginBottom: 10,
     },
     heading: {
         fontFamily: 'open-sans-bold',
         color: argonTheme.COLORS.HEADER,
         fontSize: 16,
-        textAlign: 'left'
+        textAlign: 'center',
+        marginBottom: 10,
     },
     normal: {
         fontFamily: 'open-sans-regular',
         fontSize: 14,
-        textAlign: 'left',
+        textAlign: 'auto',
         color: argonTheme.COLORS.TEXT
     }
 });

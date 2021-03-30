@@ -69,7 +69,6 @@ class Header extends React.Component {
           <BellButton key='chat-categories' navigation={navigation} isWhite={white}/>,
           // <BasketButton key='basket-categories' navigation={navigation} isWhite={white}/>
         ]);
-      case 'View My Jobs':
       case 'Categories':
       case 'Category':
       case 'Profile':
