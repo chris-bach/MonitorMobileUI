@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
         elevation: 3,
         padding: 15,
         // justifyContent: 'flex-start',
-        // alignItems: 'flex-start'
+        alignItems: 'center'
     },
     title: {
         fontFamily: 'open-sans-bold',

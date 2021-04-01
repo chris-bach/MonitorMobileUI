@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 
 import styles from "../constants/TileTheme";
+import {Block} from "galio-framework";
 
 const ViewJobsTile = props => {
   let TouchableCmp = TouchableOpacity;
@@ -31,12 +32,14 @@ const ViewJobsTile = props => {
             {/*Address: */}
             {props.address}
           </Text>
-          <Text style={styles.normal} numberOfLines={2}>
-            Start Date: {props.startDate}
-          </Text>
-          <Text style={styles.normal} numberOfLines={2}>
-            End Date: {props.endDate}
-          </Text>
+          <Block>
+            <Text style={styles.normal} numberOfLines={2}>
+              Start Date: {props.startDate}
+            </Text>
+            <Text style={styles.normal} numberOfLines={2}>
+              End Date: {props.endDate}
+            </Text>
+          </Block>
           {/*<Text style={styles.normal} numberOfLines={2}>*/}
           {/*  Latitude: {props.latitude}*/}
           {/*</Text>*/}

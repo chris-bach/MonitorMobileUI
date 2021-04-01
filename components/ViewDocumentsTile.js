@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 
 import styles from "../constants/TileTheme";
+import {Block} from "galio-framework";
 
 const ViewDocumentsTile = props => {
   let TouchableCmp = TouchableOpacity;
@@ -25,15 +26,17 @@ const ViewDocumentsTile = props => {
           <Text style={styles.title} numberOfLines={2}>
             Name: {props.name}
           </Text>
-          <Text style={styles.normal} numberOfLines={2}>
+          <Text style={styles.heading} numberOfLines={2}>
             Description: {props.description}
           </Text>
-          <Text style={styles.normal} numberOfLines={2}>
-            Document Id: {props.documentId}
-          </Text>
-          <Text style={styles.normal} numberOfLines={2}>
-            Parent Info: {props.parentInfo}
-          </Text>
+          <Block>
+            <Text style={styles.normal} numberOfLines={2}>
+              Document Id: {props.documentId}
+            </Text>
+            <Text style={styles.normal} numberOfLines={2}>
+              Parent Info: {props.parentInfo}
+            </Text>
+          </Block>
         </View>
       </TouchableCmp>
     </View>
