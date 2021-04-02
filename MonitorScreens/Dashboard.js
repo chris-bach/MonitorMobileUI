@@ -1,4 +1,4 @@
-import React, {useEffect, useState,useContext} from "react";
+import React, {useEffect, useState, useContext} from "react";
 import {
     ScrollView,
     View,
@@ -15,8 +15,13 @@ import { Button, Select, Icon, Input, Header, Switch } from "../components";
 import axios from "axios";
 
 const { width } = Dimensions.get("screen");
+
+import styles from "../constants/ScreenTheme";
+import {LogInContext} from "../context/LogInContext";
+
 import {getMonthlyBreakdowns} from "../Services/DashboardService";
 import {getBreakdownsPerBuilding} from "../Services/DashboardService";
+
 import {
     LineChart,
     BarChart,
@@ -26,20 +31,22 @@ import {
     StackedBarChart
 } from "react-native-chart-kit";
 
-import styles from "../constants/ScreenTheme";
-
-const userId = 1;
-
 const Dashboard = () => {
+    // const userId = 1;
+    const {userInfo} = useContext(LogInContext);
+    const {userOrganisation} = useContext(LogInContext);
+
+    const userId = userInfo.id;
+
+    const [monthlyBreakdownsList, setMonthlyBreakdownsList] = useState([]);
+    const [mlabels, setmLabels] = useState([]);
+    const [mdata, setmData] = useState([]);
+
     let TouchableCmp = TouchableOpacity;
 
     if (Platform.OS === 'android' && Platform.Version >= 21) {
         TouchableCmp = TouchableNativeFeedback; //ripple effect
     }
-
-    const [monthlyBreakdownsList, setMonthlyBreakdownsList] = useState([]);
-    const [mlabels, setmLabels] = useState([]);
-    const [mdata, setmData] = useState([]);
 
     useEffect(() => {
             getMonthlyBreakdowns(userId)
@@ -51,12 +58,8 @@ const Dashboard = () => {
                         // console.log("Object", object)
                     })
                     setMonthlyBreakdownsList(list);
-                    // console.log("Response", response)
-                    // console.log("List", list)
-                    // console.log("monthly", monthlyBreakdownsList)
                 }).catch(error => {
                 console.log(error)
-                // alert('Monthly Breakdowns NOT got!');
             })
         },
         []);
@@ -69,21 +72,19 @@ const Dashboard = () => {
             //     id: key,
             //     breakdowns: data.breakdowns,
             // };
-            let labelObject = {
-                id: key,
-                month: data.month,
-            };
+            // let labelObject = {
+            //     id: key,
+            //     month: data.month,
+            // };
 
             let int = parseInt(data.breakdowns)
             listLabels.push(data.month);
-            // listLabels.push(labelObject);
             listData.push(int);
+            // listLabels.push(labelObject);
+            // listData.push(dataObject);
         })
         setmData(listData);
         setmLabels(listLabels);
-        // console.log("Breakdowns", mdata)
-        // console.log("Labels", mlabels)
-        // alert('Breakdowns data pushed!');
     }, [monthlyBreakdownsList]);
 
     const [breakdownsPerBuildingList, setBreakdownsPerBuildingList] = useState([]);
@@ -97,15 +98,11 @@ const Dashboard = () => {
                     response.data.forEach(object => {
                         list.push(object)
                         // setIsLoading(true)
-                        console.log("Object", object)
+                        // console.log("Object", object)
                     })
                     setBreakdownsPerBuildingList(list);
-                    console.log("Response", response)
-                    // console.log("List", list)
-                    console.log("Buildings", breakdownsPerBuildingList)
                 }).catch(error => {
                 console.log(error)
-                alert('Building  Breakdowns NOT got!');
             })
         },
         []);
@@ -125,27 +122,24 @@ const Dashboard = () => {
 
             let int = parseInt(data.breakdowns)
             listLabels.push(data.buildingAddress);
-            // listLabels.push(labelObject);
             listData.push(int);
+            // listLabels.push(labelObject);
+            // listData.push(dataObject);
         })
         setbbData(listData);
         setbbLabels(listLabels);
-        console.log("Breakdowns", bbdata)
-        console.log("Labels", bblabels)
-        alert('Breakdowns data pushed!');
     }, [breakdownsPerBuildingList]);
 
     const check = () => {
-        // console.log (monthlyBreakdownsList);
         console.log ("Checking labels", mlabels);
         console.log ("Checking data", mdata);
     }
-
 
     return (
         <Block flex style={styles.group}>
             {/*<Button onPress={check}>Check</Button>*/}
             <ScrollView>
+                {/*Table 1*/}
                 <Block>
                     <View>
                         <Text style={styles.title}>Monthly Breakdowns</Text>
@@ -194,6 +188,7 @@ const Dashboard = () => {
                         />
                     </View>
                 </Block>
+                {/*Table 2*/}
                 <Block>
                     <View>
                         <Text style={styles.title}>Breakdowns Per Building</Text>

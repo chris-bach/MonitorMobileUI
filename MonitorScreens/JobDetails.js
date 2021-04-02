@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useState, useContext} from "react";
 import {
     ScrollView,
     View,
@@ -16,18 +16,21 @@ import { argonTheme, tabs } from "../constants";
 import { Button, Select, Icon, Input, Header, Switch } from "../components";
 
 const { width } = Dimensions.get("screen");
+
 import styles from "../constants/ScreenTheme";
+import {LogInContext} from "../context/LogInContext";
 
 const MyJobDetailsView = props => {
+    // const userId = 1;
+    const {userInfo} = useContext(LogInContext);
+    const {userOrganisation} = useContext(LogInContext);
+
+    const userId = userInfo.id;
 
     const jobIdentifier = props.route.params.params.jobIdentifier;
     const jobId = props.route.params.params.jobId;
     const jobName = props.route.params.params.jobName;
     const address = props.route.params.params.address;
-
-    const userId = 1;
-
-    console.log(props);
 
     let TouchableCmp = TouchableOpacity;
 
@@ -37,30 +40,13 @@ const MyJobDetailsView = props => {
 
     return (
         <Block style={styles.group}>
-                <Text style={styles.title}>{jobName}</Text>
-                <Text style={styles.heading}>{address}</Text>
-                {/*<Text style={styles.normal}>Job Id: {jobId}</Text>*/}
-                {/*<Text style={styles.normal}>Job Identifier: {jobIdentifier}</Text>*/}
-                <Button
-                    onPress={() => {
-                        alert("You clicked this button!" )
-                        props.navigation.navigate('View Job Equipment',
-                            {
-                                params: {
-                                    jobIdentifier: jobIdentifier,
-                                    address: address,
-                                    jobId: jobId,
-                                    jobName: jobName
-                                }
-                            });
-
-                    }}
-                >VIEW EQUIPMENT</Button>
-
-                <Button
-                    onPress={() => {
-                    alert("You clicked this view job documents button!" )
-                    props.navigation.navigate('View Job Documents',
+            <Text style={styles.title}>{jobName}</Text>
+            <Text style={styles.heading}>{address}</Text>
+            {/*<Text style={styles.normal}>Job Id: {jobId}</Text>*/}
+            {/*<Text style={styles.normal}>Job Identifier: {jobIdentifier}</Text>*/}
+            <Button
+                onPress={() => {
+                    props.navigation.navigate('View Job Equipment',
                         {
                             params: {
                                 jobIdentifier: jobIdentifier,
@@ -69,7 +55,21 @@ const MyJobDetailsView = props => {
                                 jobName: jobName
                             }
                         });
-                }}>VIEW JOB DOCUMENTS</Button>
+                }}
+            >VIEW EQUIPMENT</Button>
+
+            <Button
+                onPress={() => {
+                props.navigation.navigate('View Job Documents',
+                    {
+                        params: {
+                            jobIdentifier: jobIdentifier,
+                            address: address,
+                            jobId: jobId,
+                            jobName: jobName
+                        }
+                    });
+            }}>VIEW JOB DOCUMENTS</Button>
         </Block>
     );
 }

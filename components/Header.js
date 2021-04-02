@@ -108,12 +108,12 @@ class Header extends React.Component {
             <Text style={{ fontFamily: 'open-sans-regular' }} size={16}  style={styles.tabTitle}>{optionLeft || 'My Jobs'}</Text>
           </Block>
         </Button>
-        <Button shadowless style={styles.tab} onPress={() => navigation.navigate('My Documents')}>
-          <Block row middle>
-            <Icon size={16} name="map-big" family="ArgonExtra" style={{ paddingRight: 8 }} color={argonTheme.COLORS.ICON}/>
-            <Text style={{ fontFamily: 'open-sans-regular' }} size={16} style={styles.tabTitle}>{optionRight || 'My Documents'}</Text>
-          </Block>
-        </Button>
+        {/*<Button shadowless style={styles.tab} onPress={() => navigation.navigate('My Documents')}>*/}
+        {/*  <Block row middle>*/}
+        {/*    <Icon size={16} name="map-big" family="ArgonExtra" style={{ paddingRight: 8 }} color={argonTheme.COLORS.ICON}/>*/}
+        {/*    <Text style={{ fontFamily: 'open-sans-regular' }} size={16} style={styles.tabTitle}>{optionRight || 'My Documents'}</Text>*/}
+        {/*  </Block>*/}
+        {/*</Button>*/}
       </Block>
     );
   }

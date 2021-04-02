@@ -6,9 +6,6 @@ import axios from "axios";
 import {LogInContext} from "../context/LogInContext";
 import * as authentication from "../Services/Auth"
 
-
-
-
 const { height, width } = Dimensions.get("screen");
 function AuthInput(props){
     const [loading, setLoading] = useState(false);
@@ -76,6 +73,7 @@ function AuthInput(props){
         }
 
     }
+
     return(
         <Block safe>
             {emailValid ? null : <Text color="red"> Please Enter Valid Email </Text>}
@@ -95,10 +93,9 @@ function AuthInput(props){
                 </Text>
             </Button>
         </Block>
-
     )
-
 }
+
 export default AuthInput;
 
 const styles = StyleSheet.create({

@@ -15,37 +15,29 @@ import { Block, Text, Button as GaButton, theme } from "galio-framework";
 import { argonTheme, tabs } from "../constants";
 import { Button, Select, Icon, Input, Header, Switch } from "../components";
 
+const { width } = Dimensions.get("screen");
+
+import styles from "../constants/ScreenTheme";
+import {LogInContext} from "../context/LogInContext";
+
 import {getJobsByUserId} from "../Services/JobService";
 import ViewJobsTile from "../components/ViewJobsTile";
 
-import styles from "../constants/ScreenTheme";
-
-const { width } = Dimensions.get("screen");
-
 const MyJobsView = props => {
+    // const userId = 1;
+    const {userInfo} = useContext(LogInContext);
+    const {userOrganisation} = useContext(LogInContext);
+
+    const userId = userInfo.id;
 
     const [jobList, setJobList] = useState([]);
     const [data, setData] = useState([]);
-
-    const userId = 1;
 
     let TouchableCmp = TouchableOpacity;
 
     if (Platform.OS === 'android' && Platform.Version >= 21) {
         TouchableCmp = TouchableNativeFeedback; //ripple effect
     }
-
-    function alertIndex(index) {
-        Alert.alert(`This is row ${index + 1}`);
-    }
-
-    const element = (data, index) => (
-        <TouchableOpacity onPress={() => alertIndex(index)}>
-            <View style={styles.btn}>
-                <Text style={styles.btnText}>button</Text>
-            </View>
-        </TouchableOpacity>
-    );
 
     useEffect(() => {
             getJobsByUserId(userId)
@@ -59,7 +51,6 @@ const MyJobsView = props => {
                     console.log(response)
                 }).catch(error => {
                 console.log(error)
-                alert('Jobs NOT got!');
             })
         },
         []);
@@ -81,7 +72,6 @@ const MyJobsView = props => {
             tableData.push(jobInfo);
         })
         setData(tableData);
-        alert('Jobs pushed!');
     }, [jobList]);
 
     const renderItem = itemData => {
@@ -105,7 +95,6 @@ const MyJobsView = props => {
                                 jobName: itemData.item.jobName
                             }
                         });
-
                 }}
             />
         );

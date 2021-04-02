@@ -5,7 +5,7 @@ import {
     ScrollView,
     Image,
     ImageBackground,
-    Platform,
+    Platform, TouchableOpacity, TouchableNativeFeedback, View, FlatList,
 } from "react-native";
 import { Block, Text, theme } from "galio-framework";
 
@@ -17,9 +17,9 @@ const { width, height } = Dimensions.get("screen");
 
 const thumbMeasure = (width - 48 - 32) / 3;
 
-import {LogInContext} from "../context/LogInContext";
-
 import styles from "../constants/ScreenTheme";
+import {LogInContext} from "../context/LogInContext";
+import ViewEquipmentDetailsTile from "../components/ViewEquipmentDetailsTile";
 
 const MyProfile = props => {
     const {userInfo} = useContext(LogInContext);
@@ -27,6 +27,13 @@ const MyProfile = props => {
 
     console.log(userInfo);
     console.log(userOrganisation);
+
+    let TouchableCmp = TouchableOpacity;
+
+    if (Platform.OS === 'android' && Platform.Version >= 21) {
+        TouchableCmp = TouchableNativeFeedback; //ripple effect
+    }
+
     return (
         <Block flex style={styles.profile}>
             <Block flex>
@@ -47,52 +54,67 @@ const MyProfile = props => {
                                 />
                             </Block>
                             <Block flex>
-                                <Block middle style={styles.nameInfo}>
-                                    <Text style={styles.normal}>
-                                        User ID: {userInfo.id}
+                                <View style={{ ...styles.group}}>
+                                    <Text style={styles.title} numberOfLines={2}>
+                                        Personal Details
                                     </Text>
-                                    <Text style={styles.normal}>
-                                        First Name: {userInfo.firstName}
+                                    <Block>
+                                        <Text style={styles.normal}>
+                                            User ID: {userInfo.id}
+                                        </Text>
+                                        <Text style={styles.normal}>
+                                            First Name: {userInfo.firstName}
+                                        </Text>
+                                        <Text style={styles.normal}>
+                                            Last Name: {userInfo.lastName}
+                                        </Text>
+                                        <Text style={styles.normal}>
+                                            Email: {userInfo.email}
+                                        </Text>
+                                    </Block>
+                                    <Block style={{ marginTop: 15}}>
+                                        <TouchableCmp style={{ flex: 1 }}>
+                                            <Button
+                                                onPress={() => {
+                                                    props.navigation.navigate('Update Personal Details',
+                                                        {
+                                                            // params: {
+                                                            //     jobIdentifier: jobIdentifier,
+                                                            //     address: address,
+                                                            //     jobId: jobId,
+                                                            //     jobName: jobName
+                                                            // }
+                                                        });
+                                                }}
+                                            >UPDATE PERSONAL DETAILS</Button>
+                                        </TouchableCmp>
+                                    </Block>
+                                </View>
+                                    <Block middle style={{ marginTop: 15, marginBottom: 15 }}>
+                                        <Block style={styles.divider} />
+                                    </Block>
+                                <View style={{alignItems: 'center', marginBottom: 30}}>
+                                    <Text style={styles.title} numberOfLines={2}>
+                                        Organisation Details
                                     </Text>
-                                    <Text style={styles.normal}>
-                                        Last Name: {userInfo.lastName}
-                                    </Text>
-                                    <Text style={styles.normal}>
-                                        Email: {userInfo.email}
-                                    </Text>
-                                    <Text style={styles.normal}>
-                                        Organisation ID: {userOrganisation.organisationId}
-                                    </Text>
-                                    <Text style={styles.normal}>
-                                        Organisation Name: {userOrganisation.organisationName}
-                                    </Text>
-                                    <Text style={styles.normal}>
-                                        Organisation Email: {userOrganisation.email}
-                                    </Text>
-                                    <Text style={styles.normal}>
-                                        Organisation Address: {userOrganisation.address}
-                                    </Text>
-                                    <Text style={styles.normal}>
-                                        Organisation Contact Number: {userOrganisation.contactNumber}
-                                    </Text>
-                                </Block>
-                                <Block middle style={{ marginTop: 30, marginBottom: 16 }}>
-                                    <Block style={styles.divider} />
-                                </Block>
-                                <Block middle>
-                                    <Button
-                                        color="transparent"
-                                        textStyle={{
-                                            color: "#233DD2",
-                                            fontWeight: "500",
-                                            fontSize: 16,
-                                            fontFamily: 'open-sans-regular'
-                                        }}
-                                    >
-                                        Save Details
-                                    </Button>
-                                </Block>
-
+                                    <Block>
+                                        {/*<Text style={styles.normal}>*/}
+                                        {/*    Organisation ID: {userOrganisation.organisationId}*/}
+                                        {/*</Text>*/}
+                                        <Text style={styles.normal}>
+                                            Organisation Name: {userOrganisation.organisationName}
+                                        </Text>
+                                        <Text style={styles.normal}>
+                                            Organisation Email: {userOrganisation.email}
+                                        </Text>
+                                        <Text style={styles.normal}>
+                                            Organisation Address: {userOrganisation.address}
+                                        </Text>
+                                        <Text style={styles.normal}>
+                                            Organisation Contact Number: {userOrganisation.contactNumber}
+                                        </Text>
+                                    </Block>
+                                </View>
                             </Block>
                         </Block>
                     </ScrollView>

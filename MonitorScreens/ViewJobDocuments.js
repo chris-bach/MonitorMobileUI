@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useState, useContext} from "react";
 import {
     ScrollView,
     View,
@@ -21,8 +21,14 @@ import ViewDocumentsTile from "../components/ViewDocumentsTile";
 const { width } = Dimensions.get("screen");
 
 import styles from "../constants/ScreenTheme";
+import {LogInContext} from "../context/LogInContext";
 
 const ViewJobDocuments = props => {
+    // const userId = 1;
+    const {userInfo} = useContext(LogInContext);
+    const {userOrganisation} = useContext(LogInContext);
+
+    const userId = userInfo.id;
 
     const [documentDetails, setDocumentDetails] = useState([]);
     const [dataDocuments, setDataDocuments] = useState([]);
@@ -31,10 +37,6 @@ const ViewJobDocuments = props => {
     const jobId = props.route.params.params.jobId;
     const address = props.route.params.params.address;
     const jobName = props.route.params.params.jobName;
-
-    const userId = 1;
-
-    // console.log(props);
 
     let TouchableCmp = TouchableOpacity;
 
@@ -52,10 +54,8 @@ const ViewJobDocuments = props => {
                         // console.log(object)
                     })
                     setDocumentDetails(documentList);
-                    console.log(documentList);
                 }).catch(error => {
                 console.log(error)
-                alert('Equipment details NOT got!');
             })
         },
         []);
@@ -73,7 +73,6 @@ const ViewJobDocuments = props => {
             tableData.push(documentInfo);
         })
         setDataDocuments(tableData);
-        alert('Job details pushed!');
     }, [documentDetails]);
 
     const renderDocuments = dataDocuments => {
@@ -103,8 +102,6 @@ const ViewJobDocuments = props => {
             <Block flex>
                 <Text style={styles.title}>{jobName}</Text>
                 <Text style={styles.heading}>{address}</Text>
-                <Text>{jobId}</Text>
-                <Text>{jobIdentifier}</Text>
                 <FlatList
                     keyExtractor={(item, index) => item.id} //Need to check which key!!!
                     data={dataDocuments}

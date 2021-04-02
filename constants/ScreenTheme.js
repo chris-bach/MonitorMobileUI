@@ -49,7 +49,20 @@ const styles = StyleSheet.create({
         fontSize: 14,
         textAlign: 'left',
         color: argonTheme.COLORS.TEXT
-    }
+    },
+    highlight: {
+        backgroundColor: argonTheme.COLORS.ACCENT,
+        paddingHorizontal: 8,
+        marginLeft: 3,
+        borderRadius: 4,
+        height: 22,
+        marginTop: 15
+    },
+    divider: {
+        width: "90%",
+        borderWidth: 1,
+        borderColor: "#E9ECEF"
+    },
 });
 
 export default styles;

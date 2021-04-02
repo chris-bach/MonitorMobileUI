@@ -12,9 +12,11 @@ import MyJobsView from "../MonitorScreens/MyJobsView";
 import MyDocsView from "../MonitorScreens/MyDocsView";
 import MyJobDetailsView  from "../MonitorScreens/JobDetails";
 import ViewJobEquipment from "../MonitorScreens/ViewJobEquipment";
+import ViewEquipmentStatus from "../MonitorScreens/ViewEquipmentStatus";
 import ViewJobDocuments from "../MonitorScreens/ViewJobDocuments";
 import PDFView from "../MonitorScreens/PDFView";
 import MyProfile from "../MonitorScreens/MyProfile";
+import UpdatePersonalDetails from "../MonitorScreens/UpdatePersonalDetails";
 
 import Scratchpad from "../MonitorScreens/Scratchpad";
 
@@ -535,6 +537,21 @@ function MyJobsStack(props) {
                 }}
             />
             <Stack.Screen
+                name="View Equipment Status"
+                component={ViewEquipmentStatus}
+                options={{
+                    header: ({ navigation, scene }) => (
+                        <Header
+                            back
+                            title= "View Equipment Status"
+                            scene={scene}
+                            navigation={navigation}
+                        />
+                    ),
+                    cardStyle: { backgroundColor: "#F8F9FE" }
+                }}
+            />
+            <Stack.Screen
                 name="View Job Documents"
                 component={ViewJobDocuments}
                 options={{
@@ -623,6 +640,21 @@ function MyProfileStack(props) {
                     cardStyle: { backgroundColor: "#F8F9FE" }
                 }}
             />
+            <Stack.Screen
+                name="Update Personal Details"
+                component={UpdatePersonalDetails}
+                options={{
+                    header: ({ navigation, scene }) => (
+                        <Header
+                            back
+                            title= "Update Personal Details"
+                            scene={scene}
+                            navigation={navigation}
+                        />
+                    ),
+                    cardStyle: { backgroundColor: "#F8F9FE" }
+                }}
+            />
         </Stack.Navigator>
     );
 }
@@ -697,13 +729,13 @@ function AppStack(props) {
 export default function OnboardingStack(props) {
   return (
     <Stack.Navigator mode="card" headerMode="none">
-      {/*<Stack.Screen*/}
-      {/*  name="Onboarding"*/}
-      {/*  component={Login}*/}
-      {/*  option={{*/}
-      {/*    headerTransparent: true*/}
-      {/*  }}*/}
-      {/*/>*/}
+      <Stack.Screen
+        name="Onboarding"
+        component={Login}
+        option={{
+          headerTransparent: true
+        }}
+      />
       <Stack.Screen name="App" component={AppStack} />
     </Stack.Navigator>
   );

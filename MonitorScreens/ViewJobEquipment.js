@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useState, useContext} from "react";
 import {
     ScrollView,
     View,
@@ -15,16 +15,21 @@ import { Block, Text, Button as GaButton, theme } from "galio-framework";
 import { argonTheme, tabs } from "../constants";
 import { Button, Select, Icon, Input, Header, Switch } from "../components";
 
-import {getJobsDetailsByJobId} from "../Services/JobService";
-import ViewEquipmentDetailsTile from "../components/ViewEquipmentDetailsTile";
-
 const { width } = Dimensions.get("screen");
 
 import styles from "../constants/ScreenTheme";
+import {LogInContext} from "../context/LogInContext";
+
+import {getJobsDetailsByJobId} from "../Services/JobService";
+import ViewEquipmentDetailsTile from "../components/ViewEquipmentDetailsTile";
 
 const ViewJobEquipment = props => {
+    // const userId = 1;
+    const {userInfo} = useContext(LogInContext);
+    const {userOrganisation} = useContext(LogInContext);
 
-    const [jobDetails, setJobDetails] = useState([]);
+    const userId = userInfo.id;
+
     const [equipmentDetails, setEquipmentDetails] = useState([]);
     const [dataEquipment, setDataEquipment] = useState([]);
 
@@ -33,27 +38,11 @@ const ViewJobEquipment = props => {
     const jobName = props.route.params.params.jobName;
     const address = props.route.params.params.address;
 
-    const userId = 1;
-
-    // console.log(props);
-
     let TouchableCmp = TouchableOpacity;
 
     if (Platform.OS === 'android' && Platform.Version >= 21) {
         TouchableCmp = TouchableNativeFeedback; //ripple effect
     }
-
-    // function alertIndex(index) {
-    //     Alert.alert(`This is row ${index + 1}`);
-    // }
-    //
-    // const element = (data, index) => (
-    //     <TouchableOpacity onPress={() => alertIndex(index)}>
-    //         <View style={styles.btn}>
-    //             <Text style={styles.btnText}>button</Text>
-    //         </View>
-    //     </TouchableOpacity>
-    // );
 
     useEffect(() => {
             getJobsDetailsByJobId(jobId,userId)
@@ -88,7 +77,7 @@ const ViewJobEquipment = props => {
                 equipmentMonitorId: eq.equipmentMonitor.equipmentMonitorId,
                 flags: eq.equipmentMonitor.flags,
                 ipAddress: eq.equipmentMonitor.ipAddress,
-                status: eq.equipmentMonitor.status,
+                status: eq.equipmentMonitor.status.toString(),
                 breakdowns: eq.equipmentMonitor.breakdowns
                 // end: job.end,
                 // jobIdentifier: job.jobIdentifier,
@@ -96,7 +85,6 @@ const ViewJobEquipment = props => {
             tableData.push(equipmentInfo);
         })
         setDataEquipment(tableData);
-        alert('Equipment details pushed!');
     }, [equipmentDetails]);
 
     const renderEquipment = equipmentData => {
@@ -107,20 +95,22 @@ const ViewJobEquipment = props => {
                 equipmentName={equipmentData.item.equipmentName}
                 manufacturer={equipmentData.item.manufacturer}
                 model={equipmentData.item.model}
-                currentState={equipmentData.item.currency}
+                currentState={equipmentData.item.currentState}
                 // flags={equipmentData.item.flags}
                 // ipAddress={equipmentData.item.ipAddress}
                 status={equipmentData.item.status}
                 breakdowns={equipmentData.item.breakdowns}
                 onSelect={() => {
-                    // props.navigation.navigate({
-                    //     routeName: 'CategoryMeals',
-                    //     params: {
-                    //         docId: itemData.item.id
-                    //     }
-                    // });
+                    props.navigation.navigate('View Equipment Status',
+                        {
+                            params: {
+                                equipmentName: equipmentData.item.equipmentName,
+                                description: equipmentData.item.description,
+                                equipmentId: equipmentData.item.equipmentId,
+                                currentState: equipmentData.item.currentState,
+                            }
+                        });
 
-                    console.log(equipmentData.item.breakdowns)
                 }}
             />
         );
