@@ -19,6 +19,7 @@ const { width } = Dimensions.get("screen");
 
 import styles from "../constants/ScreenTheme";
 import {LogInContext} from "../context/LogInContext";
+import axios from 'axios';
 
 const UpdatePersonalDetails = props => {
     // const userId = 1;
@@ -31,9 +32,9 @@ const UpdatePersonalDetails = props => {
     const lastNameString = userInfo.lastName.toString();
     const emailString = userInfo.email.toString();
 
-    const [firstName, setFirstName] = useState({firstNameString});
-    const [lastName, setLastName] = useState({lastNameString});
-    const [email, setEmail] = useState({emailString});
+    const [firstName, setFirstName] = useState(firstNameString);
+    const [lastName, setLastName] = useState(lastNameString);
+    const [email, setEmail] = useState(emailString);
     const [password, setPassword] = useState("password");
 
     let TouchableCmp = TouchableOpacity;
@@ -57,7 +58,8 @@ const UpdatePersonalDetails = props => {
             // }
             console.log("handleUpdate data, ", data);
             const response = await axios.put("http://192.168.56.1:8080/api/user/update", data)
-
+                .then(response => console.log("res", response))
+                .catch (err => console.log ("err", err))
             let myResponse = await response.data;
 
             if(myResponse.userId === undefined) {
@@ -68,8 +70,9 @@ const UpdatePersonalDetails = props => {
             return response;
         } catch (err) {
             // console.log("error in handleUpdate", JSON.stringify(err));
-            warningWithConfirmMessage(err.response.data.userEmail);//userEmail exception on client side does not mean exclusively email errors
-            return err;
+            //warningWithConfirmMessage(err.response.data.userEmail);//userEmail exception on client side does not mean exclusively email errors
+            //return err;
+            console.log("error", err)
         }
     }
 
