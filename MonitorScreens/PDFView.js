@@ -8,7 +8,7 @@ export default class PDFView extends React.Component {
         return (
             <PDFReader
                 source={{
-                    uri: 'http://192.168.56.1:8080/api/document/test',
+                    uri: 'http://192.168.20.13:8080/api/document/test',
                 }}
             />
         )

@@ -8,6 +8,5 @@ export const createEquipmentAndAssignDocuments =  (equipment, documentId, organi
         "model": equipment.model,
         "name":equipment.name,
         "description": equipment.description,
-
     })
 }

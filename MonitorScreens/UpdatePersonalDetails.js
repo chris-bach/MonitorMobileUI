@@ -57,7 +57,7 @@ const UpdatePersonalDetails = props => {
             //     data.newPassword = profileNewPassword;
             // }
             console.log("handleUpdate data, ", data);
-            const response = await axios.put("http://192.168.56.1:8080/api/user/update", data)
+            const response = await axios.put("http://192.168.20.13:8080/api/user/update", data)
                 .then(response => console.log("res", response))
                 .catch (err => console.log ("err", err))
             let myResponse = await response.data;

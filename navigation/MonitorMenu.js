@@ -15,7 +15,7 @@ function CustomDrawerContent({ drawerPosition, navigation, profile, focused, sta
     "My Jobs",
     "My Documents",
     "My Profile",
-    // "Scratchpad",
+    "Scratchpad",
     // "Home",
     // "Profile",
     // "Account",

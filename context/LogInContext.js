@@ -4,7 +4,8 @@ import LoginReducer from "./LoginReducer";
 
 const initialState = {
     userInfo:{
-        id: null,
+        // id: null,
+        id: 1,
         email: null,
         firstName: null,
         lastName: null
@@ -14,7 +15,8 @@ const initialState = {
         address: null,
         contactNumber: null,
         email: null,
-        organisationId: null,
+        // organisationId: null,
+        organisationId: 1,
         organisationName: null,
     },
     director: {},

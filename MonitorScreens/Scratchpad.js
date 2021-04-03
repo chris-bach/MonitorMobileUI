@@ -46,7 +46,7 @@ const Scratchpad = () => {
 
     const pdf = () => {
         axios({
-            url: `http://192.168.56.1:8080/api/document/test`, //your url
+            url: `http://192.168.20.13:8080/api/document/test`, //your url
             method: 'GET',
             responseType: 'blob', // important
         }).then((response) => {
