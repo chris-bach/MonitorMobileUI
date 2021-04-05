@@ -144,19 +144,12 @@ const Dashboard = () => {
                 <Block>
                     <View>
                         <Text style={styles.title}>Monthly Breakdowns</Text>
-                        <LineChart
+                        <BarChart
                             data={{
                                 labels: mlabels,
                                 datasets: [
                                     {
-                                        data: [
-                                            Math.random() * 100,
-                                            Math.random() * 100,
-                                            Math.random() * 100,
-                                            Math.random() * 100,
-                                            Math.random() * 100,
-                                            Math.random() * 100
-                                        ]
+                                        data: mdata
                                     }
                                 ]
                             }}
@@ -198,22 +191,16 @@ const Dashboard = () => {
                                 labels: bblabels,
                                 datasets: [
                                     {
-                                        data: [
-                                            Math.random() * 100,
-                                            Math.random() * 100,
-                                            Math.random() * 100,
-                                            Math.random() * 100,
-                                            Math.random() * 100,
-                                            Math.random() * 100
-                                        ]
+                                        data: bbdata
                                     }
                                 ]
                             }}
                             width={Dimensions.get("window").width} // from react-native
-                            height={220}
+                            height={500}
                             yAxisLabel="$"
                             yAxisSuffix="k"
                             yAxisInterval={1} // optional, defaults to 1
+                            verticalLabelRotation={90}
                             chartConfig={{
                                 backgroundColor: argonTheme.COLORS.PRIMARY,
                                 backgroundGradientFrom: argonTheme.COLORS.ACCENT,

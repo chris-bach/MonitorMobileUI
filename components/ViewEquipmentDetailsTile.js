@@ -10,6 +10,7 @@ import {
 
 import styles from "../constants/TileTheme";
 import {Block} from "galio-framework";
+import {argonTheme} from "../constants";
 
 const ViewEquipmentDetailsTile = props => {
   let TouchableCmp = TouchableOpacity;
@@ -17,27 +18,6 @@ const ViewEquipmentDetailsTile = props => {
   if (Platform.OS === 'android' && Platform.Version >= 21) {
     TouchableCmp = TouchableNativeFeedback; //ripple effect
   }
-
-  const renderBreakdowns = breakdownData => {
-    return (
-        <ViewBreakdownsTile
-            breakdownId={breakdownData.item.breakdownId}
-            breakdownTime={breakdownData.item.breakdownTime}
-            faultCause={breakdownData.item.faultCause}
-            faultCode={breakdownData.item.faultCode}
-            recentState={breakdownData.item.recentState}
-            onSelect={() => {
-              // props.navigation.navigate({
-              //     routeName: 'CategoryMeals',
-              //     params: {
-              //         docId: itemData.item.id
-              //     }
-              // });
-              alert("You clicked a breakdown id: " + breakdownData.item.breakdownId)
-            }}
-        />
-    );
-  };
 
   return (
       <View style={styles.gridItem}>
@@ -50,6 +30,9 @@ const ViewEquipmentDetailsTile = props => {
             </Text>
             <Text style={styles.heading} numberOfLines={2}>
               Description: {props.description}
+            </Text>
+            <Text style={{...styles.heading, ...{color: argonTheme.COLORS.WHITE},...{ backgroundColor: props.status ? argonTheme.COLORS.SUCCESS : argonTheme.COLORS.ERROR}}}>
+              {props.status ? "Operating Normally" : "Faulty!"}
             </Text>
             {/*<Text style={styles.normal} numberOfLines={2}>*/}
             {/*  Equipment Id: {props.equipmentId}*/}
@@ -73,16 +56,7 @@ const ViewEquipmentDetailsTile = props => {
               {/*<Text style={styles.normal} numberOfLines={2}>*/}
               {/*  IP Address: {props.ipAddress}*/}
               {/*</Text>*/}
-              <Text style={styles.normal} numberOfLines={2}>
-                Status: {props.status}
-              </Text>
             </Block>
-            <FlatList
-                keyExtractor={(item, index) => item.id} //Need to check which key!!!
-                data={props.breakdowns}
-                renderItem={renderBreakdowns}
-                numColumns={1}
-            />
           </View>
         </TouchableCmp>
       </View>

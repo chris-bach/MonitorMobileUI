@@ -23,7 +23,7 @@ import axios from 'axios';
 
 const UpdatePersonalDetails = props => {
     // const userId = 1;
-    const {userInfo} = useContext(LogInContext);
+    const {userInfo, setUserInfo} = useContext(LogInContext);
     const {userOrganisation} = useContext(LogInContext);
 
     const userId = userInfo.id;
@@ -35,7 +35,10 @@ const UpdatePersonalDetails = props => {
     const [firstName, setFirstName] = useState(firstNameString);
     const [lastName, setLastName] = useState(lastNameString);
     const [email, setEmail] = useState(emailString);
-    const [password, setPassword] = useState("password");
+    const [emailValid, setEmailValid] = useState(true);
+    const [errorState, setError] = useState(true);
+    const [errorText, setErrorText] = useState("");
+    const [password, setPassword] = useState("");
 
     let TouchableCmp = TouchableOpacity;
 
@@ -43,8 +46,27 @@ const UpdatePersonalDetails = props => {
         TouchableCmp = TouchableNativeFeedback; //ripple effect
     }
 
+    function verifyEmail(input){
+        const emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return emailRegex.test(input)
+    }
+    function changeEmailHandler(input){
+        setEmail(input);
+        if(verifyEmail(input)){
+            setEmailValid(true);
+        }
+        else{
+            setEmailValid(false)
+        }
+    }
+
+    function changePasswordHandler(input){
+        setPassword(input);
+    }
+
     async function handleUpdate(){
         try {
+            changeEmailHandler(email);
             const data = {
                 "userId":userInfo.id,
                 "firstName":firstName,
@@ -56,30 +78,40 @@ const UpdatePersonalDetails = props => {
             //     console.log("newPassword added to profile put request");
             //     data.newPassword = profileNewPassword;
             // }
-            console.log("handleUpdate data, ", data);
             const response = await axios.put("http://192.168.20.13:8080/api/user/update", data)
-                .then(response => console.log("res", response))
-                .catch (err => console.log ("err", err))
-            let myResponse = await response.data;
+                .then (response => {
+                    console.log("Response from axios put: ", response);
+                    const user = {
+                        id: response.data.userId,
+                        email: response.data.email,
+                        firstName: response.data.firstName,
+                        lastName: response.data.lastName
+                    }
+                    setUserInfo(user);
+                    alert("Details succesfully changed!");
+                    props.navigation.pop();
+                })
+                .catch (err => {
+                    console.log ("Error in /user/update/: ", err);
+                    alert("Invalid details! Please check all fields!")
+                })
 
-            if(myResponse.userId === undefined) {
-                warningWithConfirmMessage("Invalid profile details, please try again.");
-            } else {
-                successAlertModal();
-            }
             return response;
+
         } catch (err) {
             // console.log("error in handleUpdate", JSON.stringify(err));
             //warningWithConfirmMessage(err.response.data.userEmail);//userEmail exception on client side does not mean exclusively email errors
             //return err;
-            console.log("error", err)
+            console.log("Error caught in main loop: ", err)
         }
     }
 
     return (
         <Block style={styles.group}>
             <Text style={styles.title}>Update Personal Details</Text>
-            <Block>
+            <Block safe>
+                {emailValid ? null : <Text color="red"> Please Enter Valid Email </Text>}
+                {errorState ? <Text color="red" >{errorText}</Text> : null}
                 <Text style={styles.heading}>First Name</Text>
                 <Input right
                        onChangeText={text =>
@@ -101,13 +133,13 @@ const UpdatePersonalDetails = props => {
                        iconContent={<Block />}>
                     {emailString}
                 </Input>
-                <Text style={styles.heading}>Password</Text>
-                <Input right
-                       onChangeText={text =>
-                           setPassword(text)}
-                       iconContent={<Block />}>
-                    {password}
-                </Input>
+                <Text style={styles.heading}>Current Password</Text>
+                <Input rounded
+                       password
+                       viewPass
+                       onChangeText={changePasswordHandler}
+                       value={password}
+                />
                 <Block middle>
                     <TouchableCmp style={{ flex: 1 }}>
                         <Button

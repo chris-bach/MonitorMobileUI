@@ -24,7 +24,7 @@ export default class Login extends React.Component {
       <Block flex style={{...styles.container, paddingTop:75}}>
         <StatusBar barStyle="dark-content" />
           <Block flex style={{...styles.padded}}>
-              <Block style={{alignItems: 'center'}}>
+              <Block style={{alignItems: 'flex-end'}}>
                 <Image
                   source={Images.LogoB}
                   style={{

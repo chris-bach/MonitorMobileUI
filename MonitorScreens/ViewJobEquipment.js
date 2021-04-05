@@ -77,7 +77,7 @@ const ViewJobEquipment = props => {
                 equipmentMonitorId: eq.equipmentMonitor.equipmentMonitorId,
                 flags: eq.equipmentMonitor.flags,
                 ipAddress: eq.equipmentMonitor.ipAddress,
-                status: eq.equipmentMonitor.status.toString(),
+                status: eq.equipmentMonitor.status,
                 breakdowns: eq.equipmentMonitor.breakdowns
                 // end: job.end,
                 // jobIdentifier: job.jobIdentifier,

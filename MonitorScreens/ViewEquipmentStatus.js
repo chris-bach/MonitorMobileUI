@@ -19,13 +19,15 @@ const { width } = Dimensions.get("screen");
 
 import styles from "../constants/ScreenTheme";
 
-import ViewEquipmentDetailsTile from "../components/ViewEquipmentDetailsTile";
+import ViewBreakdownsTile from "../components/ViewBreakdownsTile";
+import {getAllByEquipmentId} from "../Services/EquipmentService";
+import axios from 'axios';
 
 const ViewEquipmentStatus = props => {
 
-    const [jobDetails, setJobDetails] = useState([]);
-    const [equipmentDetails, setEquipmentDetails] = useState([]);
-    const [dataEquipment, setDataEquipment] = useState([]);
+    console.log("Props", props);
+    const [breakdownDetails, setBreakdownDetails] = useState([]);
+    const [dataBreakdown, setDataBreakdown] = useState([]);
 
     const equipmentName = props.route.params.params.equipmentName;
     const description = props.route.params.params.description;
@@ -38,61 +40,42 @@ const ViewEquipmentStatus = props => {
         TouchableCmp = TouchableNativeFeedback; //ripple effect
     }
 
-    // function alertIndex(index) {
-    //     Alert.alert(`This is row ${index + 1}`);
-    // }
-    //
-    // const element = (data, index) => (
-    //     <TouchableOpacity onPress={() => alertIndex(index)}>
-    //         <View style={styles.btn}>
-    //             <Text style={styles.btnText}>button</Text>
-    //         </View>
-    //     </TouchableOpacity>
-    // );
+    useEffect(() => {
+            getAllByEquipmentId(equipmentId)
+                .then((response) => {
+                    const breakdownList = []
+                    // response.data.forEach(object => {
+                    //     breakdownList.push(object)
+                    //     // setIsLoading(true)
+                    //     console.log("Object", object)
+                    // })
+                    // setBreakdownDetails(breakdownList);
+                    console.log("Response Data", response.data);
+                }).catch(error => {
+                console.log("ResponseERR", response);
+                console.log(error)
+                alert('Breakdown details NOT got!');
+            })
+        },
+        []);
 
-    // useEffect(() => {
-    //         getJobsDetailsByJobId(jobId,userId)
-    //             .then((response) => {
-    //                 const equipmentList = []
-    //                 response.data.equipmentDetails.forEach(object => {
-    //                     equipmentList.push(object)
-    //                     // setIsLoading(true)
-    //                     // console.log(object)
-    //                 })
-    //                 setEquipmentDetails(equipmentList);
-    //                 console.log(response.data);
-    //             }).catch(error => {
-    //             console.log(error)
-    //             alert('Equipment details NOT got!');
-    //         })
-    //     },
-    //     []);
-    //
-    // useEffect(() => {
-    //     const tableData = [];
-    //     equipmentDetails.forEach((eq, key) => {
-    //         let equipmentInfo = {
-    //             id: key,
-    //             description: eq.equipment.description,
-    //             equipmentId: eq.equipment.equipmentId,
-    //             equipmentName: eq.equipment.equipmentName,
-    //             manufacturer: eq.equipment.manufacturer,
-    //             model: eq.equipment.model,
-    //             documents: eq.equipmentDocuments,
-    //             currentState: eq.equipmentMonitor.currentState,
-    //             equipmentMonitorId: eq.equipmentMonitor.equipmentMonitorId,
-    //             flags: eq.equipmentMonitor.flags,
-    //             ipAddress: eq.equipmentMonitor.ipAddress,
-    //             status: eq.equipmentMonitor.status.toString(),
-    //             breakdowns: eq.equipmentMonitor.breakdowns
-    //             // end: job.end,
-    //             // jobIdentifier: job.jobIdentifier,
-    //         };
-    //         tableData.push(equipmentInfo);
-    //     })
-    //     setDataEquipment(tableData);
-    //     alert('Equipment details pushed!');
-    // }, [equipmentDetails]);
+    useEffect(() => {
+        const tableData = [];
+        breakdownDetails.forEach((br, key) => {
+            let breakdownInfo = {
+                id: key,
+                breakdownID: br.breakdownID,
+                faultCode: br.faultCode,
+                recentState: br.recentState,
+                faultCause: br.faultCause,
+                breakdownTime: br.breakdownTime,
+            };
+            tableData.push(breakdownInfo);
+        })
+        setDataBreakdown(tableData);
+        console.log("Use effect", dataBreakdown)
+        alert('Breakdown details pushed!');
+    }, [breakdownDetails]);
 
     const renderEquipment = equipmentData => {
         return (
@@ -129,12 +112,12 @@ const ViewEquipmentStatus = props => {
                 <Text style={styles.title}>{equipmentName}</Text>
                 <Text style={styles.heading}>{description}</Text>
                 <Text style={styles.heading}>Current State: {currentState}</Text>
-                <FlatList
-                    keyExtractor={(item, index) => item.id} //Need to check which key!!!
-                    data={dataEquipment}
-                    renderItem={renderEquipment}
-                    numColumns={1}
-                />
+                {/*<FlatList*/}
+                {/*    keyExtractor={(item, index) => item.id} //Need to check which key!!!*/}
+                {/*    data={dataBreakdowns}*/}
+                {/*    renderItem={renderBreakdowns}*/}
+                {/*    numColumns={1}*/}
+                {/*/>*/}
             </Block>
         </Block>
     );

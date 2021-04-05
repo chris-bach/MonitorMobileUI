@@ -25,6 +25,13 @@ const styles = StyleSheet.create({
         // justifyContent: 'flex-start',
         alignItems: 'center'
     },
+    tileRow: {
+        flexDirection: 'row',
+        paddingHorizontal: 10,
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        height: '15%'
+    },
     title: {
         fontFamily: 'open-sans-bold',
         color: argonTheme.COLORS.PRIMARY,
