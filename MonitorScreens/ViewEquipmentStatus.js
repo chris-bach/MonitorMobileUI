@@ -20,7 +20,7 @@ const { width } = Dimensions.get("screen");
 import styles from "../constants/ScreenTheme";
 
 import ViewBreakdownsTile from "../components/ViewBreakdownsTile";
-import {getAllByEquipmentId} from "../Services/EquipmentService";
+import {getAllByEquipmentMonitorId} from "../Services/EquipmentService";
 import axios from 'axios';
 
 const ViewEquipmentStatus = props => {
@@ -29,6 +29,8 @@ const ViewEquipmentStatus = props => {
     const [breakdownDetails, setBreakdownDetails] = useState([]);
     const [dataBreakdown, setDataBreakdown] = useState([]);
 
+    const monitorName = props.route.params.params.monitorName;
+    const equipmentMonitorId = props.route.params.params.equipmentMonitorId;
     const equipmentName = props.route.params.params.equipmentName;
     const description = props.route.params.params.description;
     const equipmentId = props.route.params.params.equipmentId;
@@ -41,16 +43,16 @@ const ViewEquipmentStatus = props => {
     }
 
     useEffect(() => {
-            getAllByEquipmentId(equipmentId)
+            getAllByEquipmentMonitorId(equipmentMonitorId)
                 .then((response) => {
                     const breakdownList = []
-                    // response.data.forEach(object => {
-                    //     breakdownList.push(object)
-                    //     // setIsLoading(true)
-                    //     console.log("Object", object)
-                    // })
-                    // setBreakdownDetails(breakdownList);
-                    console.log("Response Data", response.data);
+                    response.data.forEach(object => {
+                        breakdownList.push(object)
+                        // setIsLoading(true)
+                        console.log("Object", object)
+                    })
+                    setBreakdownDetails(breakdownList);
+                    console.log("Response Data", response);
                 }).catch(error => {
                 console.log("ResponseERR", response);
                 console.log(error)
@@ -64,7 +66,7 @@ const ViewEquipmentStatus = props => {
         breakdownDetails.forEach((br, key) => {
             let breakdownInfo = {
                 id: key,
-                breakdownID: br.breakdownID,
+                breakdownId: br.breakdownId,
                 faultCode: br.faultCode,
                 recentState: br.recentState,
                 faultCause: br.faultCause,
@@ -73,34 +75,26 @@ const ViewEquipmentStatus = props => {
             tableData.push(breakdownInfo);
         })
         setDataBreakdown(tableData);
-        console.log("Use effect", dataBreakdown)
+        console.log("Data breakdown", dataBreakdown)
         alert('Breakdown details pushed!');
     }, [breakdownDetails]);
 
-    const renderEquipment = equipmentData => {
+    const renderBreakdowns = breakdownData => {
         return (
-            <ViewEquipmentDetailsTile
-                description={equipmentData.item.description}
-                // equipmentId={equipmentData.item.equipmentId}
-                equipmentName={equipmentData.item.equipmentName}
-                manufacturer={equipmentData.item.manufacturer}
-                model={equipmentData.item.model}
-                currentState={equipmentData.item.currentState}
-                // flags={equipmentData.item.flags}
-                // ipAddress={equipmentData.item.ipAddress}
-                status={equipmentData.item.status}
-                breakdowns={equipmentData.item.breakdowns}
+            <ViewBreakdownsTile
+                breakdownId={breakdownData.item.breakdownId}
+                breakdownTime={breakdownData.item.breakdownTime}
+                faultCause={breakdownData.item.faultCause}
+                faultCode={breakdownData.item.faultCode}
+                recentState={breakdownData.item.recentState}
                 onSelect={() => {
-                    // props.navigation.navigate('View Equipment Status',
-                    //     {
-                    //         params: {
-                    //             jobIdentifier: itemData.item.jobIdentifier,
-                    //             address: itemData.item.address,
-                    //             jobId: itemData.item.jobId,
-                    //             jobName: itemData.item.jobName
-                    //         }
-                    //     });
-
+                    // props.navigation.navigate({
+                    //     routeName: 'CategoryMeals',
+                    //     params: {
+                    //         docId: itemData.item.id
+                    //     }
+                    // });
+                    alert("You clicked a breakdown id: " + breakdownData.item.breakdownId)
                 }}
             />
         );
@@ -109,15 +103,19 @@ const ViewEquipmentStatus = props => {
     return (
         <Block flex style={styles.group}>
             <Block flex>
-                <Text style={styles.title}>{equipmentName}</Text>
+                <Text style={styles.title}>{monitorName}</Text>
                 <Text style={styles.heading}>{description}</Text>
                 <Text style={styles.heading}>Current State: {currentState}</Text>
-                {/*<FlatList*/}
-                {/*    keyExtractor={(item, index) => item.id} //Need to check which key!!!*/}
-                {/*    data={dataBreakdowns}*/}
-                {/*    renderItem={renderBreakdowns}*/}
-                {/*    numColumns={1}*/}
-                {/*/>*/}
+                <Block middle style={{ marginTop: 15, marginBottom: 15 }}>
+                    <Block style={styles.divider} />
+                </Block>
+                <Text style={styles.title}>Recent Breakdowns: </Text>
+                <FlatList
+                    keyExtractor={(item, index) => item.id} //Need to check which key!!!
+                    data={dataBreakdown}
+                    renderItem={renderBreakdowns}
+                    numColumns={1}
+                />
             </Block>
         </Block>
     );

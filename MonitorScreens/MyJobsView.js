@@ -68,6 +68,9 @@ const MyJobsView = props => {
                 jobIdentifier: job.jobIdentifier,
                 latitude: job.latitude,
                 longitude: job.longitude,
+                firstName: job.manager.firstName,
+                lastName: job.manager.lastName,
+                email: job.manager.email,
             };
             tableData.push(jobInfo);
         })
@@ -79,14 +82,28 @@ const MyJobsView = props => {
             <ViewJobsTile
                 jobName={itemData.item.jobName}
                 address={itemData.item.address}
+                firstName={itemData.item.firstName}
+                lastName={itemData.item.lastName}
+                email={itemData.item.email}
                 startDate={itemData.item.start}
                 endDate={itemData.item.end}
                 latitude={itemData.item.latitude}
                 longitude={itemData.item.longitude}
                 jobId={itemData.item.jobId}
                 jobIdentifier={itemData.item.jobIdentifier}
+                // onSelect={() => {
+                //     props.navigation.navigate('Job Details',
+                //         {
+                //             params: {
+                //                 jobIdentifier: itemData.item.jobIdentifier,
+                //                 address: itemData.item.address,
+                //                 jobId: itemData.item.jobId,
+                //                 jobName: itemData.item.jobName
+                //             }
+                //         });
+                // }}
                 onSelect={() => {
-                    props.navigation.navigate('Job Details',
+                    props.navigation.navigate('View Job Equipment',
                         {
                             params: {
                                 jobIdentifier: itemData.item.jobIdentifier,
@@ -103,6 +120,7 @@ const MyJobsView = props => {
     return (
         <Block flex style={styles.group}>
             <Block flex>
+                <Text style={styles.title}>My Jobs</Text>
                 <FlatList
                     keyExtractor={(item, index) => item.id}  //Need to check which key!!!
                     data={data}

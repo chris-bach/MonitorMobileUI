@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 
 import styles from "../constants/TileTheme";
+import {Block} from "galio-framework";
 
 const ViewBreakdownsTile = props => {
     let TouchableCmp = TouchableOpacity;
@@ -24,20 +25,22 @@ const ViewBreakdownsTile = props => {
                     style={{ ...styles.container}}
                 >
                     <Text style={styles.title} numberOfLines={2}>
-                        Breakdown ID: {props.breakdownId}
-                    </Text>
-                    <Text style={styles.normal} numberOfLines={2}>
-                        Breakdown Time: {props.breakdownTime}
-                    </Text>
-                    <Text style={styles.normal} numberOfLines={2}>
                         Fault Cause: {props.faultCause}
                     </Text>
-                    <Text style={styles.normal} numberOfLines={2}>
-                        Fault Code: {props.faultCode}
+                    <Text style={styles.heading} numberOfLines={2}>
+                        Breakdown Time: {props.breakdownTime}
                     </Text>
-                    <Text style={styles.normal} numberOfLines={2}>
-                        Recent State: {props.recentState}
-                    </Text>
+                    <Block>
+                        <Text style={styles.normal} numberOfLines={2}>
+                            Recent State: {props.recentState}
+                        </Text>
+                        <Text style={styles.normal} numberOfLines={2}>
+                            Fault Code: {props.faultCode}
+                        </Text>
+                        <Text style={styles.normal} numberOfLines={2}>
+                            Breakdown ID: {props.breakdownId}
+                        </Text>
+                    </Block>
                 </View>
             </TouchableCmp>
         </View>

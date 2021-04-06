@@ -35,23 +35,28 @@ const styles = StyleSheet.create({
     title: {
         fontFamily: 'open-sans-bold',
         color: argonTheme.COLORS.PRIMARY,
-        fontSize: 20,
+        fontSize: 16,
         textAlign: 'center',
         marginBottom: 10,
     },
     heading: {
         fontFamily: 'open-sans-bold',
         color: argonTheme.COLORS.HEADER,
-        fontSize: 16,
+        fontSize: 14,
         textAlign: 'center',
         marginBottom: 10,
     },
     normal: {
         fontFamily: 'open-sans-regular',
-        fontSize: 14,
+        fontSize: 12,
         textAlign: 'auto',
         color: argonTheme.COLORS.TEXT
-    }
+    },
+    divider: {
+        width: "90%",
+        borderWidth: 1,
+        borderColor: "#E9ECEF"
+    },
 });
 
 export default styles;

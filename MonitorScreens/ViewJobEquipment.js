@@ -74,6 +74,7 @@ const ViewJobEquipment = props => {
                 model: eq.equipment.model,
                 documents: eq.equipmentDocuments,
                 currentState: eq.equipmentMonitor.currentState,
+                monitorName: eq.equipmentMonitor.monitorName,
                 equipmentMonitorId: eq.equipmentMonitor.equipmentMonitorId,
                 flags: eq.equipmentMonitor.flags,
                 ipAddress: eq.equipmentMonitor.ipAddress,
@@ -90,6 +91,8 @@ const ViewJobEquipment = props => {
     const renderEquipment = equipmentData => {
         return (
             <ViewEquipmentDetailsTile
+                monitorName={equipmentData.item.monitorName}
+                equipmentMonitorId={equipmentData.item.equipmentMonitorId}
                 description={equipmentData.item.description}
                 // equipmentId={equipmentData.item.equipmentId}
                 equipmentName={equipmentData.item.equipmentName}
@@ -104,6 +107,8 @@ const ViewJobEquipment = props => {
                     props.navigation.navigate('View Equipment Status',
                         {
                             params: {
+                                monitorName: equipmentData.item.monitorName,
+                                equipmentMonitorId: equipmentData.item.equipmentMonitorId,
                                 equipmentName: equipmentData.item.equipmentName,
                                 description: equipmentData.item.description,
                                 equipmentId: equipmentData.item.equipmentId,

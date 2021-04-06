@@ -26,10 +26,10 @@ const ViewEquipmentDetailsTile = props => {
               style={{ ...styles.container}}
           >
             <Text style={styles.title} numberOfLines={2}>
-              Equipment Name: {props.equipmentName}
+              {props.monitorName}
             </Text>
             <Text style={styles.heading} numberOfLines={2}>
-              Description: {props.description}
+              {props.description}
             </Text>
             <Text style={{...styles.heading, ...{color: argonTheme.COLORS.WHITE},...{ backgroundColor: props.status ? argonTheme.COLORS.SUCCESS : argonTheme.COLORS.ERROR}}}>
               {props.status ? "Operating Normally" : "Faulty!"}
@@ -39,14 +39,17 @@ const ViewEquipmentDetailsTile = props => {
             {/*</Text>*/}
             <Block>
               <Text style={styles.normal} numberOfLines={2}>
+                Equipment Name: {props.equipmentName}
+              </Text>
+              <Text style={styles.normal} numberOfLines={2}>
                 Manufacturer: {props.manufacturer}
               </Text>
               <Text style={styles.normal} numberOfLines={2}>
                 Model: {props.model}
               </Text>
-              <Text style={styles.normal} numberOfLines={2}>
-                Current State: {props.currentState}
-              </Text>
+              {/*<Text style={styles.normal} numberOfLines={2}>*/}
+              {/*  Current State: {props.currentState}*/}
+              {/*</Text>*/}
               {/*<Text style={styles.normal} numberOfLines={2}>*/}
               {/*  Equipment Monitor Id: {props.equipmentMonitorId}*/}
               {/*</Text>*/}

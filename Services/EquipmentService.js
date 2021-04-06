@@ -11,6 +11,6 @@ export const createEquipmentAndAssignDocuments =  (equipment, documentId, organi
     })
 }
 
-export const getAllByEquipmentId= async (equipmentId) => {
-        return await axios.get(`http://192.168.20.13:8080/api/breakdown/reports/getAllByEquipmentId/value=${equipmentId}`)
+export const getAllByEquipmentMonitorId= async (equipmentMonitorId) => {
+        return await axios.get(`http://192.168.20.13:8080/api/breakdown/reports/getAllByEquipmentMonitorId/value=${equipmentMonitorId}`)
 }

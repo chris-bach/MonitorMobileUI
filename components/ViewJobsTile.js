@@ -32,6 +32,12 @@ const ViewJobsTile = props => {
           </Text>
           <Block>
             <Text style={styles.normal} numberOfLines={2}>
+              Manager: {props.firstName} {props.lastName}
+            </Text>
+            <Text style={styles.normal} numberOfLines={2}>
+              Manager E-mail: {props.email}
+            </Text>
+            <Text style={styles.normal} numberOfLines={2}>
               Start Date: {props.startDate}
             </Text>
             <Text style={styles.normal} numberOfLines={2}>
