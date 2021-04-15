@@ -19,7 +19,6 @@ const thumbMeasure = (width - 48 - 32) / 3;
 
 import styles from "../constants/ScreenTheme";
 import {LogInContext} from "../context/LogInContext";
-import ViewEquipmentDetailsTile from "../components/ViewEquipmentDetailsTile";
 
 const MyProfile = props => {
     const {userInfo} = useContext(LogInContext);

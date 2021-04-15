@@ -20,6 +20,7 @@ const { width } = Dimensions.get("screen");
 import styles from "../constants/ScreenTheme";
 import {LogInContext} from "../context/LogInContext";
 import axios from 'axios';
+import {updateUser} from "../Services/Auth";
 
 const UpdatePersonalDetails = props => {
     // const userId = 1;
@@ -78,7 +79,7 @@ const UpdatePersonalDetails = props => {
             //     console.log("newPassword added to profile put request");
             //     data.newPassword = profileNewPassword;
             // }
-            const response = await axios.put("http://192.168.20.13:8080/api/user/update", data)
+            const response = updateUser(data)
                 .then (response => {
                     console.log("Response from axios put: ", response);
                     const user = {

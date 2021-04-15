@@ -9,6 +9,12 @@ const ArgonLogo = require("../assets/imgs/argonlogo.png");
 const iOSLogo = require("../assets/imgs/ios.png");
 const androidLogo = require("../assets/imgs/android.png");
 const ProfilePicture = require("../assets/imgs/jigglypuff.jpg")
+const liftgoingup = require("../assets/imgs/liftgoingup.png")
+const liftgoingdown = require("../assets/imgs/liftgoingdown.png")
+const liftopenclose = require("../assets/imgs/liftopenclose.png")
+const lifterror = require("../assets/imgs/lifterror.png")
+const liftparked = require("../assets/imgs/liftparked.png")
+
 const LoginBG = require("../src/images/bg.png")
 const LogoB = require("../src/images/logoblue.png")
 const LogoBNN = require("../src/images/logobluenoname.png")
@@ -53,6 +59,11 @@ export default {
   LogoOnboarding,
   ProfileBackground,
   ProfilePicture,
+  lifterror,
+  liftgoingdown,
+  liftgoingup,
+  liftopenclose,
+  liftparked,
   RegisterBackground,
   Viewed,
   Products,

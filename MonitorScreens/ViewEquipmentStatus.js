@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {
+    Image,
     ScrollView,
     View,
     FlatList,
@@ -12,7 +13,7 @@ import {
 // Galio components
 import { Block, Text, Button as GaButton, theme } from "galio-framework";
 // Argon themed components
-import { argonTheme, tabs } from "../constants";
+import {Images, argonTheme, tabs } from "../constants";
 import { Button, Select, Icon, Input, Header, Switch } from "../components";
 
 const { width } = Dimensions.get("screen");
@@ -20,10 +21,16 @@ const { width } = Dimensions.get("screen");
 import styles from "../constants/ScreenTheme";
 
 import ViewBreakdownsTile from "../components/ViewBreakdownsTile";
-import {getAllByEquipmentMonitorId} from "../Services/EquipmentService";
+import {getAllByEquipmentMonitorId, getStatusById} from "../Services/EquipmentService";
 import axios from 'axios';
 
 const ViewEquipmentStatus = props => {
+
+    let TouchableCmp = TouchableOpacity;
+
+    if (Platform.OS === 'android' && Platform.Version >= 21) {
+        TouchableCmp = TouchableNativeFeedback; //ripple effect
+    }
 
     console.log("Props", props);
     const [breakdownDetails, setBreakdownDetails] = useState([]);
@@ -36,11 +43,9 @@ const ViewEquipmentStatus = props => {
     const equipmentId = props.route.params.params.equipmentId;
     const currentState = props.route.params.params.currentState;
 
-    let TouchableCmp = TouchableOpacity;
-
-    if (Platform.OS === 'android' && Platform.Version >= 21) {
-        TouchableCmp = TouchableNativeFeedback; //ripple effect
-    }
+    const [image, setImage] = useState();
+    const [monitor, setMonitor] = useState();
+    const [counter, setCounter] = useState(0);
 
     useEffect(() => {
             getAllByEquipmentMonitorId(equipmentMonitorId)
@@ -79,6 +84,95 @@ const ViewEquipmentStatus = props => {
         alert('Breakdown details pushed!');
     }, [breakdownDetails]);
 
+    useEffect(() => {
+        const timeout = setTimeout(() => {
+            setCounter(counter + 1);
+        }, 1000);
+
+        return () => {
+            clearTimeout(timeout);
+        };
+    }, [counter]);
+
+    useEffect(() => {
+        getStatusById(equipmentMonitorId)
+            .then(res => {
+                setMonitor(res.data);
+                // if(res.data.flags === "PARKED"){
+                //     setImage(getLiftState("PARKED"))
+                // }else{
+                //     setImage(getLiftState(res.data.currentState))
+                // }
+                setImage(getLiftState(res.data.currentState))
+            })
+    }, [counter])
+
+    const getLiftState = (state) => {
+        switch(state){
+            case "Going up": {
+                return(
+                    <Image
+                        source={Images.liftgoingup}
+                    />
+                )
+            }
+            case "Going down": {
+                return(
+                    <Image
+                        source={Images.liftgoingdown}
+                    />
+                )
+            }
+            case "Doors opening, going up": {
+                return(
+                    <Image
+                        source={Images.liftopenclose}
+                    />
+                )
+            }
+            case "Doors Closing, going up": {
+                return(
+                    <Image
+                        source={Images.liftopenclose}
+                    />
+                )
+            }
+            case "Doors opening, going down": {
+                return(
+                    <Image
+                        source={Images.liftopenclose}
+                    />
+                )
+            }
+            case "Doors Closing, going down": {
+                return(
+                    <Image
+                        source={Images.liftopenclose}
+                    />
+                )
+            }
+            case "FAULT": {
+                return(
+                    <Image
+                        source={Images.lifterror}
+                    />
+                )
+            }
+            case "PARKED": {
+                return(
+                    <Image
+                        source={Images.liftparked}
+                    />
+                )
+            }
+            default :{
+                return (
+                    <h5>Lift data currently available...</h5>
+                )
+            }
+        }
+    }
+
     const renderBreakdowns = breakdownData => {
         return (
             <ViewBreakdownsTile
@@ -104,8 +198,13 @@ const ViewEquipmentStatus = props => {
         <Block flex style={styles.group}>
             <Block flex>
                 <Text style={styles.title}>{monitorName}</Text>
+                <Text style={styles.heading}>Equipment Monitor Id: {equipmentMonitorId}</Text>
                 <Text style={styles.heading}>{description}</Text>
                 <Text style={styles.heading}>Current State: {currentState}</Text>
+                <Block middle style={{ marginTop: 15, marginBottom: 15 }}>
+                    <Block style={styles.divider} />
+                </Block>
+                <Block style={styles.group}>{image}</Block>
                 <Block middle style={{ marginTop: 15, marginBottom: 15 }}>
                     <Block style={styles.divider} />
                 </Block>

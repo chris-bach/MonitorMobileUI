@@ -4,7 +4,9 @@ import {Input, Block, theme, Button, Text} from 'galio-framework'
 import {argonTheme} from "../constants";
 import axios from "axios";
 import {LogInContext} from "../context/LogInContext";
+
 import * as authentication from "../Services/Auth"
+import {login} from "../Services/Auth";
 
 const { height, width } = Dimensions.get("screen");
 function AuthInput(props){
@@ -42,7 +44,12 @@ function AuthInput(props){
         setLoading(true);
         try {
             changeEmailHandler(email)
-            const resp = await axios.post("http://192.168.20.13:8080/api/login", {"email": email, "password": password})
+            // const logindata = {
+            //     "email":email,
+            //     "password":password,
+            // }
+            // const resp = login(logindata)
+            const resp = await axios.post("http://192.168.1.4:8080/api/login", {"email": email, "password": password})
                 .then(setLoading(false))
                 .catch(setError(true))
             setLoading(false);
