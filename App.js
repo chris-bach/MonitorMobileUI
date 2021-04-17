@@ -1,9 +1,9 @@
-import React from 'react';
-import { Image } from 'react-native';
+import React, { useState, useEffect, useRef } from 'react';
+import { Image, View, Platform } from 'react-native';
 import { AppLoading } from 'expo';
 import * as Font from 'expo-font';
 import { Asset } from 'expo-asset';
-import { Block, GalioProvider } from 'galio-framework';
+import { Block, Text, GalioProvider } from 'galio-framework';
 import { NavigationContainer } from '@react-navigation/native';
 import {LoginProvider} from "./context/LogInContext";
 
@@ -13,6 +13,12 @@ enableScreens();
 
 import MonitorScreens from "./navigation/MonitorScreens";
 import { Images, articles, argonTheme } from './constants';
+import { Button } from "./components";
+
+//Expo notifications
+import Constants from 'expo-constants';
+import * as Notifications from 'expo-notifications';
+import MyJobDetailsView from "./MonitorScreens/JobDetails";
 
 // cache app images
 const assetImages = [
@@ -38,29 +44,46 @@ function cacheImages(images) {
   });
 }
 
-export default class App extends React.Component {
-  state = {
+const App = props => {
+
+  const [appState, setAppState] = useState({
     isLoadingComplete: false,
     fontLoaded: false,
-  }
+  });
 
-  async componentDidMount() {
+  const loadResourcesAsync = async () => {
+    return Promise.all([
+      ...cacheImages(assetImages), fetchFonts()
+    ]);
+  };
+
+  const handleLoadingError = error => {
+    // In this case, you might want to report the error to your error
+    // reporting service, for example Sentry
+    console.warn(error);
+  };
+
+  const handleFinishLoading = () => {
+    if(appState.fontLoaded) {
+      setAppState({ isLoadingComplete: true });
+    }
+  };
+
+  const fetchFonts = () => {
     Font.loadAsync({
       'open-sans-regular': require('./assets/font/OpenSans-Regular.ttf'),
       'open-sans-light': require('./assets/font/OpenSans-Light.ttf'),
       'open-sans-bold': require('./assets/font/OpenSans-Bold.ttf'),
     });
-
-    this.setState({ fontLoaded: true });
+    setAppState({ fontLoaded: true });
   }
 
-  render() {
-    if(!this.state.isLoadingComplete) {
+    if(!appState.isLoadingComplete) {
       return (
         <AppLoading
-          startAsync={this._loadResourcesAsync}
-          onError={this._handleLoadingError}
-          onFinish={this._handleFinishLoading}
+          startAsync={loadResourcesAsync}
+          onError={handleLoadingError}
+          onFinish={handleFinishLoading}
         />
       );
     } else {
@@ -77,24 +100,6 @@ export default class App extends React.Component {
         </LoginProvider>
       );
     }
-  }
-
-  _loadResourcesAsync = async () => {
-    return Promise.all([
-      ...cacheImages(assetImages),
-    ]);
-  };
-
-  _handleLoadingError = error => {
-    // In this case, you might want to report the error to your error
-    // reporting service, for example Sentry
-    console.warn(error);
-  };
-
-  _handleFinishLoading = () => {
-    if(this.state.fontLoaded) {
-      this.setState({ isLoadingComplete: true });
-    }
-  };
-
 }
+
+export default App;
