@@ -1,33 +1,34 @@
 {
   "project_info": {
-    "project_number": "837974706885",
-    "project_id": "monitormobilefcm",
-    "storage_bucket": "monitormobilefcm.appspot.com"
+    "project_number": "694834636624",
+    "firebase_url": "https://monitor-307520-default-rtdb.firebaseio.com",
+    "project_id": "monitor-307520",
+    "storage_bucket": "monitor-307520.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:837974706885:android:841cf8ec9c05a91e32beac",
+        "mobilesdk_app_id": "1:694834636624:android:40e10631e33ff17611ae55",
         "android_client_info": {
           "package_name": "app.monitormobile.app"
         }
       },
       "oauth_client": [
         {
-          "client_id": "837974706885-83df5p55ah06jijk90ccbbg8plb56orc.apps.googleusercontent.com",
+          "client_id": "694834636624-0apaq3k9vfbbafrpcu4g0qfejtsu1hko.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCnA7MAxt_FCMF5-JJDclDR_0kHIe6AOO8"
+          "current_key": "AIzaSyAmikANyLqHQyyjaHD3BGr1R84IztgEYo8"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "837974706885-83df5p55ah06jijk90ccbbg8plb56orc.apps.googleusercontent.com",
+              "client_id": "694834636624-0apaq3k9vfbbafrpcu4g0qfejtsu1hko.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

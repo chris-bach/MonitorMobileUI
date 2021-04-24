@@ -44,13 +44,12 @@ function AuthInput(props){
         setLoading(true);
         try {
             changeEmailHandler(email)
-            const logindata = {
-                "email":email,
-                "password":password
-            }
-            const resp = login(logindata)
-            // const resp = await axios.post("http://192.168.1.4:8080/api/login", {"email": email, "password": password})
-                // const resp = await axios.post("http://192.168.1.4:8080/api/login", {"email": email, "password": password})
+            // const logindata = {
+            //     "email":email,
+            //     "password":password
+            // }
+            // const resp = login(logindata)
+            const resp = await axios.post("http://192.168.1.4:8080/api/login", {"email": email, "password": password})
                 .then(setLoading(false))
                 .catch(setError(true))
             setLoading(false);
