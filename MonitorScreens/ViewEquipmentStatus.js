@@ -41,11 +41,12 @@ const ViewEquipmentStatus = props => {
     const equipmentName = props.route.params.params.equipmentName;
     const description = props.route.params.params.description;
     const equipmentId = props.route.params.params.equipmentId;
-    const currentState = props.route.params.params.currentState;
+    const currentStateInitial = props.route.params.params.currentState;
 
     const [image, setImage] = useState();
     const [monitor, setMonitor] = useState();
     const [counter, setCounter] = useState(0);
+    const [currentState, setCurrentState] = useState(currentStateInitial);
 
     useEffect(() => {
             getAllByEquipmentMonitorId(equipmentMonitorId)
@@ -110,6 +111,7 @@ const ViewEquipmentStatus = props => {
     const getLiftState = (state) => {
         switch(state){
             case "Going up": {
+                setCurrentState(state);
                 return(
                     <Image
                         source={Images.liftgoingup}
@@ -117,6 +119,7 @@ const ViewEquipmentStatus = props => {
                 )
             }
             case "Going down": {
+                setCurrentState(state);
                 return(
                     <Image
                         source={Images.liftgoingdown}
@@ -124,6 +127,7 @@ const ViewEquipmentStatus = props => {
                 )
             }
             case "Doors opening, going up": {
+                setCurrentState(state);
                 return(
                     <Image
                         source={Images.liftopenclose}
@@ -131,6 +135,7 @@ const ViewEquipmentStatus = props => {
                 )
             }
             case "Doors Closing, going up": {
+                setCurrentState(state);
                 return(
                     <Image
                         source={Images.liftopenclose}
@@ -138,6 +143,7 @@ const ViewEquipmentStatus = props => {
                 )
             }
             case "Doors opening, going down": {
+                setCurrentState(state);
                 return(
                     <Image
                         source={Images.liftopenclose}
@@ -145,6 +151,7 @@ const ViewEquipmentStatus = props => {
                 )
             }
             case "Doors Closing, going down": {
+                setCurrentState(state);
                 return(
                     <Image
                         source={Images.liftopenclose}
@@ -152,6 +159,7 @@ const ViewEquipmentStatus = props => {
                 )
             }
             case "FAULT": {
+                setCurrentState(state);
                 return(
                     <Image
                         source={Images.lifterror}
@@ -159,6 +167,7 @@ const ViewEquipmentStatus = props => {
                 )
             }
             case "PARKED": {
+                setCurrentState(state);
                 return(
                     <Image
                         source={Images.liftparked}
@@ -198,7 +207,6 @@ const ViewEquipmentStatus = props => {
         <Block flex style={styles.group}>
             <Block flex>
                 <Text style={styles.title}>{monitorName}</Text>
-                <Text style={styles.heading}>Equipment Monitor Id: {equipmentMonitorId}</Text>
                 <Text style={styles.heading}>{description}</Text>
                 <Text style={styles.heading}>Current State: {currentState}</Text>
                 <Block middle style={{ marginTop: 15, marginBottom: 15 }}>
