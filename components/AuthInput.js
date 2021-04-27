@@ -49,11 +49,25 @@ function AuthInput(props){
             //     "password":password
             // }
             // const resp = login(logindata)
-            const resp = await axios.post("http://192.168.1.4:8080/api/login", {"email": email, "password": password})
-                .then(setLoading(false))
-                .catch(setError(true))
-            setLoading(false);
-            const data = resp.data;
+            let data;
+            const resp = await axios.post("http://192.168.1.4:8080/api/login", {
+                deviceToken: "ExponentPushToken[AdLcAbPAsbKVq2wnlW5ms8]",
+                deviceType: "mobile",
+                email: email,
+                password: password})
+                .then(response => {
+                    data = response.data;
+                    setLoading(false);
+                    console.log("Response", response)
+                })
+                .catch(response => {
+                    setError(true);
+                    console.log("Inside login post")
+                    //console.log("Error", response)
+                })
+            //setLoading(false);
+            console.log("Data above")
+            console.log("Data below")
             const user = {
                 id: data.userId,
                 email: data.userEmail,
@@ -62,19 +76,24 @@ function AuthInput(props){
             }
             // console.log("data", data)
             // console.log("organisation", data.organisations.[0])
+            console.log("1");
             setUserInfo(user);
+            console.log("2");
             setUserRoles(data.assignedRoles);
-            setUserOrganisation(data.organisations.[0]);
+            console.log("3");
+            setUserOrganisation(data.organisations[0]);
+            console.log("4");
             setDirector(data.directorData);
+            console.log("5");
             setInactiveJobs(data.inactiveJobs);
+            console.log("6");
             setActiveJobs(data.activeJobs);
             await setSubordinates(data.subordinates);
             await setLoggedIn(true)
             setError(false)
             props.nav.navigate("App")
-
         } catch(e){
-
+            console.log ("Bottom catch", e)
             setError(true)
             errorHandling(e)
         }
