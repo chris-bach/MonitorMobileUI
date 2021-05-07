@@ -5,11 +5,12 @@ import {argonTheme} from "../constants";
 import axios from "axios";
 import {LogInContext} from "../context/LogInContext";
 
-import * as authentication from "../Services/Auth"
 import {login} from "../Services/Auth";
 
 const { height, width } = Dimensions.get("screen");
+
 function AuthInput(props){
+
     const [loading, setLoading] = useState(false);
     const [email, setEmail] = useState('');
     const [emailValid, setEmailValid] = useState(true)
@@ -24,6 +25,7 @@ function AuthInput(props){
         const emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         return emailRegex.test(input)
     }
+
     function changeEmailHandler(input){
         setEmail(input);
         if(verifyEmail(input)){
@@ -33,23 +35,24 @@ function AuthInput(props){
             setEmailValid(false)
         }
     }
+
     function changePasswordHandler(input){
         setPassword(input);
     }
+
     function errorHandling(error){
         setError(true)
         setErrorText(error.response.data.userMessage)
     }
+
     async function logInHandler(){
+
         setLoading(true);
+
         try {
-            changeEmailHandler(email)
-            // const logindata = {
-            //     "email":email,
-            //     "password":password
-            // }
-            // const resp = login(logindata)
+            changeEmailHandler(email);
             let data;
+
             const resp = await axios.post("http://192.168.1.4:8080/api/login", {
                 deviceToken: "ExponentPushToken[AdLcAbPAsbKVq2wnlW5ms8]",
                 deviceType: "mobile",
@@ -58,46 +61,35 @@ function AuthInput(props){
                 .then(response => {
                     data = response.data;
                     setLoading(false);
-                    console.log("Response", response)
                 })
                 .catch(response => {
                     setError(true);
-                    console.log("Inside login post")
-                    //console.log("Error", response)
                 })
-            //setLoading(false);
-            console.log("Data above")
-            console.log("Data below")
+
             const user = {
                 id: data.userId,
                 email: data.userEmail,
                 firstName: data.userFirstName,
                 lastName: data.userLastName
             }
-            // console.log("data", data)
-            // console.log("organisation", data.organisations.[0])
-            console.log("1");
+
             setUserInfo(user);
-            console.log("2");
             setUserRoles(data.assignedRoles);
-            console.log("3");
             setUserOrganisation(data.organisations[0]);
-            console.log("4");
             setDirector(data.directorData);
-            console.log("5");
-            setInactiveJobs(data.inactiveJobs);
-            console.log("6");
+            setInactiveJobs(data.inactiveJobs);;
             setActiveJobs(data.activeJobs);
             await setSubordinates(data.subordinates);
             await setLoggedIn(true)
             setError(false)
             props.nav.navigate("App")
-        } catch(e){
-            console.log ("Bottom catch", e)
+        }
+
+        catch(e){
+            console.log ("Log In Handler Catch: ", e)
             setError(true)
             errorHandling(e)
         }
-
     }
 
     return(
@@ -112,7 +104,6 @@ function AuthInput(props){
                 style={styles.button}
                 color={argonTheme.COLORS.DEFAULT}
                 onPress={logInHandler}
-
             >
                 <Text style={{ fontFamily: 'open-sans-bold', fontSize: 14 }} color={theme.COLORS.WHITE}>
                     LOGIN
@@ -137,5 +128,4 @@ const styles = StyleSheet.create({
         shadowOpacity: 0,
         color:"white",
     }
-
 })

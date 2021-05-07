@@ -50,14 +50,10 @@ const ViewJobEquipment = props => {
                     const equipmentList = []
                     response.data.equipmentDetails.forEach(object => {
                         equipmentList.push(object)
-                        // setIsLoading(true)
-                        // console.log(object)
                     })
                     setEquipmentDetails(equipmentList);
-                    console.log(response.data);
                 }).catch(error => {
-                console.log(error)
-                alert('Equipment details NOT got!');
+                console.log("useEffect catch: ", error)
             })
         },
         []);

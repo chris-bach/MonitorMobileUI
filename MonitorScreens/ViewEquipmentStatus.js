@@ -32,7 +32,6 @@ const ViewEquipmentStatus = props => {
         TouchableCmp = TouchableNativeFeedback; //ripple effect
     }
 
-    console.log("Props", props);
     const [breakdownDetails, setBreakdownDetails] = useState([]);
     const [dataBreakdown, setDataBreakdown] = useState([]);
 
@@ -54,15 +53,10 @@ const ViewEquipmentStatus = props => {
                     const breakdownList = []
                     response.data.forEach(object => {
                         breakdownList.push(object)
-                        // setIsLoading(true)
-                        console.log("Object", object)
                     })
                     setBreakdownDetails(breakdownList);
-                    console.log("Response Data", response);
                 }).catch(error => {
-                console.log("ResponseERR", response);
-                console.log(error)
-                alert('Breakdown details NOT got!');
+                console.log("useEffect catch: ", error);
             })
         },
         []);
@@ -81,8 +75,6 @@ const ViewEquipmentStatus = props => {
             tableData.push(breakdownInfo);
         })
         setDataBreakdown(tableData);
-        console.log("Data breakdown", dataBreakdown)
-        alert('Breakdown details pushed!');
     }, [breakdownDetails]);
 
     useEffect(() => {
@@ -99,11 +91,6 @@ const ViewEquipmentStatus = props => {
         getStatusById(equipmentMonitorId)
             .then(res => {
                 setMonitor(res.data);
-                // if(res.data.flags === "PARKED"){
-                //     setImage(getLiftState("PARKED"))
-                // }else{
-                //     setImage(getLiftState(res.data.currentState))
-                // }
                 setImage(getLiftState(res.data.currentState))
             })
     }, [counter])

@@ -90,8 +90,6 @@ const Dashboard = () => {
                     const list = []
                     response.data.forEach(object => {
                         list.push(object)
-                        // setIsLoading(true)
-                        // console.log("Object", object)
                     })
                     setMonthlyBreakdownsList(list);
                 }).catch(error => {
@@ -104,20 +102,9 @@ const Dashboard = () => {
         const listData = [];
         const listLabels = [];
         monthlyBreakdownsList.forEach((data, key) => {
-            // let dataObject = {
-            //     id: key,
-            //     breakdowns: data.breakdowns,
-            // };
-            // let labelObject = {
-            //     id: key,
-            //     month: data.month,
-            // };
-
             let int = parseInt(data.breakdowns)
             listLabels.push(data.month);
             listData.push(int);
-            // listLabels.push(labelObject);
-            // listData.push(dataObject);
         })
         setmData(listData);
         setmLabels(listLabels);
@@ -133,8 +120,6 @@ const Dashboard = () => {
                     const list = []
                     response.data.forEach(object => {
                         list.push(object)
-                        // setIsLoading(true)
-                        // console.log("Object", object)
                     })
                     setBreakdownsPerBuildingList(list);
                 }).catch(error => {
@@ -147,36 +132,17 @@ const Dashboard = () => {
         const listData = [];
         const listLabels = [];
         breakdownsPerBuildingList.forEach((data, key) => {
-            // let dataObject = {
-            //     id: key,
-            //     breakdowns: data.breakdowns,
-            // };
-            // let labelObject = {
-            //     id: key,
-            //     month: data.month,
-            // };
-
             let int = parseInt(data.breakdowns)
             listLabels.push(data.buildingAddress);
             listData.push(int);
-            // listLabels.push(labelObject);
-            // listData.push(dataObject);
         })
         setbbData(listData);
         setbbLabels(listLabels);
     }, [breakdownsPerBuildingList]);
 
-    const check = () => {
-        console.log ("Checking labels", mlabels);
-        console.log ("Checking data", mdata);
-    }
-
     return (
         <Block flex style={styles.group}>
-            {/*<Button onPress={check}>Check</Button>*/}
-
             <ScrollView>
-                {/*Table 1*/}
                 <Block>
                     <View
                         style={{
@@ -212,14 +178,14 @@ const Dashboard = () => {
                             }}
                             width={Dimensions.get("window").width} // from react-native
                             height={220}
-                            yAxisLabel="$"
-                            yAxisSuffix="k"
+                            yAxisLabel=""
+                            yAxisSuffix=""
                             yAxisInterval={1} // optional, defaults to 1
                             chartConfig={{
                                 backgroundColor: argonTheme.COLORS.PRIMARY,
                                 backgroundGradientFrom: argonTheme.COLORS.ACCENT,
                                 backgroundGradientTo: "#ffa726",
-                                decimalPlaces: 2, // optional, defaults to 2dp
+                                decimalPlaces: 0, // optional, defaults to 2dp
                                 color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
                                 labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
                                 style: {
@@ -254,15 +220,15 @@ const Dashboard = () => {
                             }}
                             width={Dimensions.get("window").width} // from react-native
                             height={500}
-                            yAxisLabel="$"
-                            yAxisSuffix="k"
+                            yAxisLabel=""
+                            yAxisSuffix=""
                             yAxisInterval={1} // optional, defaults to 1
-                            verticalLabelRotation={90}
+                            verticalLabelRotation={45}
                             chartConfig={{
                                 backgroundColor: argonTheme.COLORS.PRIMARY,
                                 backgroundGradientFrom: argonTheme.COLORS.ACCENT,
                                 backgroundGradientTo: "#ffa726",
-                                decimalPlaces: 2, // optional, defaults to 2dp
+                                decimalPlaces: 0, // optional, defaults to 2dp
                                 color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
                                 labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
                                 style: {
@@ -323,7 +289,7 @@ async function registerForPushNotificationsAsync() {
             return;
         }
         token = (await Notifications.getExpoPushTokenAsync()).data;
-        console.log(token);
+        console.log("This device's token is: ", token);
     } else {
         alert('Must use physical device for Push Notifications');
     }

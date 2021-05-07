@@ -1,11 +1,10 @@
 import React, {createContext, useReducer} from 'react'
 import LoginReducer from "./LoginReducer";
 
-
 const initialState = {
     userInfo:{
-        // id: null,
-        id: 1,
+        id: null,
+        //id: 1,
         email: null,
         firstName: null,
         lastName: null
@@ -15,8 +14,8 @@ const initialState = {
         address: null,
         contactNumber: null,
         email: null,
-        // organisationId: null,
-        organisationId: 1,
+        organisationId: null,
+        //organisationId: 1,
         organisationName: null,
     },
     director: {},
@@ -28,6 +27,7 @@ const initialState = {
 export const LogInContext = createContext(initialState);
 
 export const LoginProvider = ({children}) => {
+
     const [state, dispatch] = useReducer(LoginReducer, initialState);
 
     function setUserInfo(userInfo){
@@ -43,12 +43,14 @@ export const LoginProvider = ({children}) => {
             payload: roles
         })
     }
+
     function setUserOrganisation(org){
         dispatch({
             type: "SET_ORGANISATION",
             payload: org,
         })
     }
+
     function setDirector(director){
         dispatch({
             type: "SET_DIRECTOR",
@@ -98,7 +100,5 @@ export const LoginProvider = ({children}) => {
         >
             {children}
         </LogInContext.Provider>
-
     )
-
 }
