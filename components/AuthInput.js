@@ -1,5 +1,5 @@
-import React, {useState, useContext} from 'react'
-import {StyleSheet, Dimensions, ActivityIndicator} from 'react-native'
+import React, {useState, useEffect, useContext, useRef} from 'react'
+import {StyleSheet, Dimensions, View, Platform, ActivityIndicator} from 'react-native'
 import {Input, Block, theme, Button, Text} from 'galio-framework'
 import {argonTheme} from "../constants";
 import axios from "axios";
@@ -9,6 +9,20 @@ import {MONITOR_URL} from "../constants/MonitorConstants";
 import {login} from "../Services/Auth";
 
 const { height, width } = Dimensions.get("screen");
+
+import Constants from 'expo-constants';
+import * as Notifications from 'expo-notifications';
+//import React, { useState, useEffect, useRef } from 'react';
+//import { Text, View, Button, Platform } from 'react-native';
+
+Notifications.setNotificationHandler({
+    handleNotification: async () => ({
+        shouldShowAlert: true,
+        shouldPlaySound: false,
+        shouldSetBadge: false,
+    }),
+});
+
 
 function AuthInput(props){
 
@@ -21,6 +35,32 @@ function AuthInput(props){
     const [loggedIn, setLoggedIn] = useState(true)
 
     const {setUserInfo, setUserRoles, setUserOrganisation, setDirector, setInactiveJobs, setActiveJobs, setSubordinates} = useContext(LogInContext);
+
+    const [expoPushToken, setExpoPushToken] = useState('');
+    const [notification, setNotification] = useState(false);
+    const notificationListener = useRef();
+    const responseListener = useRef();
+
+    useEffect(() => {
+        registerForPushNotificationsAsync().then(token => setExpoPushToken(token));
+
+        // This listener is fired whenever a notification is received while the app is foregrounded
+        notificationListener.current = Notifications.addNotificationReceivedListener(notification => {
+            setNotification(notification);
+            console.log("From inside listener: ", notification)
+        });
+
+        // This listener is fired whenever a user taps on or interacts with a notification (works when app is foregrounded, backgrounded, or killed)
+        responseListener.current = Notifications.addNotificationResponseReceivedListener(response => {
+            console.log("From inside response: ", response);
+        });
+
+        return () => {
+            Notifications.removeNotificationSubscription(notificationListener.current);
+            Notifications.removeNotificationSubscription(responseListener.current);
+        };
+    }, []);
+
 
     function verifyEmail(input){
         const emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -55,7 +95,8 @@ function AuthInput(props){
             let data;
 
             const resp = await axios.post(`${MONITOR_URL}/api/login`, {
-                deviceToken: "ExponentPushToken[AdLcAbPAsbKVq2wnlW5ms8]",
+                //deviceToken: expoPushToken,
+                deviceToken: "ExponentPushToken[-O-4OhDmX2gfqbJOP8Md5e]",
                 deviceType: "mobile",
                 email: email,
                 password: password})
@@ -130,3 +171,55 @@ const styles = StyleSheet.create({
         color:"white",
     }
 })
+
+// Can use this function below, OR use Expo's Push Notification Tool-> https://expo.io/notifications
+async function sendPushNotification(expoPushToken) {
+    const message = {
+        to: expoPushToken,
+        sound: 'default',
+        title: 'Original Title',
+        body: 'And here is the body!',
+        data: { someData: 'goes here' },
+    };
+
+    await fetch('https://exp.host/--/api/v2/push/send', {
+        method: 'POST',
+        headers: {
+            Accept: 'application/json',
+            'Accept-encoding': 'gzip, deflate',
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(message),
+    });
+}
+
+async function registerForPushNotificationsAsync() {
+    let token;
+    if (Constants.isDevice) {
+        const { status: existingStatus } = await Notifications.getPermissionsAsync();
+        let finalStatus = existingStatus;
+        if (existingStatus !== 'granted') {
+            const { status } = await Notifications.requestPermissionsAsync();
+            finalStatus = status;
+        }
+        if (finalStatus !== 'granted') {
+            alert('Failed to get push token for push notification!');
+            return;
+        }
+        token = (await Notifications.getExpoPushTokenAsync()).data;
+        console.log("The token is: ", token);
+    } else {
+        alert('Must use physical device for Push Notifications');
+    }
+
+    if (Platform.OS === 'android') {
+        Notifications.setNotificationChannelAsync('default', {
+            name: 'default',
+            importance: Notifications.AndroidImportance.MAX,
+            vibrationPattern: [0, 250, 250, 250],
+            lightColor: '#FF231F7C',
+        });
+    }
+
+    return token;
+}

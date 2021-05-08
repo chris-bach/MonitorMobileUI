@@ -14,11 +14,11 @@ import { Images, argonTheme } from "../constants";
 import { HeaderHeight } from "../constants/utils";
 
 import styles from "../constants/ScreenTheme";
+import Dashboard from "./Dashboard";
+import { useNavigation } from '@react-navigation/native';
 
-
-export default class Login extends React.Component {
-  render() {
-    const { navigation } = this.props;
+const Login = (props) => {
+    const navigation = useNavigation();
 
     return (
       <Block flex style={{...styles.container, paddingTop:75}}>
@@ -63,5 +63,6 @@ export default class Login extends React.Component {
           </Block>
       </Block>
     );
-  }
 }
+
+export default Login;

@@ -80,12 +80,12 @@ const MyProfile = props => {
                                                             // params: {
                                                             //     jobIdentifier: jobIdentifier,
                                                             //     address: address,
-                                                            //     jobId: jobId,
-                                                            //     jobName: jobName
+                                                            //                                                             //     jobId: jobId,
+                                                            //                                                             //     jobName: jobName
                                                             // }
                                                         });
                                                 }}
-                                            >UPDATE PERSONAL DETAILS</Button>
+                                            >UPDATE DETAILS</Button>
                                         </TouchableCmp>
                                     </Block>
                                 </View>

@@ -67,6 +67,7 @@ const PersonalNotifications = props => {
                 jobName: notification.jobName,
                 lastState: notification.lastState,
                 read: notification.read,
+                breakdownTime: formatDateTime(notification.breakdownTime),
             };
             tableData.push(notificationInfo);
         })
@@ -81,6 +82,31 @@ const PersonalNotifications = props => {
         }).catch(err => console.log(err))
     };
 
+    const formatDateTime = (date) => {
+        let hour, minute, day, month;
+        if (date[3].length === 1) {
+            hour = "0" + date[3];
+        } else {
+            hour = date[3];
+        }
+        if (date[4].length === 1) {
+            minute = "0" + date[4];
+        } else {
+            minute = date[4];
+        }
+        if (date[2].length === 1) {
+            day = "0" + date[2];
+        } else {
+            day = date[2];
+        }
+        if (date[1].length === 1) {
+            month = "0" + date[1];
+        } else {
+            month = date[1];
+        }
+        return day + '/' + month + '/' + date[0] + '  ' + hour + ':' + minute;
+    }
+
     const renderItem = itemData => {
         return (
             <ViewNotificationTile
@@ -92,23 +118,28 @@ const PersonalNotifications = props => {
                 jobName={itemData.item.jobName}
                 lastState={itemData.item.lastState}
                 read={itemData.item.read}
+                breakdownTime={itemData.item.breakdownTime}
                 onSelect={() => {
-                    Alert.alert(
-                        "Notification",
-                        "",
-                        [
-                            {
-                                text: "Mark As Read",
-                                onPress: () => {
-                                    markAsRead(itemData.item.notificationId)
+                    if (!itemData.item.read)
+                    {
+                        Alert.alert(
+                            "Notification",
+                            "Mark as read?",
+                            [
+                                {
+                                    text: "Mark As Read",
+                                    onPress: () => {
+                                        markAsRead(itemData.item.notificationId)
+                                    },
+                                    style: "cancel"
                                 },
-                                style: "cancel"
-                            },
-                            { text: "OK", onPress: () => {
-
-                                } }
-                        ]
-                    )
+                                {
+                                    text: "Go Back", onPress: () => {
+                                    }
+                                }
+                            ]
+                        )
+                    }
                 }}
             />
         );

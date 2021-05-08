@@ -21,6 +21,7 @@ import styles from "../constants/ScreenTheme";
 import {LogInContext} from "../context/LogInContext";
 import axios from 'axios';
 import {updateUser} from "../Services/Auth";
+import {MONITOR_URL} from "../constants/MonitorConstants";
 
 const UpdatePersonalDetails = props => {
     // const userId = 1;
@@ -68,6 +69,7 @@ const UpdatePersonalDetails = props => {
     async function handleUpdate(){
         try {
             changeEmailHandler(email);
+
             const data = {
                 "userId":userInfo.id,
                 "firstName":firstName,
@@ -79,9 +81,8 @@ const UpdatePersonalDetails = props => {
             //     console.log("newPassword added to profile put request");
             //     data.newPassword = profileNewPassword;
             // }
-            const response = updateUser(data)
+            const response = await axios.put(`${MONITOR_URL}/api/user/update`, data)
                 .then (response => {
-                    console.log("Response from axios put: ", response);
                     const user = {
                         id: response.data.userId,
                         email: response.data.email,
@@ -93,10 +94,8 @@ const UpdatePersonalDetails = props => {
                     props.navigation.pop();
                 })
                 .catch (err => {
-                    console.log ("Error in /user/update/: ", err);
                     alert("Invalid details! Please check all fields!")
                 })
-
             return response;
 
         } catch (err) {

@@ -567,21 +567,6 @@ function MyJobsStack(props) {
                 }}
             />
             <Stack.Screen
-                name="View Job Documents"
-                component={ViewJobDocuments}
-                options={{
-                    header: ({ navigation, scene }) => (
-                        <Header
-                            back
-                            title= "View Job Documents"
-                            scene={scene}
-                            navigation={navigation}
-                        />
-                    ),
-                    cardStyle: { backgroundColor: "#F8F9FE" }
-                }}
-            />
-            <Stack.Screen
                 name="View PDF"
                 component={PDFView}
                 options={{

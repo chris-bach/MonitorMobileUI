@@ -25,7 +25,7 @@ const ViewNotificationTile = props => {
                 <View
                     style={{ ...styles.container}}
                 >
-                    <Text style={{...styles.heading, ...{color: argonTheme.COLORS.WHITE},...{ backgroundColor: props.read ? argonTheme.COLORS.SUCCESS : argonTheme.COLORS.ERROR}}}>
+                    <Text style={{...styles.heading, ...{color: props.read ? argonTheme.COLORS.HEADER : argonTheme.COLORS.WHITE},...{ backgroundColor: props.read ? null : argonTheme.COLORS.ERROR}}}>
                         {props.read ? "Read" : "Unread"}
                     </Text>
                     <Block>
@@ -33,7 +33,7 @@ const ViewNotificationTile = props => {
                             Job Name: {props.jobName}
                         </Text>
                         <Text style={styles.normal} numberOfLines={2}>
-                            Breakdown Date: {props.jobName}
+                            Breakdown Date: {props.breakdownTime}
                         </Text>
                         <Text style={styles.normal} numberOfLines={2}>
                             Device Name: {props.deviceName}
