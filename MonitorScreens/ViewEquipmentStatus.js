@@ -205,7 +205,7 @@ const ViewEquipmentStatus = props => {
                 </Block>
                 <Text style={styles.title}>Recent Breakdowns: </Text>
                 <FlatList
-                    keyExtractor={(item, index) => item.id} //Need to check which key!!!
+                    keyExtractor={(item, index) => item.id.toString()} //Need to check which key!!!
                     data={dataBreakdown}
                     renderItem={renderBreakdowns}
                     numColumns={1}

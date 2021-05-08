@@ -121,7 +121,7 @@ const MyJobsView = props => {
             <Block flex>
                 <Text style={styles.title}>My Jobs</Text>
                 <FlatList
-                    keyExtractor={(item, index) => item.id}  //Need to check which key!!!
+                    keyExtractor={(item, index) => item.id.toString()}  //Need to check which key!!!
                     data={data}
                     renderItem={renderItem}
                     numColumns={1}

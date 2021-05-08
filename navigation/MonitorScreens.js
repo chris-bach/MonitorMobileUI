@@ -567,6 +567,21 @@ function MyJobsStack(props) {
                 }}
             />
             <Stack.Screen
+                name="View Job Documents"
+                component={ViewJobDocuments}
+                options={{
+                    header: ({ navigation, scene }) => (
+                        <Header
+                            back
+                            title= "View Job Documents"
+                            scene={scene}
+                            navigation={navigation}
+                        />
+                    ),
+                    cardStyle: { backgroundColor: "#F8F9FE" }
+                }}
+            />
+            <Stack.Screen
                 name="View PDF"
                 component={PDFView}
                 options={{
@@ -659,6 +674,28 @@ function MyProfileStack(props) {
     );
 }
 
+function NotificationStack(props) {
+    return (
+        <Stack.Navigator mode="card" headerMode="screen">
+            <Stack.Screen
+                name="My Notifications"
+                component={PersonalNotifications}
+                options={{
+                    header: ({ navigation, scene }) => (
+                        <Header
+                            back
+                            title="My Notifications"
+                            scene={scene}
+                            navigation={navigation}
+                        />
+                    ),
+                    cardStyle: { backgroundColor: "#F8F9FE" }
+                }}
+            />
+        </Stack.Navigator>
+    );
+}
+
 function ScratchpadStack(props) {
     return (
         <Stack.Navigator mode="card" headerMode="screen">
@@ -715,6 +752,7 @@ function AppStack(props) {
       <Drawer.Screen name="My Jobs" component={MyJobsStack} />
       <Drawer.Screen name="My Documents" component={MyDocsStack} />
       <Drawer.Screen name="My Profile" component={MyProfileStack} />
+      <Drawer.Screen name="My Notifications" component={NotificationStack} />
       <Drawer.Screen name="Home" component={HomeStack} />
       <Drawer.Screen name="Account" component={Register} />
       <Drawer.Screen name="Elements" component={ElementsStack} />

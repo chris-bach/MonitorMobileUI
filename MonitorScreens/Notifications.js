@@ -33,7 +33,7 @@ export default class Notifications extends React.Component {
       <Block flex style={styles.notification}>
         <FlatList
           data={notifications}
-          keyExtractor={(item, index) => item.id}
+          keyExtractor={(item, index) => item.id.toString()}
           renderItem={this.renderItem}
           ListHeaderComponent={
             <Block style={styles.title}>

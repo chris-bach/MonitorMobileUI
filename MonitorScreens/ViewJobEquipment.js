@@ -25,6 +25,7 @@ import ViewEquipmentDetailsTile from "../components/ViewEquipmentDetailsTile";
 
 const ViewJobEquipment = props => {
     // const userId = 1;
+
     const {userInfo} = useContext(LogInContext);
     const {userOrganisation} = useContext(LogInContext);
 
@@ -125,7 +126,7 @@ const ViewJobEquipment = props => {
                 {/*<Text>{jobId}</Text>*/}
                 {/*<Text>{jobIdentifier}</Text>*/}
                 <FlatList
-                    keyExtractor={(item, index) => item.id} //Need to check which key!!!
+                    keyExtractor={(item, index) => item.id.toString()} //Need to check which key!!!
                     data={dataEquipment}
                     renderItem={renderEquipment}
                     numColumns={1}

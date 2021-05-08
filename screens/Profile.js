@@ -117,7 +117,7 @@ class Profile extends React.Component {
                       textStyle={{
                         color: "#233DD2",
                         fontWeight: "500",
-                        fontSize: 16, 
+                        fontSize: 16,
                         fontFamily: 'open-sans-regular'
                       }}
                     >
@@ -201,9 +201,9 @@ const styles = StyleSheet.create({
     marginTop: -80
   },
   avatar: {
-    width: 124,
-    height: 124,
-    borderRadius: 62,
+    width: 300,
+    height: 300,
+    borderRadius: 150,
     borderWidth: 0
   },
   nameInfo: {

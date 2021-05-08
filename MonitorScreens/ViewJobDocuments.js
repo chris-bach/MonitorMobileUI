@@ -103,7 +103,7 @@ const ViewJobDocuments = props => {
                 <Text style={styles.title}>{jobName}</Text>
                 <Text style={styles.heading}>{address}</Text>
                 <FlatList
-                    keyExtractor={(item, index) => item.id} //Need to check which key!!!
+                    keyExtractor={(item, index) => item.id.toString()} //Need to check which key!!!
                     data={dataDocuments}
                     renderItem={renderDocuments}
                     numColumns={1}

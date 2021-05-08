@@ -4,6 +4,7 @@ import {Input, Block, theme, Button, Text} from 'galio-framework'
 import {argonTheme} from "../constants";
 import axios from "axios";
 import {LogInContext} from "../context/LogInContext";
+import {MONITOR_URL} from "../constants/MonitorConstants";
 
 import {login} from "../Services/Auth";
 
@@ -53,7 +54,7 @@ function AuthInput(props){
             changeEmailHandler(email);
             let data;
 
-            const resp = await axios.post("http://192.168.1.4:8080/api/login", {
+            const resp = await axios.post(`${MONITOR_URL}/api/login`, {
                 deviceToken: "ExponentPushToken[AdLcAbPAsbKVq2wnlW5ms8]",
                 deviceType: "mobile",
                 email: email,

@@ -24,8 +24,8 @@ const MyProfile = props => {
     const {userInfo} = useContext(LogInContext);
     const {userOrganisation} = useContext(LogInContext);
 
-    console.log(userInfo);
-    console.log(userOrganisation);
+    //console.log(userInfo);
+    //console.log(userOrganisation);
 
     let TouchableCmp = TouchableOpacity;
 
@@ -49,7 +49,7 @@ const MyProfile = props => {
                             <Block middle style={styles.avatarContainer}>
                                 <Image
                                     source={ Images.ProfilePicture }
-                                    style={styles.avatar}
+                                    style={styles.profilepic}
                                 />
                             </Block>
                             <Block flex>

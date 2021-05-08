@@ -1,54 +1,129 @@
-import React from "react";
-import { ScrollView, Alert } from "react-native";
-import { Block } from "galio-framework";
+import React, {useEffect, useState, useContext} from "react";
+import {ScrollView, Alert, FlatList, TouchableOpacity, Platform, TouchableNativeFeedback} from "react-native";
+import { Block, Text } from "galio-framework";
 import { Notification } from "../components";
 import { argonTheme } from "../constants";
 
-export default class PersonalNotifications extends React.Component {
-  render() {
+import {LogInContext} from "../context/LogInContext";
+import {getNotificationsByUserId, markNotificationAsRead} from "../Services/NotificationService";
+import ViewNotificationTile from "../components/ViewNotificationTile";
+import ViewJobsTile from "../components/ViewJobsTile";
+
+const PersonalNotifications = props => {
+
+    let TouchableCmp = TouchableOpacity;
+
+    if (Platform.OS === 'android' && Platform.Version >= 21) {
+        TouchableCmp = TouchableNativeFeedback; //ripple effect
+    }
+
+    const {userInfo} = useContext(LogInContext);
+    const {userOrganisation} = useContext(LogInContext);
+
+    const userId = userInfo.id;
+
+    const [notifications, setNotifications] = useState([]); //Notifications array
+    const [data, setData] = useState([]);
+    const [readCounter, setReadCounter] = useState(0);
+
+    useEffect(() => {
+            getNotificationsByUserId(userId)
+                .then((response) => {
+                    const noteList = []
+                    response.data.forEach(object => {
+                        noteList.push(object)
+                    })
+                    setNotifications(noteList)
+                }).catch(error => {
+                console.log(error)
+            })
+        },
+        [userId]);
+
+    useEffect(() => {
+            getNotificationsByUserId(userId)
+                .then((response) => {
+                    const noteList = []
+                    response.data.forEach(object => {
+                        noteList.push(object)
+                    })
+                    setNotifications(noteList)
+                }).catch(error => {
+                console.log(error)
+            })
+        },
+        [readCounter]);
+
+    useEffect(() => {
+        const tableData = [];
+        notifications.forEach((notification, key) => {
+            let notificationInfo = {
+                id: key,
+                notificationId: notification.notificationId,
+                address: notification.address,
+                deviceName: notification.deviceName,
+                faultCause: notification.faultCause,
+                faultCode: notification.faultCode,
+                jobName: notification.jobName,
+                lastState: notification.lastState,
+                read: notification.read,
+            };
+            tableData.push(notificationInfo);
+        })
+        setData(tableData);
+    }, [notifications]);
+
+    const markAsRead = (id) => {
+        //setNotificationModal(null);
+        markNotificationAsRead(id).then(()=>{
+            const counter = readCounter + 1
+            setReadCounter(counter)
+        }).catch(err => console.log(err))
+    };
+
+    const renderItem = itemData => {
+        return (
+            <ViewNotificationTile
+                notificationId={itemData.item.notificationId}
+                address={itemData.item.address}
+                deviceName={itemData.item.deviceName}
+                faultCause={itemData.item.faultCause}
+                faultCode={itemData.item.faultCode}
+                jobName={itemData.item.jobName}
+                lastState={itemData.item.lastState}
+                read={itemData.item.read}
+                onSelect={() => {
+                    Alert.alert(
+                        "Notification",
+                        "",
+                        [
+                            {
+                                text: "Mark As Read",
+                                onPress: () => {
+                                    markAsRead(itemData.item.notificationId)
+                                },
+                                style: "cancel"
+                            },
+                            { text: "OK", onPress: () => {
+
+                                } }
+                        ]
+                    )
+                }}
+            />
+        );
+    };
+
     return (
       <Block middle flex>
-        <Block flex style={{ width: "90%" }}>
-          <ScrollView showsVerticalScrollIndicator={false}>
-            <Notification
-              time="15:30"
-              body="About your order #45C23B Wifey made the best Father's Day meal ever. So thankful so happy."
-              iconName="ship"
-              iconFamily="font-awesome"
-              style={{ marginTop: 15 }}
-              onPress={() => Alert.alert('Yes, you can use the notifications as buttons so you could send your customers to anything you want.')}
-            />
-            <Notification
-              time="12:10"
-              body="Customize our products. Now you can make the best and perfect clothes just for you."
-              iconName="ship"
-              iconFamily="font-awesome"
-              color={argonTheme.COLORS.INFO}
-              style={{ marginTop: 15 }}
-              onPress={() => Alert.alert('Yes, you can use the notifications as buttons so you could send your customers to anything you want.')}
-            />
-            <Notification
-              time="11:30"
-              body="Breaking News! We have new methods to payment. Learn how to pay off debt fast using the stack method."
-              iconName="ship"
-              iconFamily="font-awesome"
-              color={argonTheme.COLORS.WARNING}
-              style={{ marginTop: 15 }}
-              onPress={() => Alert.alert('Yes, you can use the notifications as buttons so you could send your customers to anything you want.')}
-            />
-            <Notification
-              time="04:23"
-              body="Congratulations! Someone just ordered a pair of Yamaha HS8 speakers through your app! Hurry up and ship them!"
-              iconName="ship"
-              iconFamily="font-awesome"
-              color={argonTheme.COLORS.SUCCESS}
-              style={{ marginTop: 15 }}
-              onPress={() => Alert.alert('Yes, you can use the notifications as buttons so you could send your customers to anything you want.')}
-            />
-            <Block style={{ marginBottom: 20 }} />
-          </ScrollView>
-        </Block>
+          <FlatList
+              keyExtractor={(item, index) => item.id.toString()}  //Need to check which key!!!
+              data={data}
+              renderItem={renderItem}
+              numColumns={1}
+          />
       </Block>
     );
-  }
 }
+
+export default PersonalNotifications;

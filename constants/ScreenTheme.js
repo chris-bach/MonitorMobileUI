@@ -44,6 +44,12 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         marginBottom: 10,
     },
+    profilepic: {
+        width: 150,
+        height: 150,
+        borderRadius: 30,
+        borderWidth: 0
+    },
     normal: {
         fontFamily: 'open-sans-regular',
         fontSize: 14,
