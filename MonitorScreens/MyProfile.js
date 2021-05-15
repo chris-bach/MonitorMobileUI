@@ -59,9 +59,6 @@ const MyProfile = props => {
                                     </Text>
                                     <Block>
                                         <Text style={styles.normal}>
-                                            User ID: {userInfo.id}
-                                        </Text>
-                                        <Text style={styles.normal}>
                                             First Name: {userInfo.firstName}
                                         </Text>
                                         <Text style={styles.normal}>

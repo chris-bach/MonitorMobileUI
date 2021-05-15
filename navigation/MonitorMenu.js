@@ -13,15 +13,15 @@ function CustomDrawerContent({ drawerPosition, navigation, profile, focused, sta
   const screens = [
     "Dashboard",
     "My Jobs",
-    "My Documents",
+    //"My Documents",
     "My Profile",
-    "Scratchpad",
+    //"Scratchpad",
     // "Home",
     // "Profile",
     // "Account",
-    "Elements",
+    //"Elements",
     // "Articles",
-    "Settings",
+    //"Settings",
   ];
   return (
     <Block
