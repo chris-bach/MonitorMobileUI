@@ -20,24 +20,24 @@ import UpdatePersonalDetails from "../MonitorScreens/UpdatePersonalDetails";
 
 import Scratchpad from "../MonitorScreens/Scratchpad";
 
-import Home from "../screens/Home";
-import Profile from "../screens/Profile";
-import Register from "../screens/Register";
-import Elements from "../screens/Elements";
-import Articles from "../screens/Articles";
-import Beauty from "../screens/Beauty";
-import Category from "../screens/Category";
-import Fashion from "../screens/Fashion";
-import Product from "../screens/Product";
-import Gallery from "../screens/Gallery";
-import Chat from "../screens/Chat";
-import Search from "../screens/Search";
-import Cart from "../screens/Cart";
+import Home from "../templatescreens/Home";
+import Profile from "../templatescreens/Profile";
+import Register from "../templatescreens/Register";
+import Elements from "../templatescreens/Elements";
+import Articles from "../templatescreens/Articles";
+import Beauty from "../templatescreens/Beauty";
+import Category from "../templatescreens/Category";
+import Fashion from "../templatescreens/Fashion";
+import Product from "../templatescreens/Product";
+import Gallery from "../templatescreens/Gallery";
+import Chat from "../templatescreens/Chat";
+import Search from "../templatescreens/Search";
+import Cart from "../templatescreens/Cart";
 // settings
-import SettingsScreen from "../screens/Settings";
-import AgreementScreen from "../screens/Agreement";
-import PrivacyScreen from "../screens/Privacy";
-import AboutScreen from "../screens/About";
+import SettingsScreen from "../templatescreens/Settings";
+import AgreementScreen from "../templatescreens/Agreement";
+import PrivacyScreen from "../templatescreens/Privacy";
+import AboutScreen from "../templatescreens/About";
 import NotificationsScreen from "../MonitorScreens/Notifications";
 // Notifications
 import PersonalNotifications from "../MonitorScreens/PersonalNotifications";
@@ -49,7 +49,7 @@ import CustomDrawerContent from "./MonitorMenu";
 // header for screens
 import { Icon, Header } from "../components";
 import { argonTheme, tabs } from "../constants";
-import About from "../screens/About";
+import About from "../templatescreens/About";
 
 const { width } = Dimensions.get("screen");
 
