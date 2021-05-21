@@ -1,3 +1,7 @@
+/**
+ * @author CreativeTIM
+ * @description Used by the example template components
+ */
 import argonTheme from './Theme';
 import articles from './articles';
 import Images from './Images';
@@ -8,7 +12,7 @@ import utils from './utils';
 import cart from './cart';
 
 export {
-  articles, 
+  articles,
   argonTheme,
   Images,
   tabs,

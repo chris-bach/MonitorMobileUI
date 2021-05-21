@@ -31,6 +31,10 @@ import {
     StackedBarChart
 } from "react-native-chart-kit";
 
+/**
+ * @author Chris Bautista
+ * @description This component renders the dashboard. It is the home screen of the app after logging in.
+ */
 const Dashboard = () => {
     // const userId = 1;
     const {userInfo} = useContext(LogInContext);
@@ -48,6 +52,10 @@ const Dashboard = () => {
         TouchableCmp = TouchableNativeFeedback; //ripple effect
     }
 
+    /**
+     * @author Matt Belgre, Chris Bautista
+     * @description The following useEffects get the monthly breakdown data from the server and pushes into the state.
+     */
     useEffect(() => {
             getMonthlyBreakdowns(userId)
                 .then((response) => {
@@ -78,6 +86,10 @@ const Dashboard = () => {
     const [bblabels, setbbLabels] = useState([]);
     const [bbdata, setbbData] = useState([]);
 
+    /**
+     * @author Matt Belgre, Chris Bautista
+     * @description The following useEffects get the breakdowns per building data from the server and pushes into the state.
+     */
     useEffect(() => {
             getBreakdownsPerBuilding(userId)
                 .then((response) => {
@@ -104,6 +116,10 @@ const Dashboard = () => {
         setbbLabels(listLabels);
     }, [breakdownsPerBuildingList]);
 
+    /**
+     * @author indiespirit, Chris Bautista
+     * @description Renders the dashboard charts using react-native-chart-kit by indiespirit
+     */
     return (
         <Block flex style={styles.group}>
             <ScrollView>

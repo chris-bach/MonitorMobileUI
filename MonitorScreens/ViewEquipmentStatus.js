@@ -24,6 +24,10 @@ import ViewBreakdownsTile from "../components/ViewBreakdownsTile";
 import {getAllByEquipmentMonitorId, getStatusById} from "../Services/EquipmentService";
 import axios from 'axios';
 
+/**
+ * @author Matt Belgre, Chris Bautista
+ * @description This component displays the current status of the equipment (as reported by the IoT device)
+ */
 const ViewEquipmentStatus = props => {
 
     let TouchableCmp = TouchableOpacity;
@@ -47,6 +51,10 @@ const ViewEquipmentStatus = props => {
     const [counter, setCounter] = useState(0);
     const [currentState, setCurrentState] = useState(currentStateInitial);
 
+    /**
+     * @author Matt Belgre, Chris Bautista
+     * @description The next 2 useEffects get the breakdown list from the server and pushes to state
+     */
     useEffect(() => {
             getAllByEquipmentMonitorId(equipmentMonitorId)
                 .then((response) => {
@@ -77,6 +85,10 @@ const ViewEquipmentStatus = props => {
         setDataBreakdown(tableData);
     }, [breakdownDetails]);
 
+    /**
+     * @author Matt Belgre, Chris Bautista
+     * @description The next 3 useEffects gets the equipment's status periodically from the server and updates the state and sets the image.
+     */
     useEffect(() => {
         const timeout = setTimeout(() => {
             setCounter(counter + 1);
@@ -169,6 +181,10 @@ const ViewEquipmentStatus = props => {
         }
     }
 
+    /**
+     * @author Matt Belgre, Manik Bagga
+     * @description Formats the date and time returned by the server.
+     */
     const formatDateTime = (date) => {
         let hour, minute, day, month;
         if (date[3].length === 1) {
@@ -194,6 +210,10 @@ const ViewEquipmentStatus = props => {
         return day + '/' + month + '/' + date[0] + '  ' + hour + ':' + minute;
     }
 
+    /**
+     * @author Chris Bautista
+     * @description This function uses the ViewBreakDownsTile to style the output of the flatlist
+     */
     const renderBreakdowns = breakdownData => {
         return (
             <ViewBreakdownsTile
@@ -215,6 +235,10 @@ const ViewEquipmentStatus = props => {
         );
     };
 
+    /**
+     * @author Chris Bautista
+     * @description This shows the breakdown report using a flatlist that renders the data styled by RenderBreakdowns
+     */
     return (
         <Block flex style={styles.group}>
             <Block flex>

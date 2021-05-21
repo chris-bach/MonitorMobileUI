@@ -10,6 +10,10 @@ import { Block, Text, theme } from "galio-framework";
 
 import { argonTheme } from "../constants";
 
+/**
+ * @author CreativeTIM
+ * @description Template for card component
+ */
 class Card extends React.Component {
   render() {
     const {

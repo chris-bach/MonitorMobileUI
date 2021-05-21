@@ -23,6 +23,11 @@ import {LogInContext} from "../context/LogInContext";
 import {getDocumentsByOrganisationId} from "../Services/DocumentService";
 import ViewDocumentsTile from "../components/ViewDocumentsTile";
 
+/**
+ * @author Chris Bautista
+ * @description This component is unused as we removed the view documents function.
+ * It was meant to give the user an overview of the documents, similar to MyJobsView.
+ */
 const MyDocsView = props => {
     // const organisationId = 1;
     const {userInfo} = useContext(LogInContext);

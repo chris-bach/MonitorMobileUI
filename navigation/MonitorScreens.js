@@ -38,10 +38,10 @@ import SettingsScreen from "../templatescreens/Settings";
 import AgreementScreen from "../templatescreens/Agreement";
 import PrivacyScreen from "../templatescreens/Privacy";
 import AboutScreen from "../templatescreens/About";
-import NotificationsScreen from "../MonitorScreens/Notifications";
+import NotificationsScreen from "../templatescreens/Notifications";
 // Notifications
-import PersonalNotifications from "../MonitorScreens/PersonalNotifications";
-import SystemNotifications from "../MonitorScreens/SystemNotifications";
+import MonitorNotifications from "../MonitorScreens/MonitorNotifications";
+import SystemNotifications from "../templatescreens/SystemNotifications";
 
 // drawer
 import CustomDrawerContent from "./MonitorMenu";
@@ -52,6 +52,13 @@ import { argonTheme, tabs } from "../constants";
 import About from "../templatescreens/About";
 
 const { width } = Dimensions.get("screen");
+
+/**
+ * @author CreativeTIM, Chris Bautista
+ * @description This file controls the navigation of the app and the screen stacks.
+ * There are some unused assets that we've kept that we may use in future iterations of the app.
+ */
+
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -88,7 +95,7 @@ function NotificationsStack(props) {
         }
       }}
     >
-      <Tab.Screen name="Personal" component={PersonalNotifications} />
+      <Tab.Screen name="Personal" component={MonitorNotifications} />
       <Tab.Screen name="System" component={SystemNotifications} />
     </Tab.Navigator>
   );
@@ -664,7 +671,7 @@ function NotificationStack(props) {
         <Stack.Navigator mode="card" headerMode="screen">
             <Stack.Screen
                 name="My Notifications"
-                component={PersonalNotifications}
+                component={MonitorNotifications}
                 options={{
                     header: ({ navigation, scene }) => (
                         <Header

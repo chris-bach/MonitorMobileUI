@@ -20,6 +20,11 @@ const thumbMeasure = (width - 48 - 32) / 3;
 import styles from "../constants/ScreenTheme";
 import {LogInContext} from "../context/LogInContext";
 
+/**
+ * @author Chris Bautista
+ * @description Displays the currently logged in user's details
+ */
+
 const MyProfile = props => {
     const {userInfo} = useContext(LogInContext);
     const {userOrganisation} = useContext(LogInContext);
@@ -33,6 +38,10 @@ const MyProfile = props => {
         TouchableCmp = TouchableNativeFeedback; //ripple effect
     }
 
+    /**
+     * @author Chris Bautista
+     * @description Show's the user's details and includes navigation to UpdatePersonalDetails
+     */
     return (
         <Block flex style={styles.profile}>
             <Block flex>

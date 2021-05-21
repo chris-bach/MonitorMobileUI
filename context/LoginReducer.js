@@ -1,3 +1,8 @@
+/**
+ * @author Manik Bagga
+ * @description This reducer controls the functions used by the login and authorisation components.
+ */
+
 const reducer = (user, action) => {
     switch(action.type){
         case "SET_USER":
@@ -5,8 +10,6 @@ const reducer = (user, action) => {
                 ...user,
                 userInfo: action.payload
             };
-
-
         case "SET_ROLES":
             return{
                 ...user,

@@ -8,6 +8,12 @@ import { DrawerItem as DrawerCustomItem } from '../components/index'
 
 const { width } = Dimensions.get("screen");
 
+/**
+ * @author CreativeTIM, Chris Bautista
+ * @description This file controls what's displayed in the menu.
+ * There are some unused assets that we've kept that we may use in future iterations of the app.
+ */
+
 function CustomDrawerContent({ drawerPosition, navigation, profile, focused, state, ...rest }) {
   const insets = useSafeArea();
   const screens = [

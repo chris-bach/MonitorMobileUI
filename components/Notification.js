@@ -5,6 +5,11 @@ import { Block, Text } from "galio-framework";
 import Icon from "./Icon";
 import { argonTheme } from "../constants";
 
+/**
+ * @author CreativeTIM
+ * @description Template for notification component
+ */
+
 export default class Notification extends React.Component {
   render() {
     const {

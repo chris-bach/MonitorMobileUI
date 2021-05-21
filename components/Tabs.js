@@ -5,6 +5,11 @@ import { Block, theme } from 'galio-framework';
 const { width } = Dimensions.get('screen');
 import argonTheme from '../constants/Theme';
 
+/**
+ * @author CreativeTIM
+ * @description Template for tabs component
+ */
+
 const defaultMenu = [
   { id: 'music', title: 'Music', },
   { id: 'beauty', title: 'Beauty', },

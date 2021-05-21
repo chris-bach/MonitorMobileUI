@@ -1,3 +1,7 @@
+/**
+ * @author CreativeTIM
+ * @description Used by the example template components
+ */
 // local imgs
 const Onboarding = require("../assets/imgs/bg.png");
 const Logo = require("../assets/imgs/argon-logo.png");

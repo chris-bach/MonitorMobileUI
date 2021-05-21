@@ -3,6 +3,11 @@ import { Switch, Platform } from 'react-native';
 
 import argonTheme from '../constants/Theme';
 
+/**
+ * @author CreativeTIM
+ * @description Template for switch component
+ */
+
 class MkSwitch extends React.Component {
   render() {
     const { value, ...props } = this.props;

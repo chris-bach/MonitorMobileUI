@@ -12,6 +12,12 @@ import argonTheme from '../constants/Theme';
 const { height, width } = Dimensions.get('window');
 const iPhoneX = () => Platform.OS === 'ios' && (height === 812 || width === 812 || height === 896 || width === 896);
 
+/**
+ * @author CreativeTIM, Chris Bautista
+ * @description This file controls what displays in the header in the main screen.
+ * There are some unused artifacts which we hope to make use of in future implementations.
+ */
+
 const BellButton = ({isWhite, style, navigation}) => (
   <TouchableOpacity style={[styles.button, style]} onPress={() => navigation.navigate('My Notifications')}>
     <Icon

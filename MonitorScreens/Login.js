@@ -17,6 +17,11 @@ import styles from "../constants/ScreenTheme";
 import Dashboard from "./Dashboard";
 import { useNavigation } from '@react-navigation/native';
 
+/**
+ * @author Manik Bagga, Chris Bautista
+ * @description This is the login page. It makes use of AuthInput (Manik), LogInContext(Manik) and LogInReducer (Manik)
+ * The main function is handled by AuthInput
+ */
 const Login = (props) => {
     const navigation = useNavigation();
 

@@ -23,6 +23,10 @@ import axios from 'axios';
 import {updateUser} from "../Services/Auth";
 import {MONITOR_URL} from "../constants/MonitorConstants";
 
+/**
+ * @author Matt Belgre, Manik Bagga, Chris Bautista
+ * @description This component updates the user's details in the server and changes the context accordingly.
+ */
 const UpdatePersonalDetails = props => {
     // const userId = 1;
     const {userInfo, setUserInfo} = useContext(LogInContext);
@@ -48,6 +52,10 @@ const UpdatePersonalDetails = props => {
         TouchableCmp = TouchableNativeFeedback; //ripple effect
     }
 
+    /**
+     * @author Matt Belgre, Manik Bagga
+     * @description The following functions handle e-mail formatting and form state
+     */
     function verifyEmail(input){
         const emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         return emailRegex.test(input)
@@ -66,6 +74,10 @@ const UpdatePersonalDetails = props => {
         setPassword(input);
     }
 
+    /**
+     * @author Matt Belgre, Manik Bagga, Chris Bautista
+     * @description This function attempts to update the user's details in the server, and handles incorrect input
+     */
     async function handleUpdate(){
         try {
             changeEmailHandler(email);
@@ -106,6 +118,10 @@ const UpdatePersonalDetails = props => {
         }
     }
 
+    /**
+     * @author Chris Bautista
+     * @description Displays the form for the user to input new details
+     */
     return (
         <Block style={styles.group}>
             <Text style={styles.title}>Update Personal Details</Text>

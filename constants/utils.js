@@ -1,3 +1,7 @@
+/**
+ * @author CreativeTIM
+ * @description Some controls for the template
+ */
 import { Platform, StatusBar } from 'react-native';
 import { theme } from 'galio-framework';
 

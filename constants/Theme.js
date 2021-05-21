@@ -1,3 +1,7 @@
+/**
+ * @author CreativeTIM, Chris Bautista
+ * @description The colour palette used by the stylesheets for the app
+ */
 export default {
   COLORS: {
     // DEFAULT: '#172B4D',

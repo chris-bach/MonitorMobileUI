@@ -5,6 +5,10 @@ import { Block, Text, theme } from "galio-framework";
 import Icon from "./Icon";
 import argonTheme from "../constants/Theme";
 
+/**
+ * @author CreativeTIM, Chris Bautista
+ * @description This file controls the styling of the menu drawer
+ */
 class DrawerItem extends React.Component {
   renderIcon = () => {
     const { title, focused } = this.props;
@@ -44,80 +48,6 @@ class DrawerItem extends React.Component {
                 family="ArgonExtra"
                 size={14}
                 color={focused ? "white" : argonTheme.COLORS.DEFAULT}
-            />
-        );
-
-      case "Home":
-        return (
-            <Icon
-                name="shop"
-                family="ArgonExtra"
-                size={14}
-                color={focused ? "white" : argonTheme.COLORS.PRIMARY}
-            />
-        );
-      case "Elements":
-        return (
-          <Icon
-            name="map-big"
-            family="ArgonExtra"
-            size={14}
-            color={focused ? "white" : argonTheme.COLORS.DEFAULT}
-          />
-        );
-      case "Articles":
-        return (
-          <Icon
-            name="spaceship"
-            family="ArgonExtra"
-            size={14}
-            color={focused ? "white" : argonTheme.COLORS.DEFAULT}
-          />
-        );
-      case "Profile":
-        return (
-          <Icon
-            name="chart-pie-35"
-            family="ArgonExtra"
-            size={14}
-            color={focused ? "white" : argonTheme.COLORS.DEFAULT}
-          />
-        );
-      case "Account":
-        return (
-          <Icon
-            name="calendar-date"
-            family="ArgonExtra"
-            size={14}
-            color={focused ? "white" : argonTheme.COLORS.DEFAULT}
-          />
-        );
-      case "Settings":
-        return (
-          <Icon
-            name="calendar-date"
-            family="ArgonExtra"
-            size={14}
-            color={focused ? "white" : argonTheme.COLORS.DEFAULT}
-          />
-        );
-      case "Getting Started":
-        return (
-          <Icon
-            name="spaceship"
-            family="ArgonExtra"
-            size={14}
-            color={focused ? "white" : "rgba(0,0,0,0.5)"}
-          />
-        );
-      case "Scratchpad":
-        return (
-            <Icon
-                name="diamond"
-                family="ArgonExtra"
-                size={14}
-                color={focused ? "white" : "rgba(0,0,0,0.5)"}
-                color={focused ? "white" : argonTheme.COLORS.DRIBBBLE}
             />
         );
       case "Log Out":

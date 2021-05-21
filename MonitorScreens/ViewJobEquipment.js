@@ -23,6 +23,10 @@ import {LogInContext} from "../context/LogInContext";
 import {getJobsDetailsByJobId} from "../Services/JobService";
 import ViewEquipmentDetailsTile from "../components/ViewEquipmentDetailsTile";
 
+/**
+ * @author Chris Bautista
+ * @description This component gets the equipment data from the server and renders the flatlist using ViewEquipmentDetailsTile
+ */
 const ViewJobEquipment = props => {
     // const userId = 1;
 
@@ -45,6 +49,11 @@ const ViewJobEquipment = props => {
         TouchableCmp = TouchableNativeFeedback; //ripple effect
     }
 
+    /**
+     * @author Matt Belgre, Chris Bautista
+     * @description The following useEffects get the equipment details of the currently logged in user's job from the server
+     * and then pushes into state rendered by the flatlist
+     */
     useEffect(() => {
             getJobsDetailsByJobId(jobId,userId)
                 .then((response) => {
@@ -85,6 +94,10 @@ const ViewJobEquipment = props => {
         setDataEquipment(tableData);
     }, [equipmentDetails]);
 
+    /**
+     * @author Chris Bautista
+     * @description Renders the jobs flatlist styled by ViewEquipmentDetailsTile
+     */
     const renderEquipment = equipmentData => {
         return (
             <ViewEquipmentDetailsTile
@@ -118,6 +131,10 @@ const ViewJobEquipment = props => {
         );
     };
 
+    /**
+     * @author Chris Bautista
+     * @description Renders the job's equipment list using the renderEquipment function above
+     */
     return (
         <Block flex style={styles.group}>
             <Block flex>

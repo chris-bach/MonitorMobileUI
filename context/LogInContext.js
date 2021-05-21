@@ -1,6 +1,11 @@
 import React, {createContext, useReducer} from 'react'
 import LoginReducer from "./LoginReducer";
 
+/**
+ * @author Manik Bagga
+ * @description This controls the context used by the app and sets the global states after logging in.
+ */
+
 const initialState = {
     userInfo:{
         id: null,

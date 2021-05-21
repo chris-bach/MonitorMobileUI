@@ -1,3 +1,7 @@
+/**
+ * @author CreativeTIM
+ * @description Used by the example template components
+ */
 export default tabs = {
   beauty: [
     { id: 'music', title: 'Music' },

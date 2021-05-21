@@ -11,6 +11,10 @@ import {
 import styles from "../constants/TileTheme";
 import {Block} from "galio-framework";
 
+/**
+ * @author Chris Bautista
+ * @description This component controls the styling for displaying the breakdowns flatlist
+ */
 const ViewBreakdownsTile = props => {
     let TouchableCmp = TouchableOpacity;
 

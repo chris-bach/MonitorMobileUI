@@ -23,6 +23,12 @@ const { width } = Dimensions.get("screen");
 import styles from "../constants/ScreenTheme";
 import {LogInContext} from "../context/LogInContext";
 
+/**
+ * @author Chris Bautista
+ * @description This component is unused as we removed the view documents function.
+ * It was meant to show the user the list of job documents, similar to ViewJobEquipment
+ */
+
 const ViewJobDocuments = props => {
     // const userId = 1;
     const {userInfo} = useContext(LogInContext);

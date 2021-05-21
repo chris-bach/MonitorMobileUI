@@ -7,6 +7,11 @@ import argonConfig from '../assets/config/argon.json';
 const ArgonExtra = require('../assets/font/argon.ttf');
 const IconArgonExtra = createIconSetFromIcoMoon(argonConfig, 'ArgonExtra');
 
+/**
+ * @author CreativeTIM
+ * @description Template for icons component
+ */
+
 class IconExtra extends React.Component {
   state = {
     fontLoaded: false,
@@ -19,7 +24,7 @@ class IconExtra extends React.Component {
 
   render() {
     const { name, family, ...rest } = this.props;
-    
+
     if (name && family && this.state.fontLoaded) {
       if (family === 'ArgonExtra') {
         return <IconArgonExtra name={name} family={family} {...rest} />;

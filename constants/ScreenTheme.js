@@ -2,6 +2,10 @@ import {Platform, StyleSheet} from "react-native";
 import {argonTheme} from "./index";
 import {theme} from "galio-framework";
 
+/**
+ * @author Chris Bautista, CreativeTIM
+ * @description This stylesheet controls how the screens look. It is used to maintain consistent styling for the screens.
+ */
 const styles = StyleSheet.create({
     gridItem: {
         flex: 1,

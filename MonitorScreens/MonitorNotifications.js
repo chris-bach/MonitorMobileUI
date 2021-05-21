@@ -9,7 +9,11 @@ import {getNotificationsByUserId, markNotificationAsRead} from "../Services/Noti
 import ViewNotificationTile from "../components/ViewNotificationTile";
 import ViewJobsTile from "../components/ViewJobsTile";
 
-const PersonalNotifications = props => {
+/**
+ * @author Matt Belgre, Manik Bagga, Chris Bautista
+ * @description This component displays the notifications saved in the server.
+ */
+const MonitorNotifications = props => {
 
     let TouchableCmp = TouchableOpacity;
 
@@ -26,6 +30,10 @@ const PersonalNotifications = props => {
     const [data, setData] = useState([]);
     const [readCounter, setReadCounter] = useState(0);
 
+    /**
+     * @author Matt Belgre, Chris Bautista
+     * @description The following useEffects gets the notifications from the server and pushes to state.
+     */
     useEffect(() => {
             getNotificationsByUserId(userId)
                 .then((response) => {
@@ -74,6 +82,10 @@ const PersonalNotifications = props => {
         setData(tableData);
     }, [notifications]);
 
+    /**
+     * @author Matt Belgre, Chris Bautista
+     * @description This marks a notification as read, pushes to server then updates the state.
+     */
     const markAsRead = (id) => {
         //setNotificationModal(null);
         markNotificationAsRead(id).then(()=>{
@@ -82,6 +94,10 @@ const PersonalNotifications = props => {
         }).catch(err => console.log(err))
     };
 
+    /**
+     * @author Matt Belgre, Manik Bagga
+     * @description Formats the date and time returned by the server.
+     */
     const formatDateTime = (date) => {
         let hour, minute, day, month;
         if (date[3].length === 1) {
@@ -157,4 +173,4 @@ const PersonalNotifications = props => {
     );
 }
 
-export default PersonalNotifications;
+export default MonitorNotifications;

@@ -11,6 +11,11 @@ import {
 import styles from "../constants/TileTheme";
 import {Block} from "galio-framework";
 
+/**
+ * @author Chris Bautista
+ * @description This component controls the styling for displaying the documents flatlist
+ * It is unused for now as we have removed the view documents functionality
+ */
 const ViewDocumentsTile = props => {
   let TouchableCmp = TouchableOpacity;
 

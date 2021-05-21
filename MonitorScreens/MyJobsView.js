@@ -23,6 +23,10 @@ import {LogInContext} from "../context/LogInContext";
 import {getJobsByUserId} from "../Services/JobService";
 import ViewJobsTile from "../components/ViewJobsTile";
 
+/**
+ * @author Chris Bautista
+ * @description This component gets the jobs data from the server and renders the flatlist using ViewJobsTile
+ */
 const MyJobsView = props => {
     // const userId = 1;
     const {userInfo} = useContext(LogInContext);
@@ -39,6 +43,11 @@ const MyJobsView = props => {
         TouchableCmp = TouchableNativeFeedback; //ripple effect
     }
 
+    /**
+     * @author Matt Belgre, Chris Bautista
+     * @description The following useEffects get the jobs of the currently logged in user from the server
+     * and then pushes into state rendered by the flatlist
+     */
     useEffect(() => {
             getJobsByUserId(userId)
                 .then((response) => {
@@ -76,6 +85,10 @@ const MyJobsView = props => {
         setData(tableData);
     }, [jobList]);
 
+    /**
+     * @author Chris Bautista
+     * @description Renders the jobs flatlist styled by ViewJobsTile
+     */
     const renderItem = itemData => {
         return (
             <ViewJobsTile
@@ -116,6 +129,10 @@ const MyJobsView = props => {
         );
     };
 
+    /**
+     * @author Chris Bautista
+     * @description Renders the jobs using the renderItem function above
+     */
     return (
         <Block flex style={styles.group}>
             <Block flex>

@@ -13,6 +13,10 @@ import { Button, Select, Icon, Input, Header, Switch } from "../components";
 
 import axios from "axios";
 
+/**
+ * @author Chris Bautista
+ * @description This isn't included in the build but is just an extra component Chris uses to draft components.
+ */
 const { width } = Dimensions.get("screen");
 
 import styles from "../constants/ScreenTheme";

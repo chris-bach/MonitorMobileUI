@@ -12,6 +12,10 @@ import styles from "../constants/TileTheme";
 import {Block} from "galio-framework";
 import {argonTheme} from "../constants";
 
+/**
+ * @author Chris Bautista
+ * @description This component controls the styling for displaying the equipment details flatlist
+ */
 const ViewEquipmentDetailsTile = props => {
   let TouchableCmp = TouchableOpacity;
 

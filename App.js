@@ -15,10 +15,11 @@ import MonitorScreens from "./navigation/MonitorScreens";
 import { Images, articles, argonTheme } from './constants';
 import { Button } from "./components";
 
-//Expo notifications
-import Constants from 'expo-constants';
-import * as Notifications from 'expo-notifications';
-import MyJobDetailsView from "./MonitorScreens/JobDetails";
+/**
+ * @author CreativeTIM, Manik Bagga, Matt Belgre, Chris Bautista
+ * @description This file is the entry point of the app.
+ */
+
 
 // cache app images
 const assetImages = [
@@ -33,6 +34,11 @@ const assetImages = [
 
 // cache product images
 articles.map(article => assetImages.push(article.image));
+
+/**
+ * @author CreativeTIM
+ * @description The following functions begin to load the app's assets
+ */
 
 function cacheImages(images) {
   return images.map(image => {
@@ -78,7 +84,12 @@ const App = props => {
     setAppState({ fontLoaded: true });
   }
 
-    if(!appState.isLoadingComplete) {
+  /**
+   * @author CreativeTIM, Manik Bagga, Chris Bautista
+   * @description The following functions then set up the context, navigation, then renders the splash and login screen.
+   */
+
+  if(!appState.isLoadingComplete) {
       return (
         <AppLoading
           startAsync={loadResourcesAsync}

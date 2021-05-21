@@ -15,15 +15,22 @@ import * as Notifications from 'expo-notifications';
 //import React, { useState, useEffect, useRef } from 'react';
 //import { Text, View, Button, Platform } from 'react-native';
 
+/**
+ * @author Expo
+ * @description Notifications handler
+ */
 Notifications.setNotificationHandler({
     handleNotification: async () => ({
         shouldShowAlert: true,
-        shouldPlaySound: false,
+        shouldPlaySound: true,
         shouldSetBadge: false,
     }),
 });
 
-
+/**
+ * @author Manik Bagga
+ * @description This component renders and handles the form for logging in
+ */
 function AuthInput(props){
 
     const [loading, setLoading] = useState(false);
@@ -41,6 +48,10 @@ function AuthInput(props){
     const notificationListener = useRef();
     const responseListener = useRef();
 
+    /**
+     * @author Expo
+     * @description This useEffect handles token registration, and notification listener and response
+     */
     useEffect(() => {
         registerForPushNotificationsAsync().then(token => setExpoPushToken(token));
 
@@ -62,6 +73,10 @@ function AuthInput(props){
     }, []);
 
 
+    /**
+     * @author Manik Bagga
+     * @description The following functions handle login verification and error checkjing for the login page
+     */
     function verifyEmail(input){
         const emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         return emailRegex.test(input)
@@ -86,6 +101,10 @@ function AuthInput(props){
         setErrorText(error.response.data.userMessage)
     }
 
+    /**
+     * @author Manik Bagga, Chris Bautista
+     * @description Attempts logging in to the server
+     */
     async function logInHandler(){
 
         setLoading(true);
@@ -134,6 +153,10 @@ function AuthInput(props){
         }
     }
 
+    /**
+     * @author Manik Bagga, Chris Bautista
+     * @description Displays the form components for logging in
+     */
     return(
         <Block safe>
             {emailValid ? null : <Text color="red"> Please Enter Valid Email </Text>}
@@ -172,6 +195,10 @@ const styles = StyleSheet.create({
     }
 })
 
+/**
+ * @author Expo
+ * @description These functions handle token registration, and send and fetch of notifications
+ */
 // Can use this function below, OR use Expo's Push Notification Tool-> https://expo.io/notifications
 async function sendPushNotification(expoPushToken) {
     const message = {

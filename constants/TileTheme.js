@@ -1,6 +1,10 @@
 import {Platform, StyleSheet} from "react-native";
 import {argonTheme} from "./index";
 
+/**
+ * @author Chris Bautista, CreativeTIM
+ * @description This stylesheet controls how the tiles look when rendered in the flatlists in the screens
+ */
 const styles = StyleSheet.create({
     gridItem: {
         flex: 1,
