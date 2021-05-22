@@ -51,7 +51,8 @@ class DrawerItem extends React.Component {
             />
         );
       case "Log Out":
-        return <Icon />;
+        return <Icon
+        />;
       default:
         return null;
     }
@@ -68,7 +69,7 @@ class DrawerItem extends React.Component {
     return (
       <TouchableOpacity
         style={{ height: 60 }}
-        onPress={() => title == 'Getting Started' ? Linking.openURL('https://demos.creative-tim.com/argon-pro-react-native/docs/').catch((err) => console.error('An error occurred', err)) : navigation.navigate(title)}
+        onPress={() => title == 'Log Out' ? Linking.openURL(navigation.navigate(popToTop)) : navigation.navigate(title)}
       >
         <Block flex row style={containerStyles}>
           <Block middle flex={0.1} style={{ marginRight: 5 }}>
