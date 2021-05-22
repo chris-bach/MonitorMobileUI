@@ -78,7 +78,7 @@ const ViewEquipmentStatus = props => {
                 faultCode: br.faultCode,
                 recentState: br.recentState,
                 faultCause: br.faultCause,
-                breakdownTime: formatDateTime(br.breakdownTime),
+                breakdownTime: br.breakdownTime,
             };
             tableData.push(breakdownInfo);
         })
@@ -181,34 +181,6 @@ const ViewEquipmentStatus = props => {
         }
     }
 
-    /**
-     * @author Matt Belgre, Manik Bagga
-     * @description Formats the date and time returned by the server.
-     */
-    const formatDateTime = (date) => {
-        let hour, minute, day, month;
-        if (date[3].length === 1) {
-            hour = "0" + date[3];
-        } else {
-            hour = date[3];
-        }
-        if (date[4].length === 1) {
-            minute = "0" + date[4];
-        } else {
-            minute = date[4];
-        }
-        if (date[2].length === 1) {
-            day = "0" + date[2];
-        } else {
-            day = date[2];
-        }
-        if (date[1].length === 1) {
-            month = "0" + date[1];
-        } else {
-            month = date[1];
-        }
-        return day + '/' + month + '/' + date[0] + '  ' + hour + ':' + minute;
-    }
 
     /**
      * @author Chris Bautista

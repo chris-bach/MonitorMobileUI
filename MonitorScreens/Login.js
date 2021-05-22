@@ -16,6 +16,7 @@ import { HeaderHeight } from "../constants/utils";
 import styles from "../constants/ScreenTheme";
 import Dashboard from "./Dashboard";
 import { useNavigation } from '@react-navigation/native';
+import {axiosInstance} from "../Interceptor";
 
 /**
  * @author Manik Bagga, Chris Bautista
@@ -24,6 +25,7 @@ import { useNavigation } from '@react-navigation/native';
  */
 const Login = (props) => {
     const navigation = useNavigation();
+    axiosInstance(props);
 
     return (
       <Block flex style={{...styles.container, paddingTop:75}}>

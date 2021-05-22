@@ -14,6 +14,7 @@ import Constants from 'expo-constants';
 import * as Notifications from 'expo-notifications';
 //import React, { useState, useEffect, useRef } from 'react';
 //import { Text, View, Button, Platform } from 'react-native';
+import { AsyncStorage } from 'react-native';
 
 /**
  * @author Expo
@@ -97,8 +98,8 @@ function AuthInput(props){
     }
 
     function errorHandling(error){
-        setError(true)
-        setErrorText(error.response.data.userMessage)
+        setError(true);
+        console.log(error);
     }
 
     /**
@@ -109,6 +110,26 @@ function AuthInput(props){
 
         setLoading(true);
 
+        await axios.post(`${MONITOR_URL}/api/user/authorise`,
+            {
+                "username":email,
+                "password":password,
+            }
+    ).then(res => {
+            AsyncStorage.setItem('Authorization', res.data.token)
+        }).catch((error)=>{
+            console.log("Interceptor error: ", error)
+        })
+
+        // AsyncStorage.getItem('Authorization')
+        //     .then((value) => {
+        //         const data = JSON.parse(value);
+        //         console.log('name is ', data.name);
+        //     });
+        let token;
+        AsyncStorage.getItem('Authorization').then((res)=>{
+            token = res;
+        });
         try {
             changeEmailHandler(email);
             let data;
@@ -147,7 +168,6 @@ function AuthInput(props){
         }
 
         catch(e){
-            console.log ("Log In Handler Catch: ", e)
             setError(true)
             errorHandling(e)
         }
@@ -234,7 +254,6 @@ async function registerForPushNotificationsAsync() {
             return;
         }
         token = (await Notifications.getExpoPushTokenAsync()).data;
-        console.log("The token is: ", token);
     } else {
         alert('Must use physical device for Push Notifications');
     }
