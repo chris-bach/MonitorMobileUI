@@ -4,6 +4,7 @@ import { Block, Text, theme } from "galio-framework";
 
 import Icon from "./Icon";
 import argonTheme from "../constants/Theme";
+import { AsyncStorage } from 'react-native';
 
 /**
  * @author CreativeTIM, Chris Bautista
@@ -52,7 +53,7 @@ class DrawerItem extends React.Component {
         );
       case "Log Out":
         return <Icon
-            name="hat-3"
+            name="nav-left"
             family="ArgonExtra"
             size={14}
             color={focused ? "white" : argonTheme.COLORS.DEFAULT}
@@ -61,6 +62,11 @@ class DrawerItem extends React.Component {
         return null;
     }
   };
+
+  logout = () =>{
+    Linking.openURL(navigation.navigate(popToTop));
+    AsyncStorage.clear();
+  }
 
   render() {
     const { focused, title, navigation } = this.props;
@@ -73,7 +79,7 @@ class DrawerItem extends React.Component {
     return (
       <TouchableOpacity
         style={{ height: 60 }}
-        onPress={() => title == 'Log Out' ? Linking.openURL(navigation.navigate(popToTop)) : navigation.navigate(title)}
+        onPress={() => title == 'Log Out' ? logout : navigation.navigate(title)}
       >
         <Block flex row style={containerStyles}>
           <Block middle flex={0.1} style={{ marginRight: 5 }}>
