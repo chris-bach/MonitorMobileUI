@@ -30,28 +30,6 @@ const BellButton = ({isWhite, style, navigation}) => (
   </TouchableOpacity>
 );
 
-const BasketButton = ({isWhite, style, navigation}) => (
-  <TouchableOpacity style={[styles.button, style]} onPress={() => navigation.navigate('Cart')}>
-    <Icon
-      family="ArgonExtra"
-      size={16}
-      name="basket"
-      color={argonTheme.COLORS[isWhite ? 'WHITE' : 'ICON']}
-    />
-  </TouchableOpacity>
-);
-
-const SearchButton = ({isWhite, style, navigation}) => (
-  <TouchableOpacity style={[styles.button, style]} onPress={() => navigation.navigate('Search')}>
-    <Icon
-      size={16}
-      family="Galio"
-      name="search-zoom-in"
-      color={theme.COLORS[isWhite ? 'WHITE' : 'ICON']}
-    />
-  </TouchableOpacity>
-);
-
 class Header extends React.Component {
   handleLeftPress = () => {
     const { back, navigation, scene } = this.props;
@@ -73,36 +51,12 @@ class Header extends React.Component {
       case 'Monitor Dashboard':
         return ([
           <BellButton key='chat-categories' navigation={navigation} isWhite={white}/>,
-          // <BasketButton key='basket-categories' navigation={navigation} isWhite={white}/>
-        ]);
-      case 'Categories':
-      case 'Category':
-      case 'Profile':
-      case 'Product':
-      case 'Search':
-      case 'Settings':
-        return ([
-          <BellButton key='chat-categories' navigation={navigation} isWhite={white}/>,
-          <BasketButton key='basket-categories' navigation={navigation} isWhite={white}/>
         ]);
       default:
         break;
     }
   }
-  renderSearch = () => {
-    const { navigation } = this.props;
-    return (
-      <Input
-        right
-        color="black"
-        style={styles.search}
-        placeholder="What are you looking for?"
-        placeholderTextColor={'#8898AA'}
-        onFocus={() => {Keyboard.dismiss(); navigation.navigate('Search');}}
-        iconContent={<Icon size={16} color={theme.COLORS.MUTED} name="search-zoom-in" family="ArgonExtra" />}
-      />
-    );
-  }
+
   renderOptions = () => {
     const { navigation, optionLeft, optionRight } = this.props;
 
@@ -141,7 +95,6 @@ class Header extends React.Component {
     if (search || tabs || options) {
       return (
         <Block center>
-          {/*{search ? this.renderSearch() : null}*/}
           {options ? this.renderOptions() : null}
           {tabs ? this.renderTabs() : null}
         </Block>
@@ -175,7 +128,6 @@ class Header extends React.Component {
           left={
             <Icon
               name={back ? 'chevron-left' : "menu"} family="entypo"
-              // name={back ? 'nav-left' : "menu-8"} family="ArgonExtra"
               size={back ? 20 : 20} onPress={this.handleLeftPress}
               color={iconColor || (white ? argonTheme.COLORS.WHITE : argonTheme.COLORS.ICON)}
               style={{ marginTop: 2 }}

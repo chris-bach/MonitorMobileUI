@@ -97,7 +97,7 @@ const ViewJobDocuments = props => {
                                 // job_id: itemData.item.id
                             }
                         });
-                    alert("You clicked " + dataDocuments.item.description + " document!" )
+                    //alert("You clicked " + dataDocuments.item.description + " document!" )
                 }}
             />
         );

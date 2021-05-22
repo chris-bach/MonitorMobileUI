@@ -20,7 +20,6 @@ import { Button } from "./components";
  * @description This file is the entry point of the app.
  */
 
-
 // cache app images
 const assetImages = [
   Images.Onboarding,
@@ -104,7 +103,6 @@ const App = props => {
             <GalioProvider theme={argonTheme}>
               <Block flex>
                 <MonitorScreens />
-                {/*<Screens />*/}
               </Block>
             </GalioProvider>
           </NavigationContainer>

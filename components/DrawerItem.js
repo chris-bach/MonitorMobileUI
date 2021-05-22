@@ -52,6 +52,10 @@ class DrawerItem extends React.Component {
         );
       case "Log Out":
         return <Icon
+            name="hat-3"
+            family="ArgonExtra"
+            size={14}
+            color={focused ? "white" : argonTheme.COLORS.DEFAULT}
         />;
       default:
         return null;

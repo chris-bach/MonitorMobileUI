@@ -201,7 +201,7 @@ const ViewEquipmentStatus = props => {
                     //         docId: itemData.item.id
                     //     }
                     // });
-                    alert("You clicked a breakdown id: " + breakdownData.item.breakdownId)
+                    //alert("You clicked a breakdown id: " + breakdownData.item.breakdownId)
                 }}
             />
         );
