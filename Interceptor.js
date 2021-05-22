@@ -5,6 +5,7 @@ let token;
 AsyncStorage.getItem('Authorization').then((res)=>{
     token = res;
 });
+
 export const axiosInstance = (props) => {
 
     const retrieveData = async () => {
