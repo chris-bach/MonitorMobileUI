@@ -186,7 +186,7 @@ const Dashboard = () => {
                             yAxisLabel=""
                             yAxisSuffix=""
                             yAxisInterval={1} // optional, defaults to 1
-                            // verticalLabelRotation={45}
+                            verticalLabelRotation={90}
                             chartConfig={{
                                 backgroundColor: argonTheme.COLORS.PRIMARY,
                                 backgroundGradientFrom: argonTheme.COLORS.ACCENT,
