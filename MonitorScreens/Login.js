@@ -4,7 +4,7 @@ import {
     StyleSheet,
     StatusBar,
     Dimensions,
-    Platform, View,
+    Platform, View, AsyncStorage,
 } from "react-native";
 import { Block, Button ,Text, Input, theme } from "galio-framework";
 import AuthInput from "../components/AuthInput";
@@ -19,13 +19,20 @@ import { useNavigation } from '@react-navigation/native';
 import {axiosInstance} from "../Interceptor";
 
 /**
- * @author Manik Bagga, Chris Bautista
+ * @author Manik Bagga, Chris Bautista, Matth Belgre
  * @description This is the login page. It makes use of AuthInput (Manik), LogInContext(Manik) and LogInReducer (Manik)
  * The main function is handled by AuthInput
  */
 const Login = (props) => {
+
+    /**
+     *
+     * @param history the page history
+     * @returns axiosInstance the custom instance of axios
+     */
     const navigation = useNavigation();
     axiosInstance(props);
+
 
     return (
       <Block flex style={{...styles.container, paddingTop:75}}>

@@ -135,8 +135,8 @@ function AuthInput(props){
             let data;
 
             const resp = await axios.post(`${MONITOR_URL}/api/login`, {
-                //deviceToken: expoPushToken,
-                deviceToken: "ExponentPushToken[-O-4OhDmX2gfqbJOP8Md5e]",
+                deviceToken: expoPushToken,
+                // deviceToken: "ExponentPushToken[-O-4OhDmX2gfqbJOP8Md5e]",
                 deviceType: "mobile",
                 email: email,
                 password: password})
@@ -147,7 +147,7 @@ function AuthInput(props){
                 .catch(response => {
                     setError(true);
                 })
-
+            console.log ("Data response: ", data)
             const user = {
                 id: data.userId,
                 email: data.userEmail,

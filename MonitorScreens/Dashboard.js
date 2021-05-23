@@ -93,9 +93,13 @@ const Dashboard = () => {
     useEffect(() => {
             getBreakdownsPerBuilding(userId)
                 .then((response) => {
-                    const list = []
+                    const list = [];
+                    let counter = 0;
                     response.data.forEach(object => {
-                        list.push(object)
+                        if (counter <= 10){
+                            list.push(object);
+                            counter++;
+                        }
                     })
                     setBreakdownsPerBuildingList(list);
                 }).catch(error => {
@@ -182,7 +186,7 @@ const Dashboard = () => {
                             yAxisLabel=""
                             yAxisSuffix=""
                             yAxisInterval={1} // optional, defaults to 1
-                            verticalLabelRotation={45}
+                            // verticalLabelRotation={45}
                             chartConfig={{
                                 backgroundColor: argonTheme.COLORS.PRIMARY,
                                 backgroundGradientFrom: argonTheme.COLORS.ACCENT,

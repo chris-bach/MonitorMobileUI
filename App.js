@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Image, View, Platform } from 'react-native';
+import {Image, View, Platform, AsyncStorage} from 'react-native';
 import { AppLoading } from 'expo';
 import * as Font from 'expo-font';
 import { Asset } from 'expo-asset';
@@ -50,6 +50,7 @@ function cacheImages(images) {
 }
 
 const App = props => {
+  AsyncStorage.setItem('Authorization', "")
 
   const [appState, setAppState] = useState({
     isLoadingComplete: false,
