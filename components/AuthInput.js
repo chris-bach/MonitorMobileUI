@@ -131,7 +131,6 @@ function AuthInput(props){
 
             const resp = await axios.post(`${MONITOR_URL}/api/login`, {
                 deviceToken: expoPushToken,
-                // deviceToken: "ExponentPushToken[-O-4OhDmX2gfqbJOP8Md5e]",
                 deviceType: "mobile",
                 email: email,
                 password: password})
