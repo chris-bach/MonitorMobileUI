@@ -29,9 +29,6 @@ const MyProfile = props => {
     const {userInfo} = useContext(LogInContext);
     const {userOrganisation} = useContext(LogInContext);
 
-    //console.log(userInfo);
-    //console.log(userOrganisation);
-
     let TouchableCmp = TouchableOpacity;
 
     if (Platform.OS === 'android' && Platform.Version >= 21) {

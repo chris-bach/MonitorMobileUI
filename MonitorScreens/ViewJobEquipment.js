@@ -63,7 +63,6 @@ const ViewJobEquipment = props => {
                     })
                     setEquipmentDetails(equipmentList);
                 }).catch(error => {
-                console.log("useEffect catch: ", error)
             })
         },
         []);

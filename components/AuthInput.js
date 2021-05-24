@@ -59,12 +59,10 @@ function AuthInput(props){
         // This listener is fired whenever a notification is received while the app is foregrounded
         notificationListener.current = Notifications.addNotificationReceivedListener(notification => {
             setNotification(notification);
-            console.log("From inside listener: ", notification)
         });
 
         // This listener is fired whenever a user taps on or interacts with a notification (works when app is foregrounded, backgrounded, or killed)
         responseListener.current = Notifications.addNotificationResponseReceivedListener(response => {
-            console.log("From inside response: ", response);
         });
 
         return () => {
@@ -116,19 +114,16 @@ function AuthInput(props){
                 "password":password,
             }
     ).then(res => {
-            AsyncStorage.setItem('Authorization', res.data.token)
+            AsyncStorage.setItem('Authorization', res.data.token);
+            console.log("The token is: ", res.data.token);
         }).catch((error)=>{
             console.log("Interceptor error: ", error)
         })
 
-        // AsyncStorage.getItem('Authorization')
-        //     .then((value) => {
-        //         const data = JSON.parse(value);
-        //         console.log('name is ', data.name);
-        //     });
         let token;
         AsyncStorage.getItem('Authorization').then((res)=>{
             token = res;
+            console.log("The token stored is: ", AsyncStorage.getItem('Authorization'));
         });
         try {
             changeEmailHandler(email);
@@ -143,11 +138,12 @@ function AuthInput(props){
                 .then(response => {
                     data = response.data;
                     setLoading(false);
+                    console.log ("Data response", response)
                 })
                 .catch(response => {
                     setError(true);
+                    console.log ("Catch response: ", response)
                 })
-            console.log ("Data response: ", data)
             const user = {
                 id: data.userId,
                 email: data.userEmail,

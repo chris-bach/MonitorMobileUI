@@ -64,7 +64,6 @@ const ViewEquipmentStatus = props => {
                     })
                     setBreakdownDetails(breakdownList);
                 }).catch(error => {
-                console.log("useEffect catch: ", error);
             })
         },
         []);
