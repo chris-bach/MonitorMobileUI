@@ -91,6 +91,10 @@ const Dashboard = () => {
      * @description The following useEffects get the breakdowns per building data from the server and pushes into the state.
      */
     useEffect(() => {
+        console.log("userID", userId)
+            if(userId === undefined){
+                return;
+            }
             getBreakdownsPerBuilding(userId)
                 .then((response) => {
                     const list = [];

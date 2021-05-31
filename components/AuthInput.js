@@ -100,6 +100,13 @@ function AuthInput(props){
         console.log(error);
     }
 
+    const tokenSetter = async (data) => {
+        try{
+           await AsyncStorage.setItem("authorization", data);
+        } catch (err){
+            console.log("these was an error setting async storage", err.message)
+        }
+    }
     /**
      * @author Manik Bagga, Chris Bautista
      * @description Attempts logging in to the server
@@ -107,29 +114,44 @@ function AuthInput(props){
     async function logInHandler(){
 
         setLoading(true);
-
+        let tokenIn
         await axios.post(`${MONITOR_URL}/api/user/authorise`,
             {
                 "username":email,
                 "password":password,
             }
     ).then(res => {
-            AsyncStorage.setItem('Authorization', res.data.token);
+            /*AsyncStorage.setItem('Authorization', "testc");
             console.log("The token is: ", res.data.token);
+            console.log("asyncstorage in the then block of response", AsyncStorage.getItem("Authorization"))*/
+            if(res.data.token) {
+                tokenIn = res.data.token;
+            }
+            tokenSetter(res.data.token)
+
         }).catch((error)=>{
-            console.log("Interceptor error: ", error)
+            console.log("Interceptor error: ", error.message)
+            alert(JSON.stringify(error))
         })
 
+
         let token;
-        AsyncStorage.getItem('Authorization').then((res)=>{
+        /*await AsyncStorage.getItem('Authorization').then((res)=>{
             token = res;
             console.log("The token stored is: ", AsyncStorage.getItem('Authorization'));
-        });
+        });*/
+        try {
+            token = await AsyncStorage.getItem("authorization")
+            if(token !== null) console.log("tokenAuthInput", token)
+        } catch (error){
+            console.log("these was an error getting async storage", error.message)
+        }
         try {
             changeEmailHandler(email);
             let data;
+            let user
 
-            const resp = await axios.post(`${MONITOR_URL}/api/login`, {
+            let resp = await axios.post(`${MONITOR_URL}/api/login`, {
                 deviceToken: expoPushToken,
                 deviceType: "mobile",
                 email: email,
@@ -137,25 +159,27 @@ function AuthInput(props){
                 .then(response => {
                     data = response.data;
                     setLoading(false);
-                    console.log ("Data response", response)
+                    user = {
+                        id: data.userId,
+                        email: data.userEmail,
+                        firstName: data.userFirstName,
+                        lastName: data.userLastName
+                    }
+                    //console.log ("Data response", response)
                 })
                 .catch(response => {
                     setError(true);
                     console.log ("Catch response: ", response)
                 })
-            const user = {
-                id: data.userId,
-                email: data.userEmail,
-                firstName: data.userFirstName,
-                lastName: data.userLastName
-            }
+            //console.log("This is data outside the function", data)
+            //console.log("This is user outside the function", user)
 
-            setUserInfo(user);
-            setUserRoles(data.assignedRoles);
-            setUserOrganisation(data.organisations[0]);
-            setDirector(data.directorData);
-            setInactiveJobs(data.inactiveJobs);;
-            setActiveJobs(data.activeJobs);
+            await setUserInfo(user);
+            await setUserRoles(data.assignedRoles);
+            await setUserOrganisation(data.organisations[0]);
+            await setDirector(data.directorData);
+            await setInactiveJobs(data.inactiveJobs);;
+            await setActiveJobs(data.activeJobs);
             await setSubordinates(data.subordinates);
             await setLoggedIn(true)
             setError(false)

@@ -23,6 +23,7 @@ import {axiosInstance} from "../Interceptor";
  * @description This is the login page. It makes use of AuthInput (Manik), LogInContext(Manik) and LogInReducer (Manik)
  * The main function is handled by AuthInput
  */
+
 const Login = (props) => {
 
     /**
@@ -30,9 +31,30 @@ const Login = (props) => {
      * @param history the page history
      * @returns axiosInstance the custom instance of axios
      */
+    //console.log(AsyncStorage.getItem("Authorization"), "Authorization Printing")
     const navigation = useNavigation();
-    axiosInstance(props);
+    //axiosInstance(props);
 
+    useEffect(() => {
+        console.log("navigation", navigation.dangerouslyGetState().routes[0].name)
+        if(navigation.dangerouslyGetState().routes[0].name === "Onboarding"){
+            try{
+                AsyncStorage.clear()
+            } catch (e) {
+                console.log("error in login", e)
+            }
+        }
+    }, [])
+
+    /*useEffect(() => {
+        try{
+            console.log("login async storage before", AsyncStorage.getItem("authorization"))
+            AsyncStorage.clear()
+            console.log("login async storage after", AsyncStorage.getItem("authorization"))
+        } catch(error){
+            console.log("this is the error in the use effect", error)
+        }
+    },[])*/
 
     return (
       <Block flex style={{...styles.container, paddingTop:75}}>

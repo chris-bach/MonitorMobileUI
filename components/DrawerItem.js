@@ -65,7 +65,11 @@ class DrawerItem extends React.Component {
 
   logout = () =>{
     this.props.navigation.popToTop();
-    AsyncStorage.setItem('Authorization', "")
+    //console.log("logout action", this.props.navigation.popToTop())
+    try{
+      AsyncStorage.clear()
+    } catch(error){
+    }
   }
 
   render() {
@@ -79,7 +83,7 @@ class DrawerItem extends React.Component {
     return (
       <TouchableOpacity
         style={{ height: 60 }}
-        onPress={() => title == 'Log Out' ? this.logout() : navigation.navigate(title)}
+        onPress={() => title === 'Log Out' ? this.logout() : navigation.navigate(title)}
       >
         <Block flex row style={containerStyles}>
           <Block middle flex={0.1} style={{ marginRight: 5 }}>

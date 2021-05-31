@@ -102,11 +102,14 @@ const ViewEquipmentStatus = props => {
         getStatusById(equipmentMonitorId)
             .then(res => {
                 setMonitor(res.data);
+              //  console.log(res.data, "data")
                 setImage(getLiftState(res.data.currentState))
             })
     }, [counter])
 
     const getLiftState = (state) => {
+        if(state.includes("FAULT")) state = "FAULT";
+        console.log("state", state)
         switch(state){
             case "Going up": {
                 setCurrentState(state);
@@ -174,7 +177,7 @@ const ViewEquipmentStatus = props => {
             }
             default :{
                 return (
-                    <h5>Lift data currently available...</h5>
+                    <Text>Lift data currently available...</Text>
                 )
             }
         }

@@ -23,6 +23,7 @@ const ViewEquipmentDetailsTile = props => {
     TouchableCmp = TouchableNativeFeedback; //ripple effect
   }
 
+  console.log(props.status)
   return (
       <View style={styles.gridItem}>
         <TouchableCmp style={{ flex: 1 }} onPress={props.onSelect}>

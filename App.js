@@ -14,6 +14,8 @@ enableScreens();
 import MonitorScreens from "./navigation/MonitorScreens";
 import { Images, articles, argonTheme } from './constants';
 import { Button } from "./components";
+//import {axiosInstance} from "./Interceptor";
+import axios from "axios";
 
 /**
  * @author CreativeTIM, Manik Bagga, Matt Belgre, Chris Bautista
@@ -49,14 +51,28 @@ function cacheImages(images) {
   });
 }
 
+axios.interceptors.request.use(
+    async config => {
+      const token = await AsyncStorage.getItem("authorization")
+      if(token){
+        console.log("token in apps", token)
+        config.headers.Authorization = token
+      }
+      return config
+    },
+    error =>{
+      return Promise.reject(error)
+    }
+)
+
 const App = props => {
-  AsyncStorage.setItem('Authorization', "")
+
 
   const [appState, setAppState] = useState({
     isLoadingComplete: false,
     fontLoaded: false,
   });
-
+  //axiosInstance(props);
   const loadResourcesAsync = async () => {
     return Promise.all([
       ...cacheImages(assetImages), fetchFonts()
@@ -98,6 +114,7 @@ const App = props => {
         />
       );
     } else {
+
       return (
         <LoginProvider>
           <NavigationContainer>
